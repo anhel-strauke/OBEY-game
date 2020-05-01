@@ -9,7 +9,7 @@ radius = 20.0
 height = 60.0
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 50.9703
+radius = 40.0
 height = 61.2894
 
 [node name="Character" type="KinematicBody2D"]
