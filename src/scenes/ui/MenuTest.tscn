@@ -12,7 +12,7 @@
 script = ExtResource( 4 )
 
 [node name="white" type="Sprite" parent="."]
-modulate = Color( 0.435294, 0.470588, 0.529412, 1 )
+modulate = Color( 0.396078, 0.396078, 0.396078, 1 )
 scale = Vector2( 120, 67.5 )
 texture = ExtResource( 5 )
 centered = false
@@ -33,6 +33,7 @@ can_be_cancelled = false
 
 [node name="NewGame" parent="MenuController" instance=ExtResource( 1 )]
 position = Vector2( 380.011, 340 )
+change_label_color = false
 
 [node name="Label" type="Label" parent="MenuController/NewGame"]
 margin_left = 140.0
@@ -48,6 +49,7 @@ __meta__ = {
 
 [node name="Settings" parent="MenuController" instance=ExtResource( 1 )]
 position = Vector2( 380.022, 500 )
+change_label_color = false
 
 [node name="Label" type="Label" parent="MenuController/Settings"]
 margin_left = 139.989
@@ -62,6 +64,7 @@ __meta__ = {
 
 [node name="Credits" parent="MenuController" instance=ExtResource( 1 )]
 position = Vector2( 380, 640 )
+change_label_color = false
 
 [node name="Label" type="Label" parent="MenuController/Credits"]
 margin_left = 140.0
@@ -76,6 +79,7 @@ __meta__ = {
 
 [node name="Exit" parent="MenuController" instance=ExtResource( 1 )]
 position = Vector2( 380, 780 )
+change_label_color = false
 
 [node name="Label" type="Label" parent="MenuController/Exit"]
 margin_left = 140.0

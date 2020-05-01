@@ -48,7 +48,7 @@ func is_just_pressed(action: int) -> bool:
 	return _actions_just_pressed[action]
 
 
-func process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	if device_id < 0:
 		return
 	for action in _actions_pressed.keys():
@@ -63,4 +63,9 @@ func process(_delta: float) -> void:
 		_actions_just_pressed[action] = _actions_pressed[action] != -1 and not _actions_just_pressed[action]
 	var x_axis = GamepadManager.get_axis(device_id, GamepadManager.GamepadAxis.LX)
 	var y_axis = GamepadManager.get_axis(device_id, GamepadManager.GamepadAxis.LY)
-	_direction = Vector2(x_axis, y_axis).normalized()
+	_direction = Vector2(x_axis, y_axis)
+	var dir_len = _direction.length()
+	if dir_len < 0.05:
+		_direction = Vector2.ZERO
+	elif dir_len > 1.0:
+		_direction = _direction.normalized()

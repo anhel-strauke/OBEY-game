@@ -33,20 +33,26 @@ _global_script_classes=[ {
 "class": "MenuItem",
 "language": "GDScript",
 "path": "res://scenes/ui/menu/MenuItem.gd"
+}, {
+"base": "Node",
+"class": "PlayerDriver",
+"language": "GDScript",
+"path": "res://scenes/game/character_drivers/PlayerDriver.gd"
 } ]
 _global_script_class_icons={
 "CustomSlider": "",
 "GamepadConfigurator": "",
 "GamepadDetector": "",
 "MenuController": "",
-"MenuItem": ""
+"MenuItem": "",
+"PlayerDriver": ""
 }
 
 [application]
 
 config/name="OBEY: The Game"
 config/description="Game for Siberian Game Jam on May, 2020"
-run/main_scene="res://scenes/ui/MenuTest.tscn"
+run/main_scene="res://scenes/game/World.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -100,6 +106,14 @@ ui_down={
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":1.0,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="World"
+2d_physics/layer_2="Character"
+2d_physics/layer_3="CharacterHurtbox"
+2d_physics/layer_4="Hitbox"
+2d_physics/layer_5="Projectile"
 
 [rendering]
 

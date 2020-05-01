@@ -111,6 +111,7 @@ func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 func _on_gamepad_detected(device_id: int) -> void:
 	GameInput.set_gamepad_input_source(player_index, device_id)
 	self.device_id = device_id
+	print("Detected Gamepad #", device_id)
 	if GamepadManager.is_configured(device_id):
 		cancelled = false
 		hide()

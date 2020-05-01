@@ -5,6 +5,7 @@ onready var anim_player = $AnimationPlayer
 onready var click_sound = $ClickSound
 onready var activation_sound = $ActivationSound
 export(bool) var enabled := true setget set_enabled
+export(bool) var change_label_color := true
 
 var selected := false setget set_selected
 
@@ -44,6 +45,7 @@ func set_selected(sel: bool) -> void:
 			emit_signal("selected")
 		else:
 			emit_signal("deselected")
+		update_label_colors()
 
 
 func set_selected_immed(sel: bool) -> void:
@@ -60,6 +62,19 @@ func set_selected_immed(sel: bool) -> void:
 		anim_player.seek(0.0, true)
 		anim_player.stop(false)
 		emit_signal("deselected")
+	update_label_colors()
+
+
+func update_label_colors():
+	if not change_label_color:
+		return
+	var color = Color(0, 0, 0)
+	if selected:
+		color = Color(0.84, 0.84, 0.84)
+	for child in get_children():
+		if child is Label:
+			var lbl = child as Label
+			lbl.add_color_override("font_color", color)
 
 
 func activate() -> void:

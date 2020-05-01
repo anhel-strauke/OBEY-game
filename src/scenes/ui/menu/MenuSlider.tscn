@@ -51,7 +51,7 @@ texture = ExtResource( 4 )
 centered = false
 
 [node name="TitlebarBg" type="Sprite" parent="Slider"]
-modulate = Color( 0.32549, 0.490196, 0.803922, 1 )
+modulate = Color( 0.956863, 0.266667, 0.168627, 1 )
 scale = Vector2( 6.25, 67.5 )
 texture = ExtResource( 4 )
 centered = false
