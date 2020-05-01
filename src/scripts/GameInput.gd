@@ -91,6 +91,12 @@ func set_keyboard_input_source(player_index: int) -> void:
 
 
 func set_gamepad_input_source(player_index: int, device_id: int) -> void:
+	for player in players:
+		if player.index != player_index:
+			if player.input_source is GamepadInputSource:
+				if player.input_source.device_id == device_id:
+					set_keyboard_input_source(player.index)
+					emit_signal("player_controls_reset_to_keyboard", player.index)
 	var player = players[player_index]
 	if player.input_source:
 		remove_child(player.input_source)

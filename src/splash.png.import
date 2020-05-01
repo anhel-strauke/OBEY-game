@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/elmessiri_64_reg_0.png-ca8d25972c18f2260c9bc5a081f40d35.stex"
+path="res://.import/splash.png-929ed8a00b89ba36c51789452f874c77.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://fonts/elmessiri_64_reg_0.png"
-dest_files=[ "res://.import/elmessiri_64_reg_0.png-ca8d25972c18f2260c9bc5a081f40d35.stex" ]
+source_file="res://splash.png"
+dest_files=[ "res://.import/splash.png-929ed8a00b89ba36c51789452f874c77.stex" ]
 
 [params]
 

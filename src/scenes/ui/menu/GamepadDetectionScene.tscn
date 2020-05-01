@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://fonts/font_64.tres" type="DynamicFont" id=1]
 [ext_resource path="res://fonts/font_42.tres" type="DynamicFont" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://scenes/ui/GamepadConfigurator.gd" type="Script" id=4]
 [ext_resource path="res://scenes/ui/menu/GamepadDetectionScene.gd" type="Script" id=5]
 [ext_resource path="res://scenes/ui/GamepadDetector.gd" type="Script" id=6]
+[ext_resource path="res://fonts/font_obey_64.tres" type="DynamicFont" id=7]
+[ext_resource path="res://sounds/ui/click.ogg" type="AudioStream" id=8]
+[ext_resource path="res://sounds/ui/select.ogg" type="AudioStream" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "hide"
@@ -36,7 +39,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=2]
-length = 0.4
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("ControlsRoot:visible")
 tracks/0/interp = 1
@@ -44,7 +47,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
@@ -56,13 +59,15 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3, 0.4 ),
+"times": PoolRealArray( 0, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 0.756863, 0.768627, 0.827451, 0 ), Color( 0.756863, 0.768627, 0.827451, 1 ), Color( 0.756863, 0.768627, 0.827451, 1 ) ]
 }
 
 [node name="GamepadDetectionScene" type="Node2D"]
+pause_mode = 2
+z_index = 100
 script = ExtResource( 5 )
 
 [node name="back" type="Sprite" parent="."]
@@ -91,7 +96,7 @@ margin_left = 40.0
 margin_top = 280.0
 margin_right = 1880.0
 margin_bottom = 381.0
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Player 1"
 align = 1
@@ -210,6 +215,14 @@ script = ExtResource( 4 )
 
 [node name="GamepadDetector" type="Node" parent="."]
 script = ExtResource( 6 )
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+bus = "Sounds"
+
+[node name="CancelSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+bus = "Sounds"
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="cancelled" from="GamepadConfigurator" to="." method="_on_GamepadConfigurator_cancelled"]
 [connection signal="finished" from="GamepadConfigurator" to="." method="_on_GamepadConfigurator_finished"]

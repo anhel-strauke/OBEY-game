@@ -10,9 +10,6 @@ script = ExtResource( 4 )
 
 [node name="MenuSlider" parent="." instance=ExtResource( 3 )]
 
-[node name="Background" parent="MenuSlider/Slider" index="0"]
-self_modulate = Color( 0.756863, 0.768627, 0.827451, 1 )
-
 [node name="Label" parent="MenuSlider/Slider/LabelRoot" index="0"]
 text = "Player 1"
 
@@ -67,5 +64,6 @@ __meta__ = {
 position = Vector2( -280, 0 )
 [connection signal="activated" from="MenuSlider/Slider/MenuController/Keyboard" to="." method="_on_Keyboard_activated"]
 [connection signal="activated" from="MenuSlider/Slider/MenuController/Gamepad" to="." method="_on_Gamepad_activated"]
+[connection signal="activated" from="MenuSlider/Slider/MenuController/GamepadConfiguration" to="." method="_on_GamepadConfiguration_activated"]
 
 [editable path="MenuSlider"]

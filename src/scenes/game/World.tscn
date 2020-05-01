@@ -22,12 +22,12 @@ centered = false
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Borders"]
-polygon = PoolVector2Array( 40, 120, 1880, 120, 1880, 1040, 40, 1040, 40, 120, -40, 120, -40, 1100, 1940, 1100, 1940, 0, -40, 0, -40, 0 )
+polygon = PoolVector2Array( 40, 120, 1880, 120, 1880, 1040, 40, 1040, 40, 120, -40, 120, -40, 1100, 1940, 1100, 1940, 0, 40, 0, 40, 20 )
 
 [node name="Chars" type="YSort" parent="."]
 
 [node name="Character" parent="Chars" instance=ExtResource( 2 )]
-position = Vector2( 180, 400 )
+position = Vector2( 160, 280 )
 
 [node name="white" parent="Chars/Character/Sprite" index="0"]
 self_modulate = Color( 1, 1, 1, 1 )

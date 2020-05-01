@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://fonts/font_64.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/ui/menu/MenuItem.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/ui/menu/VolumeMenuItem.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "set_amount"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Amount:visible_characters")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 31 ]
+}
+
+[node name="VolumeMenuItem" instance=ExtResource( 2 )]
+script = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="." index="5"]
+margin_left = 80.0
+margin_top = 20.0
+margin_right = 480.0
+margin_bottom = 108.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Music"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Amount" type="Label" parent="." index="6"]
+margin_left = 500.0
+margin_top = 20.0
+margin_right = 1027.0
+margin_bottom = 108.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "|||||||||||||||||||||||||||||||"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftBracket" type="Label" parent="." index="7"]
+margin_left = 480.0
+margin_top = 20.0
+margin_right = 501.0
+margin_bottom = 108.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "["
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RightBracket" type="Label" parent="." index="8"]
+margin_left = 1027.0
+margin_top = 20.0
+margin_right = 1048.0
+margin_bottom = 108.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "]"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmountAnim" type="AnimationPlayer" parent="." index="9"]
+anims/set_amount = SubResource( 1 )

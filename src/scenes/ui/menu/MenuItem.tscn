@@ -42,5 +42,6 @@ stream = ExtResource( 2 )
 bus = "Sounds"
 
 [node name="ActivationSound" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
 stream = ExtResource( 3 )
 bus = "Sounds"

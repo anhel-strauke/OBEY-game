@@ -15,8 +15,7 @@ enum State {
 	Hiding
 }
 
-signal success()
-signal cancelled()
+signal finished(device_id)
 
 onready var anim_player = $AnimationPlayer
 onready var detection_controls = $ControlsRoot/Detection
@@ -30,6 +29,8 @@ onready var cancel_guide = $ControlsRoot/CancelGuide
 onready var success_message = $ControlsRoot/Success
 onready var configurator = $GamepadConfigurator
 onready var detector = $GamepadDetector
+onready var click_sound = $ClickSound
+onready var cancel_sound = $CancelSound
 
 var player_index: int = 0 setget set_player_index
 var device_id = -1
@@ -38,14 +39,23 @@ var allow_keyboard_fallback: bool = false
 var state = State.Showing
 var _success_time = 0.0
 
+var caller_data = []
+var was_paused: bool = false
 
 var cancelled: bool = false
 
-func _ready():
+
+func _set_visible(vis: bool) -> void:
+	set_process(vis)
+	set_process_input(vis)
+	visible = vis
+
+
+func _ready() -> void:
 	detector.enabled = false
 	configurator.enabled = false
 	GamepadManager.connect("gamepad_disconnected", self, "on_gamepad_disconnected")
-	show()
+	_set_visible(false)
 
 
 func set_player_index(index: int) -> void:
@@ -54,7 +64,16 @@ func set_player_index(index: int) -> void:
 	kbd_fallback_label.text = "or press %s to use keyboard controls" % KBD_FALLBACK_KEY[player_index][1]
 
 
+func show_modal(caller: Node, slot: String) -> void:
+	caller_data = [caller, slot]
+	connect("finished", caller, slot)
+	was_paused = get_tree().paused
+	get_tree().paused = true
+	show()
+
+
 func show() -> void:
+	_set_visible(true)
 	global_position = Vector2.ZERO
 	cancelled = false
 	state = State.Showing
@@ -73,6 +92,7 @@ func show() -> void:
 		unknown_gp_message.visible = false
 		prompt_label.text = ""
 	anim_player.play("show")
+	anim_player.seek(0, true)
 
 
 func hide() -> void:
@@ -102,10 +122,14 @@ func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 		else:
 			begin_gamepad_configuration()
 	else:
+		var dev_id = device_id
 		if cancelled:
-			emit_signal("cancelled")
-		else:
-			emit_signal("success")
+			dev_id = -1
+		emit_signal("finished", dev_id)
+		if caller_data.size() > 0:
+			disconnect("finished", caller_data[0], caller_data[1])
+		get_tree().paused = was_paused
+		_set_visible(false)
 
 
 func _on_gamepad_detected(device_id: int) -> void:
@@ -114,6 +138,7 @@ func _on_gamepad_detected(device_id: int) -> void:
 	print("Detected Gamepad #", device_id)
 	if GamepadManager.is_configured(device_id):
 		cancelled = false
+		click_sound.play()
 		hide()
 	else:
 		detection_controls.visible = false
@@ -145,9 +170,11 @@ func _input(event) -> void:
 					if event.scancode == KEY_ESCAPE or event.scancode == KEY_BACKSPACE:
 						cancelled = true
 						detector.enabled = false
+						cancel_sound.play()
 						hide()
 					elif allow_keyboard_fallback and event.scancode == KBD_FALLBACK_KEY[player_index][0]:
 						cancelled = false
+						cancel_sound.play()
 						GameInput.set_keyboard_input_source(player_index)
 						hide()
 		State.SuccessMessage:
@@ -155,6 +182,7 @@ func _input(event) -> void:
 				if event is InputEventJoypadButton:
 					if event.device == device_id and event.is_pressed():
 						cancelled = false
+						cancel_sound.play()
 						hide()
 
 
@@ -163,12 +191,12 @@ func _process(delta: float) -> void:
 		_success_time -= delta
 
 
-func _on_GamepadConfigurator_cancelled():
+func _on_GamepadConfigurator_cancelled() -> void:
 	cancelled = true
 	hide()
 
 
-func _on_GamepadConfigurator_finished():
+func _on_GamepadConfigurator_finished() -> void:
 	cancelled = false
 	if device_id >= 0:
 		var input_map = configurator.input_map
@@ -179,16 +207,18 @@ func _on_GamepadConfigurator_finished():
 	configurator.enabled = false
 	_success_time = 0.5
 	state = State.SuccessMessage
+	click_sound.play()
 
 
-func _on_GamepadConfigurator_waiting_for_axis(axis):
+func _on_GamepadConfigurator_waiting_for_axis(axis: int) -> void:
 	var axis_text = "Left"
 	if axis == GamepadManager.GamepadAxis.LY:
 		axis_text = "Up"
 	prompt_label.text = PLEASE_PRESS % axis_text
+	click_sound.play()
 
 
-func _on_GamepadConfigurator_waiting_for_axis_button(axis_button):
+func _on_GamepadConfigurator_waiting_for_axis_button(axis_button: int) -> void:
 	var button_text = ""
 	match axis_button:
 		GamepadManager.GamepadAxisButton.LXMinus:
@@ -200,9 +230,10 @@ func _on_GamepadConfigurator_waiting_for_axis_button(axis_button):
 		GamepadManager.GamepadAxisButton.LYPlus:
 			button_text = "Down"
 	prompt_label.text = PLEASE_PRESS % button_text
+	click_sound.play()
 
 
-func _on_GamepadConfigurator_waiting_for_button(button):
+func _on_GamepadConfigurator_waiting_for_button(button: int) -> void:
 	var button_text = ""
 	match button:
 		GamepadManager.GamepadButton.A:
@@ -224,3 +255,4 @@ func _on_GamepadConfigurator_waiting_for_button(button):
 		GamepadManager.GamepadButton.R2:
 			button_text = "R2"
 	prompt_label.text = PLEASE_PRESS % button_text
+	click_sound.play()

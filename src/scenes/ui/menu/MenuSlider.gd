@@ -1,6 +1,7 @@
 extends Node2D
 
 
+onready var cancel_sound = $CancelSound
 onready var anim_player = $SlideAnimationPlayer
 onready var menu_controller = $Slider/MenuController
 onready var back_label = $Slider/BackLabel
@@ -27,6 +28,7 @@ func show() -> void:
 
 func hide() -> void:
 	self.state = State.SlideOut
+	cancel_sound.play()
 	anim_player.play("slide_out")
 
 

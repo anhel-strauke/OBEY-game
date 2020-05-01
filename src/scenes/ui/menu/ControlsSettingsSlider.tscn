@@ -20,7 +20,7 @@ position = Vector2( -80, 0 )
 [node name="Label" type="Label" parent="MenuSlider/Slider/MenuController/Player1"]
 margin_left = 100.0
 margin_top = 20.0
-margin_right = 720.0
+margin_right = 660.0
 margin_bottom = 121.0
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -30,7 +30,7 @@ __meta__ = {
 }
 
 [node name="Value" type="Label" parent="MenuSlider/Slider/MenuController/Player1"]
-margin_left = 740.0
+margin_left = 660.0
 margin_top = 20.0
 margin_right = 1060.0
 margin_bottom = 121.0
@@ -48,7 +48,7 @@ position = Vector2( -79.9888, 140 )
 [node name="Label" type="Label" parent="MenuSlider/Slider/MenuController/Player2"]
 margin_left = 100.0
 margin_top = 20.0
-margin_right = 720.0
+margin_right = 660.0
 margin_bottom = 121.0
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -58,13 +58,13 @@ __meta__ = {
 }
 
 [node name="Value" type="Label" parent="MenuSlider/Slider/MenuController/Player2"]
-margin_left = 740.0
+margin_left = 660.0
 margin_top = 20.0
 margin_right = 1060.0
 margin_bottom = 121.0
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Gamepad"
+text = "Gamepad #0"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
