@@ -1,0 +1,220 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://fonts/font_64.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/font_42.tres" type="DynamicFont" id=2]
+[ext_resource path="res://textures/ui/white.png" type="Texture" id=3]
+[ext_resource path="res://scenes/ui/GamepadConfigurator.gd" type="Script" id=4]
+[ext_resource path="res://scenes/ui/menu/GamepadDetectionScene.gd" type="Script" id=5]
+[ext_resource path="res://scenes/ui/GamepadDetector.gd" type="Script" id=6]
+
+[sub_resource type="Animation" id=2]
+resource_name = "hide"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("ControlsRoot:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("back:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.756863, 0.768627, 0.827451, 1 ), Color( 0.756863, 0.768627, 0.827451, 1 ), Color( 0.756863, 0.768627, 0.827451, 0 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "show"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("ControlsRoot:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("back:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.756863, 0.768627, 0.827451, 0 ), Color( 0.756863, 0.768627, 0.827451, 1 ), Color( 0.756863, 0.768627, 0.827451, 1 ) ]
+}
+
+[node name="GamepadDetectionScene" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="back" type="Sprite" parent="."]
+modulate = Color( 0.756863, 0.768627, 0.827451, 1 )
+scale = Vector2( 120, 67.5 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="ControlsRoot" type="Node2D" parent="."]
+
+[node name="CancelGuide" type="Label" parent="ControlsRoot"]
+margin_left = 1580.0
+margin_top = 940.0
+margin_right = 1844.0
+margin_bottom = 1006.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Esc = Cancel"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" type="Label" parent="ControlsRoot"]
+margin_left = 40.0
+margin_top = 280.0
+margin_right = 1880.0
+margin_bottom = 381.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Player 1"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Detection" type="Node2D" parent="ControlsRoot"]
+visible = false
+
+[node name="Message" type="Label" parent="ControlsRoot/Detection"]
+margin_left = 40.0
+margin_top = 420.0
+margin_right = 1880.0
+margin_bottom = 521.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Please, press any button on your gamepad"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KbdFallbackMessage" type="Label" parent="ControlsRoot/Detection"]
+margin_left = 40.0
+margin_top = 500.0
+margin_right = 1880.0
+margin_bottom = 601.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "or press H to use keyboard controls"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Configuring" type="Node2D" parent="ControlsRoot"]
+visible = false
+
+[node name="UnknownMessage" type="Label" parent="ControlsRoot/Configuring"]
+margin_left = 40.0
+margin_top = 420.0
+margin_right = 1880.0
+margin_bottom = 521.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Gamepad model is unknown. Now configuring..."
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="JustConfiguringMessage" type="Label" parent="ControlsRoot/Configuring"]
+visible = false
+margin_left = 40.0
+margin_top = 420.0
+margin_right = 1880.0
+margin_bottom = 521.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Now configuring your gamepad..."
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Prompt" type="Label" parent="ControlsRoot/Configuring"]
+margin_left = 40.0
+margin_top = 540.0
+margin_right = 1880.0
+margin_bottom = 641.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Please press Up"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Success" type="Node2D" parent="ControlsRoot"]
+visible = false
+
+[node name="Message2" type="Label" parent="ControlsRoot/Success"]
+margin_left = 40.0
+margin_top = 420.0
+margin_right = 1880.0
+margin_bottom = 521.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Gamepad configured"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Message3" type="Label" parent="ControlsRoot/Success"]
+margin_left = 40.0
+margin_top = 540.0
+margin_right = 1880.0
+margin_bottom = 675.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Configuration can be changed anytime in the Settings
+Press any button to continue"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/hide = SubResource( 2 )
+anims/show = SubResource( 1 )
+
+[node name="GamepadConfigurator" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="GamepadDetector" type="Node" parent="."]
+script = ExtResource( 6 )
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="cancelled" from="GamepadConfigurator" to="." method="_on_GamepadConfigurator_cancelled"]
+[connection signal="finished" from="GamepadConfigurator" to="." method="_on_GamepadConfigurator_finished"]
+[connection signal="waiting_for_axis" from="GamepadConfigurator" to="." method="_on_GamepadConfigurator_waiting_for_axis"]
+[connection signal="waiting_for_axis_button" from="GamepadConfigurator" to="." method="_on_GamepadConfigurator_waiting_for_axis_button"]
+[connection signal="waiting_for_button" from="GamepadConfigurator" to="." method="_on_GamepadConfigurator_waiting_for_button"]
+[connection signal="gamepad_detected" from="GamepadDetector" to="." method="_on_gamepad_detected"]

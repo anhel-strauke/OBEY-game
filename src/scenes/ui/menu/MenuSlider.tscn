@@ -1,0 +1,95 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/ui/menu/MenuController.tscn" type="PackedScene" id=1]
+[ext_resource path="res://fonts/font_64.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scenes/ui/menu/MenuSlider.gd" type="Script" id=3]
+[ext_resource path="res://textures/ui/white.png" type="Texture" id=4]
+[ext_resource path="res://fonts/font_42.tres" type="DynamicFont" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "slide_in"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Slider:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1940, 0 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "slide_out"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Slider:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1940, 0 ) ]
+}
+
+[node name="MenuSlider" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Slider" type="Node2D" parent="."]
+position = Vector2( 1940, 0 )
+
+[node name="Background" type="Sprite" parent="Slider"]
+self_modulate = Color( 0.756863, 0.768627, 0.827451, 1 )
+scale = Vector2( 120, 67.5 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="TitlebarBg" type="Sprite" parent="Slider"]
+modulate = Color( 0.32549, 0.490196, 0.803922, 1 )
+scale = Vector2( 6.25, 67.5 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="LabelRoot" type="Node2D" parent="Slider"]
+position = Vector2( 0, 1080 )
+rotation = -1.5708
+
+[node name="Label" type="Label" parent="Slider/LabelRoot"]
+margin_right = 1037.0
+margin_bottom = 101.0
+custom_fonts/font = ExtResource( 2 )
+text = "New Game"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuController" parent="Slider" instance=ExtResource( 1 )]
+position = Vector2( 440, 300 )
+enabled = false
+
+[node name="BackLabel" type="Node2D" parent="Slider"]
+
+[node name="BackLabelText" type="Label" parent="Slider/BackLabel"]
+margin_left = 1580.0
+margin_top = 20.0
+margin_right = 1893.0
+margin_bottom = 86.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Esc or (B) = Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SlideAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/slide_in = SubResource( 1 )
+anims/slide_out = SubResource( 2 )
+[connection signal="cancelled" from="Slider/MenuController" to="." method="_on_MenuController_cancelled"]
+[connection signal="animation_finished" from="SlideAnimationPlayer" to="." method="_on_SlideAnimationPlayer_animation_finished"]

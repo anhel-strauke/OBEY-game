@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://fonts/ElMessiri-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://GamepadTest.gd" type="Script" id=2]
+[ext_resource path="res://scenes/ui/GamepadConfigurator.tscn" type="PackedScene" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 64
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 64
+font_data = ExtResource( 1 )
+
+[node name="GamepadTest" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchor_right = 0.478
+anchor_bottom = 1.0
+margin_left = 0.975342
+margin_top = 0.975342
+margin_right = 32.9353
+margin_bottom = 40.9753
+custom_fonts/normal_font = SubResource( 1 )
+text = "Running...
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_right = 1.0
+margin_right = 40.0
+margin_bottom = 252.0
+custom_fonts/font = SubResource( 2 )
+text = "Button pressed!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+margin_left = 963.0
+margin_top = 320.0
+margin_right = 1810.0
+margin_bottom = 525.0
+custom_fonts/font = SubResource( 3 )
+text = "0; 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GamepadConfigurator" parent="." instance=ExtResource( 3 )]
+[connection signal="finished" from="GamepadConfigurator" to="." method="_on_GamepadConfigurator_finished"]
+[connection signal="waiting_for_axis" from="GamepadConfigurator" to="." method="_on_GamepadConfigurator_waiting_for_axis"]
+[connection signal="waiting_for_axis_button" from="GamepadConfigurator" to="." method="_on_GamepadConfigurator_waiting_for_axis_button"]
+[connection signal="waiting_for_button" from="GamepadConfigurator" to="." method="_on_GamepadConfigurator_waiting_for_button"]
