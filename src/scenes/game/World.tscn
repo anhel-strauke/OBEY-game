@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://textures/arenas/map1.png" type="Texture" id=1]
 [ext_resource path="res://scenes/game/character/characters/Tower5G.tscn" type="PackedScene" id=2]
@@ -6,6 +6,12 @@
 [ext_resource path="res://scenes/game/character_drivers/PlayerDriver.gd" type="Script" id=4]
 [ext_resource path="res://scenes/game/character/characters/Reptiloid.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/game/character/Weapons/WeaponSpawner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/game/character_drivers/aistates/FollowPlayer.gd" type="Script" id=7]
+[ext_resource path="res://scripts/state_machine/state.gd" type="Script" id=8]
+[ext_resource path="res://scenes/game/character_drivers/AiDriver.gd" type="Script" id=9]
+[ext_resource path="res://scenes/ui/AIVisualiser.gd" type="Script" id=10]
+[ext_resource path="res://scenes/game/character_drivers/aistates/Think.gd" type="Script" id=11]
+[ext_resource path="res://scenes/game/character_drivers/aistates/HoldPosition.gd" type="Script" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 960, 20 )
@@ -102,3 +108,50 @@ spawn_period = 5.0
 position = Vector2( 460, 760 )
 weapon_scene = "res://scenes/game/character/Weapons/AssaultRifle.tscn"
 spawn_period = 5.0
+
+
+[node name="Character3" parent="Chars" instance=ExtResource( 2 )]
+position = Vector2( 1757.81, 411.074 )
+
+[node name="white" parent="Chars/Character3/Sprite" index="0"]
+self_modulate = Color( 0.941176, 0.905882, 0.0627451, 1 )
+
+[node name="Driver" type="Node" parent="Chars/Character3"]
+script = ExtResource( 9 )
+start_state = NodePath("Think")
+
+[node name="Think" type="Node" parent="Chars/Character3/Driver"]
+script = ExtResource( 11 )
+
+[node name="GetWeapon" type="Node" parent="Chars/Character3/Driver"]
+script = ExtResource( 8 )
+
+[node name="GetBonus" type="Node" parent="Chars/Character3/Driver"]
+script = ExtResource( 8 )
+
+[node name="FollowPlayer" type="Node" parent="Chars/Character3/Driver"]
+script = ExtResource( 7 )
+
+[node name="Attack" type="Node" parent="Chars/Character3/Driver"]
+script = ExtResource( 8 )
+
+[node name="Flee" type="Node" parent="Chars/Character3/Driver"]
+script = ExtResource( 8 )
+
+[node name="HoldPosition" type="Node" parent="Chars/Character3/Driver"]
+script = ExtResource( 12 )
+
+[node name="AIVisualiser" type="Node2D" parent="Chars/Character3"]
+script = ExtResource( 10 )
+
+[node name="StateLabel" type="RichTextLabel" parent="Chars/Character3/AIVisualiser"]
+margin_left = -50.1958
+margin_top = -205.065
+margin_right = 107.804
+margin_bottom = -141.065
+meta_underlined = false
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[editable path="Chars/Character3"]
