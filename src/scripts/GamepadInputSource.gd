@@ -65,7 +65,7 @@ func _process(_delta: float) -> void:
 	var y_axis = GamepadManager.get_axis(device_id, GamepadManager.GamepadAxis.LY)
 	_direction = Vector2(x_axis, y_axis)
 	var dir_len = _direction.length()
-	if dir_len < 0.05:
+	if dir_len < 0.1:
 		_direction = Vector2.ZERO
 	elif dir_len > 1.0:
 		_direction = _direction.normalized()

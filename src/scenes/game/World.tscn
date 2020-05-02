@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://textures/ui/white.png" type="Texture" id=1]
-[ext_resource path="res://scenes/game/character/Character.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/game/character/characters/Mason.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/World.gd" type="Script" id=3]
 [ext_resource path="res://scenes/game/character_drivers/PlayerDriver.gd" type="Script" id=4]
-[ext_resource path="res://textures/test/rept.png" type="Texture" id=5]
-[ext_resource path="res://textures/test/mason.png" type="Texture" id=6]
+[ext_resource path="res://scenes/game/character/characters/Reptiloid.tscn" type="PackedScene" id=5]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 3 )
@@ -26,33 +25,16 @@ polygon = PoolVector2Array( 40, 120, 1880, 120, 1880, 1040, 40, 1040, 40, 120, -
 
 [node name="Chars" type="YSort" parent="."]
 
-[node name="Character" parent="Chars" instance=ExtResource( 2 )]
-position = Vector2( 160, 280 )
+[node name="Mason" parent="Chars" instance=ExtResource( 2 )]
+position = Vector2( 860, 500 )
 
-[node name="white" parent="Chars/Character/Sprite" index="0"]
-self_modulate = Color( 1, 1, 1, 1 )
-scale = Vector2( 1, 1 )
-texture = ExtResource( 5 )
-flip_h = true
-
-[node name="Driver" type="Node" parent="Chars/Character"]
+[node name="Driver" type="Node" parent="Chars/Mason"]
 script = ExtResource( 4 )
 player_index = 0
 
-[node name="Character2" parent="Chars" instance=ExtResource( 2 )]
-position = Vector2( 1760, 960 )
+[node name="Reptiloid" parent="Chars" instance=ExtResource( 5 )]
+position = Vector2( 1340, 760 )
 
-[node name="white" parent="Chars/Character2/Sprite" index="0"]
-self_modulate = Color( 1, 1, 1, 1 )
-scale = Vector2( 1, 1 )
-texture = ExtResource( 6 )
-
-[node name="Driver" type="Node" parent="Chars/Character2"]
+[node name="Driver" type="Node" parent="Chars/Reptiloid"]
 script = ExtResource( 4 )
 player_index = 1
-
-[editable path="Chars/Character"]
-
-[editable path="Chars/Character/Hurtbox"]
-
-[editable path="Chars/Character2"]
