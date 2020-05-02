@@ -8,6 +8,7 @@ func initialize(newTarget):
 func update(Variant):
 	._update()
 	# var aim_direction = player.position.direction_to(target.position)
+	#get_simple_path(start_position, end_position, true)
 	var aim_direction = predict_without_acceleration()
 	velocity_vector = aim_direction # / 10000 # fixme: stop on "shoot" to visualize cooldown
 	# var distance = player.position.distance_to(target.position)

@@ -16,12 +16,15 @@ func update(_delta):
 	
 	if ttd > ttk:
 		target_ent = enemies[enemy_iterator]
-		emit_signal("finished", "attack")
+		emit_signal("finished", "follow_player")
 	else:
 		# TODO: Consider fleeing to a point with _fewer_ enemies, rather than none at all
 		var points = _sort_strategic_points("_sort_by_distance", funcref(self, "_filter_by_enemy_presence"))
-		print(points)
-		target_point = points[0]
+		
+		if points.empty(): # or no path available
+			print('Fight to the death!')
+		else:	
+			target_point = points[0]
 		emit_signal("finished", "flee")
 		
 		

@@ -21,6 +21,12 @@ func _process(delta):
 func _draw():
 	$StateLabel.text = aidriver.get_stack_description()
 	draw_line(nul, aidriver.get_velocity_vector().normalized()*100.0, Color(1,1,1), 3)
+	var drawAnchor = nul - global_position
+	var prevPoint = null
+	for point in aidriver.current_state.path:
+		if prevPoint != null:
+			draw_line(prevPoint - global_position, point - global_position, Color(1,1,0), 3)
+		prevPoint = point
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
