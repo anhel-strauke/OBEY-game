@@ -26,8 +26,10 @@ func _ready():
 func _change_state(state_name):
 	if not _active:
 		return
-	if state_name in ["follow_player", "flee", "hold_position"]:
+	if state_name in ["follow_player", "attack", "flee", "hold_position"]:
 		states_stack.push_front(states_map[state_name])
 	if state_name == "follow_player": # and current_state == $Flee:
 		$FollowPlayer.initialize(get_parent(), $Think.target)
+	if state_name == "attack": # and current_state == $Flee:
+		$Attack.initialize(get_parent(), $Think.target)
 	._change_state(state_name)

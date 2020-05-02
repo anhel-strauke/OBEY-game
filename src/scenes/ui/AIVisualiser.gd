@@ -18,4 +18,4 @@ func _process(delta):
 	
 func _draw():
 	$StateLabel.text = aidriver.get_stack_description()
-	draw_line(nul, aidriver.get_velocity_vector()*100.0, Color(1,1,1), 3)
+	draw_line(nul, aidriver.get_velocity_vector().normalized()*100.0, Color(1,1,1), 3)
