@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/game/character/Hurtbox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/character/Character.gd" type="Script" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 8.49282
+height = 63.0589
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 5.1605, 40.0223 )
 
 [node name="Character" type="KinematicBody2D"]
 collision_layer = 2
@@ -13,5 +20,19 @@ script = ExtResource( 3 )
 [node name="Hurtbox" parent="." instance=ExtResource( 2 )]
 collision_layer = 4
 collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -9.36763 )
+rotation = -1.5708
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+rotation = -1.5708
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -5 )
+rotation = -1.5708
+shape = SubResource( 2 )
 
 [editable path="Hurtbox"]

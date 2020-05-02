@@ -1,4 +1,4 @@
-extends "res://scenes/game/character/Character.gd"
+extends Character
 
 
 onready var walk_anim_player = $Sprite/Sprite/WalkAnimation
