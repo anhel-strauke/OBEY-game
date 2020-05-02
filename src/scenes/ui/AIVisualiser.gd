@@ -11,6 +11,8 @@ var aidriver
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	aidriver = get_parent().get_node("Driver")
+	set_process_input(true)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -19,3 +21,12 @@ func _process(delta):
 func _draw():
 	$StateLabel.text = aidriver.get_stack_description()
 	draw_line(nul, aidriver.get_velocity_vector().normalized()*100.0, Color(1,1,1), 3)
+
+func _input(event):
+	if event is InputEventKey and event.pressed:
+		if event.scancode == KEY_PLUS:
+			aidriver.incMockTTK()
+		if event.scancode == KEY_EQUAL and event.shift:
+			aidriver.incMockTTK()
+		if event.scancode == KEY_MINUS:
+			aidriver.decMockTTK()

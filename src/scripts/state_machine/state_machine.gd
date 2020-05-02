@@ -77,3 +77,19 @@ func _change_state(state_name):
 
 	if state_name != "previous":
 		current_state.enter()
+
+func _drop_to_state(state_name):
+	if not _active:
+		return
+	var returnCount = 0	
+	for state in states_stack:
+		if states_map[state_name] != state:
+			returnCount += 1
+		else:
+			break	
+	
+	for i in range(0, returnCount):
+		states_stack.pop_front().exit()
+	
+	current_state = states_stack[0]
+	emit_signal("state_changed", current_state)
