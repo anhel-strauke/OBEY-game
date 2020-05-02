@@ -39,5 +39,7 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="activated" from="MenuSlider/Slider/MenuController/SinglePlayer" to="." method="_on_SinglePlayer_activated"]
+[connection signal="activated" from="MenuSlider/Slider/MenuController/TwoPlayers" to="." method="_on_SinglePlayer_activated"]
 
 [editable path="MenuSlider"]
