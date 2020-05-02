@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/game/character/Weapons/WeaponPickupZone.tscn" type="PackedScene" id=1]
+[ext_resource path="res://textures/characters/weapon/shotgun.png" type="Texture" id=2]
+[ext_resource path="res://scenes/game/character/Weapons/Shotgun.gd" type="Script" id=3]
+[ext_resource path="res://sounds/ui/select.ogg" type="AudioStream" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "shoot"
+length = 0.12
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("shotgun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.01, 0.12 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 0 ]
+}
+
+[node name="Shotgun" type="Node2D"]
+script = ExtResource( 3 )
+ammo = 4
+shoot_sound = ExtResource( 4 )
+
+[node name="shotgun" type="Sprite" parent="."]
+position = Vector2( -60, -5 )
+texture = ExtResource( 2 )
+vframes = 2
+
+[node name="BulletSpawn" type="Position2D" parent="."]
+position = Vector2( -75, -10 )
+
+[node name="WeaponPickupZone" parent="." instance=ExtResource( 1 )]
+position = Vector2( -20, -5 )
+
+[node name="ShotAnim" type="AnimationPlayer" parent="."]
+anims/shoot = SubResource( 1 )

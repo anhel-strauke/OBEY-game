@@ -1,21 +1,44 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://scenes/game/character/Weapons/Firearm.gd" type="Script" id=1]
+[ext_resource path="res://scenes/game/character/Weapons/AssaultRifle.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/character/Weapons/WeaponPickupZone.tscn" type="PackedScene" id=2]
 [ext_resource path="res://textures/characters/weapon/assault_rifle.png" type="Texture" id=3]
+[ext_resource path="res://sounds/ui/click.ogg" type="AudioStream" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "shoot"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("assault_rifle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.01, 0.07 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 0 ]
+}
 
 [node name="AssaultRifle" type="Node2D"]
 script = ExtResource( 1 )
 attack_cooldown_time = 0.1
 is_automatic = true
 ammo = 20
+shoot_sound = ExtResource( 4 )
+
+[node name="ShotAnim" type="AnimationPlayer" parent="."]
+anims/shoot = SubResource( 1 )
 
 [node name="BulletSpawn" type="Position2D" parent="."]
 position = Vector2( -76, -13 )
 
 [node name="assault_rifle" type="Sprite" parent="."]
-position = Vector2( -23, 0 )
+position = Vector2( -47, -3 )
 texture = ExtResource( 3 )
+vframes = 2
 
 [node name="WeaponPickupZone" parent="." instance=ExtResource( 2 )]
 position = Vector2( -15, 0 )

@@ -36,6 +36,20 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 12, 23 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath("../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_random_walk_animation"
+} ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "walk_usual"
@@ -53,6 +67,20 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 0, 11 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath("../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_random_walk_animation"
+} ]
+}
 
 [sub_resource type="CapsuleShape2D" id=4]
 radius = 20.0
@@ -66,7 +94,7 @@ position = Vector2( 0, -90 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 6
-frame = 15
+frame = 11
 
 [node name="WalkAnimation" type="AnimationPlayer" parent="Sprite/Sprite" index="0"]
 anims/idle = SubResource( 1 )
