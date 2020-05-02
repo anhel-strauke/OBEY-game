@@ -30,7 +30,6 @@ func _on_animation_finished(anim_name: String) -> void:
 			#	preloaded_scenes[next_scene_name] = preloaded_res
 			#var scene = preloaded_res.instance()
 			get_tree().change_scene(next_scene_name)
-			next_scene_name = ""
 			anim_player.play("hide")
 		"hide":
-			pass
+			next_scene_name = ""
