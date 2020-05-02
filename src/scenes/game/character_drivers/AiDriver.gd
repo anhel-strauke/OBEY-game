@@ -20,19 +20,20 @@ func _ready():
 	enemies.push_back(get_parent().get_parent().get_node("Character"))
 	enemies.push_back(get_parent().get_parent().get_node("Character2"))
 	
+	for child in get_children():
+		child.player = get_parent()
+		child.enemies = enemies
+	
 	var world_width = 1920 # TODO: Stabilize API
 	var world_height = 1080
 	strategic_points.push_back(Vector2(world_width/4, world_height/4))
 	strategic_points.push_back(Vector2(world_width*3/4, world_height/4))
 	strategic_points.push_back(Vector2(world_width/4, world_height*3/4))
 	strategic_points.push_back(Vector2(world_width*3/4, world_height*3/4))
-	
-	$Think.player = get_parent()
-	$Think.enemies = enemies
+		
 	$Think.strategic_points = strategic_points
 	# TODO: Remove "safe zone" :) 
 	$FollowPlayer.safe_zone = enemies[0].position
-	$HoldPosition.initialize(get_parent(), get_parent().position)
 	
 func _change_state(state_name):
 	if not _active:
@@ -40,11 +41,13 @@ func _change_state(state_name):
 	if state_name in ["follow_player", "attack", "flee", "hold_position"]:
 		states_stack.push_front(states_map[state_name])
 	if state_name == "follow_player": # and current_state == $Flee:
-		$FollowPlayer.initialize(get_parent(), $Think.target_ent)
+		$FollowPlayer.initialize($Think.target_ent)
 	if state_name == "attack": # and current_state == $Flee:
-		$Attack.initialize(get_parent(), $Think.target_ent)
+		$Attack.initialize($Think.target_ent)
 	if state_name == "flee":
-		$Flee.initialize(get_parent(), $Think.target_point)
+		$Flee.initialize($Think.target_point)
+	if state_name == "hold_position":
+		$HoldPosition.initialize(get_parent().position)
 	._change_state(state_name)
 
 # Abrupt changes of the game field should trigger recalculation of the action stack
@@ -53,8 +56,8 @@ func _change_state(state_name):
 # - New player in combat radius
 func incMockTTK():
 	$Think.incMockTTK()
-	._drop_to_state("think")
+	._reset_to_state("think")
 	
 func decMockTTK():
 	$Think.decMockTTK()
-	._drop_to_state("think")
+	._reset_to_state("think")

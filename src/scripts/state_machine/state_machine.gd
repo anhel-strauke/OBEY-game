@@ -22,6 +22,7 @@ func _ready():
 		start_state = get_child(0).get_path()
 	for child in get_children():
 		child.connect("finished", self, "_change_state")
+		child.connect("stack_invalid", self, "_reset_to_state")
 	initialize(start_state)
 
 
@@ -30,7 +31,6 @@ func initialize(initial_state):
 	states_stack.push_front(get_node(initial_state))
 	current_state = states_stack[0]
 	current_state.enter()
-
 
 func set_active(value):
 	_active = value
@@ -78,7 +78,7 @@ func _change_state(state_name):
 	if state_name != "previous":
 		current_state.enter()
 
-func _drop_to_state(state_name):
+func _reset_to_state(state_name):
 	if not _active:
 		return
 	var returnCount = 0	
@@ -91,5 +91,8 @@ func _drop_to_state(state_name):
 	for i in range(0, returnCount):
 		states_stack.pop_front().exit()
 	
-	current_state = states_stack[0]
-	emit_signal("state_changed", current_state)
+	if(states_stack.empty()):
+		_change_state(state_name)
+	else:
+		current_state = states_stack[0]
+		emit_signal("state_changed", current_state)

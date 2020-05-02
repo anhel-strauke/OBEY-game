@@ -1,17 +1,15 @@
-extends "res://scripts/state_machine/state.gd"
+extends "res://scenes/game/character_drivers/aistates/StageAwareState.gd"
 
-
-var player
-var target_position
+var target_position: Vector2
 
 const COUNTDOWN_UPDATE_COUNT: int = 100
 var countdown = COUNTDOWN_UPDATE_COUNT
 
-func initialize(newPlayer, newTarget):
-	player = newPlayer
+func initialize(newTarget: Vector2):
 	target_position = newTarget
 
 func update(Variant):
+	._update()
 	var distance = player.position.distance_to(target_position)
 	if distance < 200:
 		velocity_vector = Vector2()

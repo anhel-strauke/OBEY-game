@@ -5,8 +5,7 @@ extends Node
 
 # warning-ignore:unused_signal
 signal finished(next_state_name)
-
-var velocity_vector: Vector2 = Vector2.ZERO
+signal stack_invalid()
 
 # Initialize the state. E.g. change the animation.
 func enter():

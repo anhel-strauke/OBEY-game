@@ -1,14 +1,12 @@
-extends "res://scripts/state_machine/state.gd"
+extends "res://scenes/game/character_drivers/aistates/StageAwareState.gd"
 
-var player
 var target
 
-
-func initialize(newPlayer, newTarget):
-	player = newPlayer
+func initialize(newTarget):
 	target = newTarget
 
 func update(Variant):
+	._update()
 	# var aim_direction = player.position.direction_to(target.position)
 	var aim_direction = predict_without_acceleration()
 	velocity_vector = aim_direction # / 10000 # fixme: stop on "shoot" to visualize cooldown

@@ -1,18 +1,16 @@
-extends "res://scripts/state_machine/state.gd"
+extends "res://scenes/game/character_drivers/aistates/StageAwareState.gd"
 
-
-var player
-var target_position
-
-const COUNTDOWN_UPDATE_COUNT: int = 60
+const COUNTDOWN_UPDATE_COUNT: int = 240
 var countdown = COUNTDOWN_UPDATE_COUNT
+var target_position: Vector2
 
-func initialize(newPlayer, newTarget):
-	player = newPlayer
+func initialize(newTarget: Vector2):
+	goal_avoid_enemies = true
 	target_position = newTarget
 
 # TODO: [obstacles] Avoid direct ray traces to players
 func update(Variant):
+	._update()
 	var distance = player.position.distance_to(target_position)
 	if distance < 200:
 		velocity_vector = Vector2()

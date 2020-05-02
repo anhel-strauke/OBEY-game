@@ -1,16 +1,15 @@
-extends 'res://scripts/state_machine/state.gd'
+extends 'res://scenes/game/character_drivers/aistates/StageAwareState.gd'
 
-var player
 var target
 
 # TODO: Remove "safe zone" :) 
 var safe_zone = null
 
-func initialize(newPlayer, newTarget):
-	player = newPlayer
+func initialize(newTarget):
 	target = newTarget
 
 func update(Variant):
+	._update()
 	velocity_vector = player.position.direction_to(target.position)
 	var distance = player.position.distance_to(target.position)
 	if distance < 50:

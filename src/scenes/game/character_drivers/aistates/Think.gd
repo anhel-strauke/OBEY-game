@@ -1,7 +1,5 @@
-extends "res://scripts/state_machine/state.gd"
+extends "res://scenes/game/character_drivers/aistates/StageAwareState.gd"
 
-var player
-var enemies = []
 var strategic_points = []
 var target_ent # TODO: Stack parameters
 var target_point # TODO: Stack parameters
@@ -41,14 +39,6 @@ func decMockTTK():
 
 func get_state_description():
 	return "Think"
-	
-# fixme: read about simpler solutions	
-func _get_enemies_around_point(point: Vector2, radius: int):
-	var result = []	
-	for enemy in enemies:
-		if point.distance_to(enemy.global_position) < radius:
-			result.push_back(enemy)
-	return result
 	
 func _filter_by_enemy_presence(element) -> bool:
 	var enemies = _get_enemies_around_point(element, 400)
