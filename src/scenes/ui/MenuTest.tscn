@@ -1,14 +1,31 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/ui/menu/MenuItem.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/ui/menu/MenuController.tscn" type="PackedScene" id=2]
 [ext_resource path="res://fonts/NunitoSans-ExtraBoldItalic.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://scenes/ui/MenuTest.gd" type="Script" id=4]
-[ext_resource path="res://textures/ui/white.png" type="Texture" id=5]
+[ext_resource path="res://textures/test/obey.png" type="Texture" id=5]
 [ext_resource path="res://scenes/ui/menu/PlayerSelectSlider.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/ui/menu/SettingsSlider.tscn" type="PackedScene" id=7]
 [ext_resource path="res://fonts/font_obey_64.tres" type="DynamicFont" id=8]
 [ext_resource path="res://fonts/Caveat-Regular.ttf" type="DynamicFontData" id=9]
+
+[sub_resource type="Animation" id=3]
+resource_name = "loop"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Rect2( 0, 0, 1920, 1080 ), Rect2( 486, 231, 1920, 1080 ) ]
+}
 
 [sub_resource type="DynamicFont" id=1]
 size = 112
@@ -21,11 +38,15 @@ font_data = ExtResource( 9 )
 [node name="MenuTest" type="Node2D"]
 script = ExtResource( 4 )
 
-[node name="white" type="Sprite" parent="."]
-modulate = Color( 0.431373, 0.32549, 0.32549, 1 )
-scale = Vector2( 120, 67.5 )
+[node name="Background" type="Sprite" parent="."]
 texture = ExtResource( 5 )
 centered = false
+region_enabled = true
+region_rect = Rect2( 486, 231, 1920, 1080 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background"]
+autoplay = "loop"
+anims/loop = SubResource( 3 )
 
 [node name="GameTitle" type="Label" parent="."]
 margin_left = 40.0
@@ -47,6 +68,20 @@ margin_bottom = 305.0
 custom_fonts/font = ExtResource( 8 )
 text = "in they we trust"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1467.0
+margin_bottom = 272.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.933333, 1, 0, 0.305882 )
+text = "Мышка (пока что) не работает, выбор стрелками или геймпадом,
+и Enter или кнопка (A) на геймпаде
+                                            — Анхель"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -118,20 +153,6 @@ __meta__ = {
 visible = false
 
 [node name="SettingsSlider" parent="." instance=ExtResource( 7 )]
-
-[node name="Label2" type="Label" parent="."]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 1467.0
-margin_bottom = 272.0
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.933333, 1, 0, 1 )
-text = "Мышка (пока что) не работает, выбор стрелками или геймпадом,
-и Enter или кнопка (A) на геймпаде
-                                            — Анхель"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 [connection signal="activated" from="MenuController/NewGame" to="." method="_on_NewGame_activated"]
 [connection signal="activated" from="MenuController/Settings" to="." method="_on_Settings_activated"]
 [connection signal="activated" from="MenuController/Exit" to="." method="_on_Exit_activated"]
