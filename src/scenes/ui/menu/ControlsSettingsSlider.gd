@@ -17,10 +17,10 @@ func set_input_src_label(player_index: int) -> void:
 	var player = GameInput.player(player_index)
 	var text = "???"
 	if player.is_keyboard_input_source():
-		text = "Keyboard"
+		text = "Клавиатура"
 	elif player.is_gamepad_input_source():
 		var gp_id = player.input_source.device_id
-		text = "Gamepad #%d" % gp_id
+		text = "Геймпад №%d" % gp_id
 	player_input_labels[player_index].text = text
 
 
@@ -31,7 +31,7 @@ func show():
 
 
 func update_to_keyboard(player_index: int) -> void:
-	player_input_labels[player_index].text = "Keyboard"
+	player_input_labels[player_index].text = "Клавиатура"
 
 
 func update_to_gamepad(player_index: int) -> void:
@@ -40,7 +40,7 @@ func update_to_gamepad(player_index: int) -> void:
 	if player.is_gamepad_input_source():
 		var id = player.input_source.device_id
 		gamepad_id_str = str(id)
-	player_input_labels[player_index].text = "Gamepad #%s" % gamepad_id_str
+	player_input_labels[player_index].text = "Геймпад №%s" % gamepad_id_str
 
 
 func _on_Player1_activated():

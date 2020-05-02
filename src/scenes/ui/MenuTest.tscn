@@ -10,6 +10,7 @@
 [ext_resource path="res://fonts/font_obey_64.tres" type="DynamicFont" id=8]
 [ext_resource path="res://fonts/Caveat-Regular.ttf" type="DynamicFontData" id=9]
 
+
 [sub_resource type="Animation" id=1]
 resource_name = "loop"
 length = 3.0
@@ -94,12 +95,12 @@ position = Vector2( 380.011, 360 )
 change_label_color = false
 
 [node name="Label" type="Label" parent="MenuController/NewGame"]
-margin_left = 140.0
+margin_left = 339.989
 margin_top = 20.0
-margin_right = 437.0
+margin_right = 636.989
 margin_bottom = 121.0
 custom_fonts/font = ExtResource( 8 )
-text = "Start Game"
+text = "Начать Игру"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -109,12 +110,12 @@ position = Vector2( 380.022, 500 )
 change_label_color = false
 
 [node name="Label" type="Label" parent="MenuController/Settings"]
-margin_left = 139.989
+margin_left = 339.978
 margin_top = 20.0
-margin_right = 499.989
+margin_right = 699.978
 margin_bottom = 121.0
 custom_fonts/font = ExtResource( 8 )
-text = "Settings"
+text = "Настройки"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -124,12 +125,12 @@ position = Vector2( 380, 640 )
 change_label_color = false
 
 [node name="Label" type="Label" parent="MenuController/Credits"]
-margin_left = 140.0
+margin_left = 340.0
 margin_top = 20.0
-margin_right = 560.0
-margin_bottom = 121.0
+margin_right = 760.0
+margin_bottom = 102.0
 custom_fonts/font = ExtResource( 8 )
-text = "Credits"
+text = "Авторы"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -139,12 +140,12 @@ position = Vector2( 380, 780 )
 change_label_color = false
 
 [node name="Label" type="Label" parent="MenuController/Exit"]
-margin_left = 140.0
+margin_left = 340.0
 margin_top = 20.0
-margin_right = 560.0
+margin_right = 760.0
 margin_bottom = 121.0
 custom_fonts/font = ExtResource( 8 )
-text = "Exit"
+text = "Выход"
 __meta__ = {
 "_edit_use_anchors_": false
 }

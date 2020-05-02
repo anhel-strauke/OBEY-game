@@ -6,9 +6,9 @@ var new_game: bool = true setget set_new_game
 
 func set_new_game(n: bool) -> void:
 	if n:
-		title_label.text = "Start Game"
+		title_label.text = "Начать Игру"
 	else:
-		title_label.text = "Continue Game"
+		title_label.text = "Продолжить Игру"
 
 
 

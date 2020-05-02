@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "BaseWeapon",
+"language": "GDScript",
+"path": "res://scenes/game/character/Weapons/BaseWeapon.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Character",
 "language": "GDScript",
@@ -43,22 +48,29 @@ _global_script_classes=[ {
 "class": "PlayerDriver",
 "language": "GDScript",
 "path": "res://scenes/game/character_drivers/PlayerDriver.gd"
+}, {
+"base": "Node2D",
+"class": "WeaponSpawner",
+"language": "GDScript",
+"path": "res://scenes/game/character/Weapons/WeaponSpawner.gd"
 } ]
 _global_script_class_icons={
+"BaseWeapon": "",
 "Character": "",
 "CustomSlider": "",
 "GamepadConfigurator": "",
 "GamepadDetector": "",
 "MenuController": "",
 "MenuItem": "",
-"PlayerDriver": ""
+"PlayerDriver": "",
+"WeaponSpawner": ""
 }
 
 [application]
 
 config/name="OBEY: In They We Trust"
 config/description="Game for Siberian Game Jam on May, 2020"
-run/main_scene="res://scenes/game/World.tscn"
+run/main_scene="res://scenes/ui/MenuTest.tscn"
 boot_splash/image="res://splash.png"
 config/icon="res://icon.png"
 
@@ -120,9 +132,11 @@ ui_down={
 
 2d_physics/layer_1="World"
 2d_physics/layer_2="Character"
-2d_physics/layer_3="CharacterHurtbox"
+2d_physics/layer_3="Character Hurtbox"
 2d_physics/layer_4="Hitbox"
 2d_physics/layer_5="Projectile"
+2d_physics/layer_6="Projectile Obstacle"
+2d_physics/layer_7="Collectible Items"
 
 [rendering]
 

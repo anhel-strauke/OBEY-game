@@ -5,7 +5,7 @@ const KBD_FALLBACK_KEY = [
 	[KEY_P, "P"]
 ]
 
-const PLEASE_PRESS = "Please press %s on the gamepad"
+const PLEASE_PRESS = "Пожалуйста, нажмите %s на геймпаде"
 
 enum State {
 	Showing,
@@ -60,8 +60,8 @@ func _ready() -> void:
 
 func set_player_index(index: int) -> void:
 	player_index = index
-	player_label.text = "Player %d" % (player_index + 1)
-	kbd_fallback_label.text = "or press %s to use keyboard controls" % KBD_FALLBACK_KEY[player_index][1]
+	player_label.text = "Игрок %d" % (player_index + 1)
+	kbd_fallback_label.text = "или нажмите %s, чтобы использовать клавиатуру" % KBD_FALLBACK_KEY[player_index][1]
 
 
 func show_modal(caller: Node, slot: String) -> void:
@@ -211,9 +211,9 @@ func _on_GamepadConfigurator_finished() -> void:
 
 
 func _on_GamepadConfigurator_waiting_for_axis(axis: int) -> void:
-	var axis_text = "Left"
+	var axis_text = "Влево"
 	if axis == GamepadManager.GamepadAxis.LY:
-		axis_text = "Up"
+		axis_text = "Вверх"
 	prompt_label.text = PLEASE_PRESS % axis_text
 	click_sound.play()
 
@@ -222,13 +222,13 @@ func _on_GamepadConfigurator_waiting_for_axis_button(axis_button: int) -> void:
 	var button_text = ""
 	match axis_button:
 		GamepadManager.GamepadAxisButton.LXMinus:
-			button_text = "Left"
+			button_text = "Влево"
 		GamepadManager.GamepadAxisButton.LXPlus:
-			button_text = "Right"
+			button_text = "Вправо"
 		GamepadManager.GamepadAxisButton.LYMinus:
-			button_text = "Up"
+			button_text = "Вверх"
 		GamepadManager.GamepadAxisButton.LYPlus:
-			button_text = "Down"
+			button_text = "Вниз"
 	prompt_label.text = PLEASE_PRESS % button_text
 	click_sound.play()
 
@@ -237,13 +237,13 @@ func _on_GamepadConfigurator_waiting_for_button(button: int) -> void:
 	var button_text = ""
 	match button:
 		GamepadManager.GamepadButton.A:
-			button_text = "A button"
+			button_text = "кнопку (A)"
 		GamepadManager.GamepadButton.B:
-			button_text = "B button"
+			button_text = "кнопку (B)"
 		GamepadManager.GamepadButton.X:
-			button_text = "X button"
+			button_text = "кнопку (X)"
 		GamepadManager.GamepadButton.Y:
-			button_text = "Y button"
+			button_text = "кнопку (Y)"
 		GamepadManager.GamepadButton.Start:
 			button_text = "Start"
 		GamepadManager.GamepadButton.L1:

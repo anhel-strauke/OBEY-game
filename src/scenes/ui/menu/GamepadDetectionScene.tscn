@@ -85,7 +85,7 @@ margin_right = 1844.0
 margin_bottom = 1006.0
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Esc = Cancel"
+text = "Esc = Отмена"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -114,7 +114,7 @@ margin_right = 1880.0
 margin_bottom = 521.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Please, press any button on your gamepad"
+text = "Пожалуйста, нажмите какую-нибудь кнопку на геймпаде."
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -143,7 +143,7 @@ margin_right = 1880.0
 margin_bottom = 521.0
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Gamepad model is unknown. Now configuring..."
+text = "У вас незнакомый геймпад. Настраиваем..."
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -157,7 +157,7 @@ margin_right = 1880.0
 margin_bottom = 521.0
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Now configuring your gamepad..."
+text = "Настраиваем ваш геймпад..."
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -177,7 +177,6 @@ __meta__ = {
 }
 
 [node name="Success" type="Node2D" parent="ControlsRoot"]
-visible = false
 
 [node name="Message2" type="Label" parent="ControlsRoot/Success"]
 margin_left = 40.0
@@ -186,7 +185,7 @@ margin_right = 1880.0
 margin_bottom = 521.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Gamepad configured"
+text = "Готово, геймпад настроен."
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -199,8 +198,8 @@ margin_right = 1880.0
 margin_bottom = 675.0
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Configuration can be changed anytime in the Settings
-Press any button to continue"
+text = "Вы всегда можете перенастроить его в меню «Настройки».
+Нажмите любую кнопку на гейм-паде для продолжения."
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false

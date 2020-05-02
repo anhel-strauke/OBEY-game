@@ -1,35 +1,58 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://scenes/ui/menu/MenuItem.gd" type="Script" id=1]
+[ext_resource path="res://sounds/ui/select.ogg" type="AudioStream" id=1]
 [ext_resource path="res://sounds/ui/click.ogg" type="AudioStream" id=2]
-[ext_resource path="res://sounds/ui/select.ogg" type="AudioStream" id=3]
+[ext_resource path="res://scenes/ui/menu/MenuItem.gd" type="Script" id=3]
+[ext_resource path="res://textures/ui/menu/item_back.png" type="Texture" id=4]
 
 [sub_resource type="Animation" id=1]
-resource_name = "slide"
-length = 0.2
+resource_name = "selected"
+length = 0.6
+loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("MenuHighlight:scale")
+tracks/0/path = NodePath("item_back:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 2.54912 ),
-"update": 0,
-"values": [ Vector2( 0, 1 ), Vector2( 1, 1 ) ]
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.2
+
+[sub_resource type="Animation" id=3]
+resource_name = "unselected"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("item_back:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
 }
 
 [node name="MenuItem" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource( 3 )
 
-[node name="MenuHighlight" type="Polygon2D" parent="."]
-scale = Vector2( 1e-05, 1 )
-color = Color( 0.956863, 0.266667, 0.168627, 1 )
-polygon = PoolVector2Array( 0, 0, 1120, 0, 1120, 120, 0, 120 )
+[node name="item_back" type="Sprite" parent="."]
+position = Vector2( 540, 80 )
+texture = ExtResource( 4 )
+vframes = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/slide = SubResource( 1 )
+anims/selected = SubResource( 1 )
+anims/slide = SubResource( 2 )
+anims/unselected = SubResource( 3 )
 
 [node name="BottomRightPos" type="Position2D" parent="."]
 position = Vector2( 1120, 120 )
@@ -43,5 +66,5 @@ bus = "Sounds"
 
 [node name="ActivationSound" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
-stream = ExtResource( 3 )
+stream = ExtResource( 1 )
 bus = "Sounds"

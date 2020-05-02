@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://textures/characters/weapon/gun.png" type="Texture" id=1]
+[ext_resource path="res://scenes/game/character/Weapons/Firearm.gd" type="Script" id=2]
+[ext_resource path="res://scenes/game/character/Weapons/WeaponPickupZone.tscn" type="PackedScene" id=3]
+
+[node name="Gun" type="Node2D"]
+script = ExtResource( 2 )
+attack_cooldown_time = 0.1
+ammo = 7
+
+[node name="gun" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+offset = Vector2( -15, -5 )
+
+[node name="BulletSpawn" type="Position2D" parent="."]
+position = Vector2( -51.3305, -17.5778 )
+
+[node name="WeaponPickupZone" parent="." instance=ExtResource( 3 )]
+position = Vector2( -10, 0 )

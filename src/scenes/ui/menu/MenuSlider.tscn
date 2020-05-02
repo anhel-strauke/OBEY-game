@@ -1,18 +1,17 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/ui/menu/MenuController.tscn" type="PackedScene" id=1]
-[ext_resource path="res://fonts/NunitoSans-SemiBold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://fonts/Caveat-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scenes/ui/menu/MenuSlider.gd" type="Script" id=3]
 [ext_resource path="res://textures/ui/white.png" type="Texture" id=4]
 [ext_resource path="res://fonts/font_obey_64.tres" type="DynamicFont" id=5]
 [ext_resource path="res://sounds/ui/select.ogg" type="AudioStream" id=6]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 size = 42
 font_data = ExtResource( 2 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "slide_in"
+[sub_resource type="Animation" id=2]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Slider:position")
@@ -27,8 +26,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1940, 0 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "slide_out"
+[sub_resource type="Animation" id=3]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Slider:position")
@@ -87,16 +85,16 @@ margin_left = 1560.0
 margin_top = 20.0
 margin_right = 1881.0
 margin_bottom = 86.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Esc or (B) = Back"
+text = "Esc или (B) = Назад"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SlideAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/slide_in = SubResource( 1 )
-anims/slide_out = SubResource( 2 )
+anims/slide_in = SubResource( 2 )
+anims/slide_out = SubResource( 3 )
 
 [node name="CancelSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )

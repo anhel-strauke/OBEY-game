@@ -8,6 +8,7 @@ onready var back_label = $Slider/BackLabel
 onready var back_label_pos = back_label.position
 
 signal hidden()
+signal showing()
 
 enum State {
 	Hidden,
@@ -35,6 +36,7 @@ func hide() -> void:
 func _on_SlideAnimationPlayer_animation_finished(anim_name: String) -> void:
 	if anim_name == "slide_in":
 		self.state = State.Running
+		emit_signal("showing")
 	elif anim_name == "slide_out":
 		self.state = State.Hidden
 		emit_signal("hidden")

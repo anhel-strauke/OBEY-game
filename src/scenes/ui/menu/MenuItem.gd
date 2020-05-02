@@ -4,10 +4,13 @@ class_name MenuItem
 onready var anim_player = $AnimationPlayer
 onready var click_sound = $ClickSound
 onready var activation_sound = $ActivationSound
+onready var back_sprite = $item_back
 export(bool) var enabled := true setget set_enabled
 export(bool) var change_label_color := true
 
 var selected := false setget set_selected
+
+onready var unsel_frame = randi() % 3 + 3
 
 signal activated()
 signal selected()
@@ -39,7 +42,12 @@ func _play_selection_anim(forward: bool) -> void:
 func set_selected(sel: bool) -> void:
 	if selected != sel:
 		selected = sel
-		_play_selection_anim(selected)
+		#_play_selection_anim(selected)
+		if selected:
+			anim_player.play("selected")
+		else:
+			anim_player.stop()
+			back_sprite.frame = unsel_frame
 		if selected:
 			click_sound.play()
 			emit_signal("selected")
@@ -52,16 +60,21 @@ func set_selected_immed(sel: bool) -> void:
 	selected = sel
 	var anim: Animation = anim_player.get_animation("slide")
 	var length = anim.length
-	if selected:
-		anim_player.play("slide")
-		anim_player.seek(length, true)
-		anim_player.stop(false)
-		emit_signal("selected")
+	#if selected:
+	#	anim_player.play("slide")
+	#	anim_player.seek(length, true)
+	#	anim_player.stop(false)
+	#	emit_signal("selected")
+	#else:
+	#	anim_player.play("slide")
+	#	anim_player.seek(0.0, true)
+	#	anim_player.stop(false)
+	#	emit_signal("deselected")
+	if sel:
+		anim_player.play("selected")
 	else:
-		anim_player.play("slide")
-		anim_player.seek(0.0, true)
-		anim_player.stop(false)
-		emit_signal("deselected")
+		anim_player.stop()
+		back_sprite.frame = unsel_frame
 	update_label_colors()
 
 

@@ -7,7 +7,7 @@ onready var gamepad_config_item = $MenuSlider/Slider/MenuController/GamepadConfi
 
 func set_player_index(index: int) -> void:
 	player_index = index
-	title_label.text = "Player " + str(index + 1)
+	title_label.text = "Игрок " + str(index + 1)
 
 
 func show() -> void:

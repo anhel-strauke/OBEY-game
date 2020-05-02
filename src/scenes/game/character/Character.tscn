@@ -1,14 +1,18 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/game/character/Hurtbox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/character/Character.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.49282
-height = 63.0589
+height = 43.0144
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 5.1605, 40.0223 )
+extents = Vector2( 5.1605, 30 )
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 13.3277
+height = 33.3446
 
 [node name="Character" type="KinematicBody2D"]
 collision_layer = 2
@@ -21,18 +25,28 @@ script = ExtResource( 3 )
 collision_layer = 4
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="TopCollisionCapsule" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -9.36763 )
 rotation = -1.5708
 shape = SubResource( 1 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+[node name="MiddleCollisionRect" type="CollisionShape2D" parent="."]
 rotation = -1.5708
 shape = SubResource( 1 )
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+[node name="BottomCollisionCapsule" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -5 )
 rotation = -1.5708
 shape = SubResource( 2 )
+
+[node name="WeaponPickup" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponPickup"]
+position = Vector2( 0, -4.57794 )
+rotation = -1.5708
+shape = SubResource( 3 )
+[connection signal="area_entered" from="WeaponPickup" to="." method="_on_WeaponPickup_area_entered"]
 
 [editable path="Hurtbox"]

@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/ui/menu/PlayerSelectSlider.gd" type="Script" id=4]
 [ext_resource path="res://fonts/Caveat-Regular.ttf" type="DynamicFontData" id=5]
 
+
 [sub_resource type="DynamicFont" id=1]
 size = 64
 font_data = ExtResource( 5 )
@@ -24,7 +25,7 @@ margin_right = 1119.97
 margin_bottom = 121.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Single Player"
+text = "Один Игрок"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -39,13 +40,14 @@ margin_right = 1120.0
 margin_bottom = 121.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Two Players"
+text = "Два Игрока"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="DELETE_THIS_LABEL" type="Label" parent="MenuSlider/Slider" index="5"]
+visible = false
 margin_left = 500.0
 margin_top = 660.0
 margin_right = 1634.0

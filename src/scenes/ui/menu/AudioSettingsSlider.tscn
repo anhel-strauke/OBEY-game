@@ -1,8 +1,25 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/ui/menu/VolumeMenuItem.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/ui/menu/MenuSlider.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/ui/menu/AudioSettingsSlider.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "selected"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("item_back:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
 
 [node name="AudioSettingsSlider" type="Node2D"]
 script = ExtResource( 3 )
@@ -10,31 +27,76 @@ script = ExtResource( 3 )
 [node name="MenuSlider" parent="." instance=ExtResource( 2 )]
 
 [node name="Label" parent="MenuSlider/Slider/LabelRoot" index="0"]
-text = "Audio"
+text = "Громкость звука"
 
 [node name="SoundVolume" parent="MenuSlider/Slider/MenuController" index="0" instance=ExtResource( 1 )]
 position = Vector2( -80, 0 )
 audio_bus_name = "Sounds"
 
-[node name="MenuHighlight" parent="MenuSlider/Slider/MenuController/SoundVolume" index="0"]
-scale = Vector2( 1, 1 )
+[node name="AnimationPlayer" parent="MenuSlider/Slider/MenuController/SoundVolume" index="1"]
+anims/selected = SubResource( 1 )
 
 [node name="ActivationSound" parent="MenuSlider/Slider/MenuController/SoundVolume" index="4"]
 pause_mode = 0
 
 [node name="Label" parent="MenuSlider/Slider/MenuController/SoundVolume" index="5"]
-text = "Sound"
+text = "Звуки"
+
+[node name="Amount" parent="MenuSlider/Slider/MenuController/SoundVolume" index="6"]
+margin_left = 320.0
+margin_top = 40.0
+margin_right = 971.0
+margin_bottom = 128.0
+
+[node name="LeftBracket" parent="MenuSlider/Slider/MenuController/SoundVolume" index="7"]
+margin_left = 300.0
+margin_top = 40.0
+margin_right = 321.0
+margin_bottom = 128.0
+
+[node name="RightBracket" parent="MenuSlider/Slider/MenuController/SoundVolume" index="8"]
+margin_left = 972.0
+margin_top = 40.0
+margin_right = 993.0
+margin_bottom = 128.0
 
 [node name="MusicVolume" parent="MenuSlider/Slider/MenuController" index="1" instance=ExtResource( 1 )]
 position = Vector2( -80, 140 )
 audio_bus_name = "Music"
 
+[node name="AnimationPlayer" parent="MenuSlider/Slider/MenuController/MusicVolume" index="1"]
+anims/selected = SubResource( 1 )
+
 [node name="ActivationSound" parent="MenuSlider/Slider/MenuController/MusicVolume" index="4"]
 pause_mode = 0
+
+[node name="Label" parent="MenuSlider/Slider/MenuController/MusicVolume" index="5"]
+margin_bottom = 102.0
+text = "Музыка"
+
+[node name="Amount" parent="MenuSlider/Slider/MenuController/MusicVolume" index="6"]
+margin_left = 320.0
+margin_top = 40.0
+margin_right = 971.0
+margin_bottom = 128.0
+
+[node name="LeftBracket" parent="MenuSlider/Slider/MenuController/MusicVolume" index="7"]
+margin_left = 300.0
+margin_top = 40.0
+margin_right = 321.0
+margin_bottom = 128.0
+
+[node name="RightBracket" parent="MenuSlider/Slider/MenuController/MusicVolume" index="8"]
+margin_left = 972.0
+margin_top = 40.0
+margin_right = 993.0
+margin_bottom = 128.0
 
 [node name="BackLabelText" parent="MenuSlider/Slider/BackLabel" index="0"]
 margin_left = 1408.0
 margin_right = 1729.0
+[connection signal="hidden" from="MenuSlider" to="." method="on_hide"]
+[connection signal="showing" from="MenuSlider" to="." method="on_show"]
 
 [editable path="MenuSlider"]
 
