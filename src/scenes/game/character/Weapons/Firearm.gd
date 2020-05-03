@@ -45,7 +45,6 @@ func setup_projectile(projectile) -> void:
 	projectile.global_position += vp.get_parent().global_position - Vector2(150, 200)
 
 
-
 func make_shot(direction: Vector2, parent: Node) -> void:
 	var projectile = create_bullet()
 	setup_projectile(projectile)

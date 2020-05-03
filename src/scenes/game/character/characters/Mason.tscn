@@ -95,8 +95,8 @@ vframes = 2
 hframes = 12
 frame = 23
 
-[node name="WeaponPivot" type="Position2D" parent="Sprite" index="1"]
-position = Vector2( -50, -65 )
+[node name="WeaponPivot" type="Position2D" parent="Sprite/MasonSprite" index="0"]
+position = Vector2( -50, -15 )
 
 [node name="Hurtbox" parent="." index="1"]
 position = Vector2( 0, -45 )
