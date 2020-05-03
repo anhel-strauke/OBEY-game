@@ -38,6 +38,12 @@ func setup_projectile(projectile) -> void:
 	projectile.damage = hit_damage
 	projectile.impulse = knockback_impulse
 
+	# position viewport correction:
+	var vp = get_parent()
+	while not vp is Viewport:
+		vp = vp.get_parent()
+	projectile.global_position += vp.get_parent().global_position - Vector2(150, 200)
+
 
 func make_shot(direction: Vector2, parent: Node) -> void:
 	var projectile = create_bullet()
