@@ -20,7 +20,7 @@ tracks/0/keys = {
 "values": [ 0, 0 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "idle_no_weapon"
 length = 0.1
 tracks/0/type = "value"
@@ -36,8 +36,7 @@ tracks/0/keys = {
 "values": [ 12, 12 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "walk"
+[sub_resource type="Animation" id=3]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -53,7 +52,7 @@ tracks/0/keys = {
 "values": [ 0, 11 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "walk_no_weapon"
 length = 0.5
 loop = true
@@ -70,7 +69,7 @@ tracks/0/keys = {
 "values": [ 12, 23 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=5]
 radius = 40.0
 height = 40.0
 
@@ -86,9 +85,9 @@ frame = 20
 
 [node name="WalkAnimation" type="AnimationPlayer" parent="Sprite/Sprite" index="0"]
 anims/idle = SubResource( 1 )
-anims/idle_no_weapon = SubResource( 4 )
-anims/walk = SubResource( 2 )
-anims/walk_no_weapon = SubResource( 5 )
+anims/idle_no_weapon = SubResource( 2 )
+anims/walk = SubResource( 3 )
+anims/walk_no_weapon = SubResource( 4 )
 
 [node name="WeaponPivot" type="Position2D" parent="Sprite" index="1"]
 position = Vector2( -40, -50 )
@@ -99,6 +98,6 @@ monitoring = false
 
 [node name="HurtboxCollision" type="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, 30 )
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [editable path="Hurtbox"]

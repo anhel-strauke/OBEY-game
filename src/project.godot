@@ -70,7 +70,7 @@ _global_script_class_icons={
 
 config/name="OBEY: In They We Trust"
 config/description="Game for Siberian Game Jam on May, 2020"
-run/main_scene="res://scenes/ui/MenuTest.tscn"
+run/main_scene="res://scenes/game/World.tscn"
 boot_splash/image="res://splash.png"
 config/icon="res://icon.png"
 
