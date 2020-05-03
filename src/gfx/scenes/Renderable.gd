@@ -8,7 +8,8 @@ extends Node2D
 export(NodePath) var viewport_path
 
 var viewport: Viewport
-
+var obj_pos
+var shadows = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	viewport = get_node(viewport_path)
@@ -20,13 +21,32 @@ func _ready():
 
 
 func _process(delta):
-	process_light()
+	obj_pos = get_parent().position
+	var light_system = get_light_system()
+	if not light_system:
+		return
+	var cur_shadow_count = 0
+	for light in light_system.lights.values():
+		cur_shadow_count += 1
+		var shadow
+		if cur_shadow_count > len(shadows):
+			shadow = Sprite.new()
+			add_child(shadow)
+			shadows.append(shadow)
+			shadow.texture = viewport.get_texture()
+		else:
+			shadow = shadows[cur_shadow_count - 1]
+		process_light(light, shadow)
+	for i in range(cur_shadow_count, len(shadows)):
+		var shadow = shadows.pop_back()
+		shadow.queue_free()
+	
+func get_light_system():
+	return get_tree().get_root().get_node("World").get_node("LightSystem")
 
-var light_coord = Vector2(1500, 500)
-
-func process_light():
-	var shadow: Sprite = $Shadow
-	var obj_pos = get_parent().position
+func process_light(light, shadow: Sprite):
+	var light_coord = light.position
+	
 	var lvec = obj_pos - light_coord
 	var ldirection = atan2(lvec.y, lvec.x)
 	
