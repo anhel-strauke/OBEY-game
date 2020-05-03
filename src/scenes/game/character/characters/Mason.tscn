@@ -12,7 +12,7 @@ height = 40.0
 length = 0.1
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite/MasonSprite:frame")
+tracks/0/path = NodePath("Sprite/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -28,7 +28,7 @@ tracks/0/keys = {
 length = 0.7
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite/MasonSprite:frame")
+tracks/0/path = NodePath("Sprite/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -58,7 +58,7 @@ tracks/1/keys = {
 length = 0.7
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite/MasonSprite:frame")
+tracks/0/path = NodePath("Sprite/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -88,14 +88,14 @@ tracks/1/keys = {
 script = ExtResource( 3 )
 max_hitpoints = 100.0
 
-[node name="MasonSprite" type="Sprite" parent="Sprite" index="0"]
+[node name="Sprite" type="Sprite" parent="Sprite" index="0"]
 position = Vector2( 0, -50 )
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 12
 frame = 23
 
-[node name="WeaponPivot" type="Position2D" parent="Sprite/MasonSprite" index="0"]
+[node name="WeaponPivot" type="Position2D" parent="Sprite/Sprite" index="0"]
 position = Vector2( -50, -15 )
 
 [node name="Hurtbox" parent="." index="1"]
