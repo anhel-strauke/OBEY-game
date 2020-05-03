@@ -147,6 +147,7 @@ func set_weapon_object(weapon: BaseWeapon) -> void:
 			drop_weapon()
 		weapon_obj = weapon
 		weapon.get_parent().remove_child(weapon)
+		weapon.signal_picked_up()
 		weapon_pivot.add_child(weapon)
 		weapon.position = Vector2.ZERO
 		weapon.transform = Transform2D(0.0, Vector2.ZERO)

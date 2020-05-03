@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://textures/arenas/map1.png" type="Texture" id=1]
 [ext_resource path="res://scenes/game/character/characters/Tower5G.tscn" type="PackedScene" id=2]
@@ -6,7 +6,18 @@
 [ext_resource path="res://scenes/game/character_drivers/PlayerDriver.gd" type="Script" id=4]
 [ext_resource path="res://scenes/game/character/characters/Reptiloid.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/game/character/Weapons/WeaponSpawner.tscn" type="PackedScene" id=6]
-[ext_resource path="res://textures/test/light.png" type="Texture" id=7]
+[ext_resource path="res://scenes/game/character_drivers/aistates/FollowPlayer.gd" type="Script" id=7]
+[ext_resource path="res://scenes/game/character_drivers/aistates/StageAwareState.gd" type="Script" id=8]
+[ext_resource path="res://scenes/game/character_drivers/AiDriver.gd" type="Script" id=9]
+[ext_resource path="res://scenes/ui/AIVisualiser.gd" type="Script" id=10]
+[ext_resource path="res://scenes/game/character_drivers/aistates/Think.gd" type="Script" id=11]
+[ext_resource path="res://scenes/game/character_drivers/aistates/HoldPosition.gd" type="Script" id=12]
+[ext_resource path="res://scenes/game/character_drivers/aistates/Attack.gd" type="Script" id=13]
+[ext_resource path="res://scenes/game/character_drivers/aistates/Flee.gd" type="Script" id=14]
+[ext_resource path="res://scenes/ui/NavVisualiser.gd" type="Script" id=15]
+[ext_resource path="res://scenes/game/character_drivers/aistates/GetWeapon.gd" type="Script" id=16]
+[ext_resource path="res://scenes/game/character/characters/Mason.tscn" type="PackedScene" id=17]
+[ext_resource path="res://textures/test/light.png" type="Texture" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 960, 20 )
@@ -22,6 +33,11 @@ extents = Vector2( 960, 40 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 40, 440 )
+
+[sub_resource type="NavigationPolygon" id=6]
+vertices = PoolVector2Array( 1776.75, 144.639, 1778.94, 949.44, 138.722, 951.627, 145.283, 146.826 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 145.283, 146.826, 138.722, 951.627, 1778.94, 949.44, 1776.75, 144.639 ) ]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 3 )
@@ -89,17 +105,65 @@ position = Vector2( 320, 360 )
 script = ExtResource( 4 )
 player_index = 0
 
-[node name="WeaponSpawner" parent="YSort" instance=ExtResource( 6 )]
+[node name="Mason" parent="YSort" instance=ExtResource( 17 )]
+position = Vector2( 1489.32, 271.183 )
+
+[node name="Control" type="Node2D" parent="YSort/Mason"]
+visible = false
+script = ExtResource( 10 )
+
+[node name="StateLabel" type="RichTextLabel" parent="YSort/Mason/Control"]
+margin_left = -68.0
+margin_top = -158.0
+margin_right = 68.0
+margin_bottom = -64.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Driver" type="Node" parent="YSort/Mason"]
+script = ExtResource( 9 )
+start_state = NodePath("Think")
+navigation_path = NodePath("../../../PathFinder")
+
+[node name="Think" type="Node" parent="YSort/Mason/Driver"]
+script = ExtResource( 11 )
+
+[node name="GetWeapon" type="Node" parent="YSort/Mason/Driver"]
+script = ExtResource( 16 )
+
+[node name="GetBonus" type="Node" parent="YSort/Mason/Driver"]
+script = ExtResource( 8 )
+
+[node name="FollowPlayer" type="Node" parent="YSort/Mason/Driver"]
+script = ExtResource( 7 )
+
+[node name="Attack" type="Node" parent="YSort/Mason/Driver"]
+script = ExtResource( 13 )
+
+[node name="Flee" type="Node" parent="YSort/Mason/Driver"]
+script = ExtResource( 14 )
+
+[node name="HoldPosition" type="Node" parent="YSort/Mason/Driver"]
+script = ExtResource( 12 )
+
+[node name="WeaponSpawner" parent="YSort" groups=[
+"weapon_spawners",
+] instance=ExtResource( 6 )]
 position = Vector2( 720, 280 )
 weapon_scene = "res://scenes/game/character/Weapons/Gun.tscn"
 spawn_period = 5.0
 
-[node name="WeaponSpawner2" parent="YSort" instance=ExtResource( 6 )]
+[node name="WeaponSpawner2" parent="YSort" groups=[
+"weapon_spawners",
+] instance=ExtResource( 6 )]
 position = Vector2( 1600, 420 )
 weapon_scene = "res://scenes/game/character/Weapons/Shotgun.tscn"
 spawn_period = 5.0
 
-[node name="WeaponSpawner3" parent="YSort" instance=ExtResource( 6 )]
+[node name="WeaponSpawner3" parent="YSort" groups=[
+"weapon_spawners",
+] instance=ExtResource( 6 )]
 position = Vector2( 460, 760 )
 weapon_scene = "res://scenes/game/character/Weapons/AssaultRifle.tscn"
 spawn_period = 5.0
@@ -107,4 +171,33 @@ spawn_period = 5.0
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 1500, 500 )
 scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 7 )
+texture = ExtResource( 18 )
+
+[node name="PathFinder" type="Navigation2D" parent="."]
+visible = false
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="PathFinder"]
+navpoly = SubResource( 6 )
+
+[node name="Polygon2D" type="Polygon2D" parent="PathFinder"]
+color = Color( 0.360784, 1, 0, 0.180392 )
+script = ExtResource( 15 )
+navigation_polygon_path = NodePath("../NavigationPolygonInstance")
+
+[node name="Polygon2D2" type="Polygon2D" parent="PathFinder"]
+color = Color( 0.360784, 1, 0, 0.180392 )
+script = ExtResource( 15 )
+navigation_polygon_path = NodePath("../NavigationPolygonInstance")
+outline_number = 1
+
+[node name="Polygon2D3" type="Polygon2D" parent="PathFinder"]
+color = Color( 0.360784, 1, 0, 0.180392 )
+script = ExtResource( 15 )
+navigation_polygon_path = NodePath("../NavigationPolygonInstance")
+outline_number = 2
+
+[node name="Polygon2D4" type="Polygon2D" parent="PathFinder"]
+color = Color( 0.360784, 1, 0, 0.180392 )
+script = ExtResource( 15 )
+navigation_polygon_path = NodePath("../NavigationPolygonInstance")
+outline_number = 3
