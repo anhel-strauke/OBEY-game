@@ -29,6 +29,7 @@ func set_direction(vect: Vector2) -> void:
 	direction_vector = vect.normalized()
 	_velocity = direction_vector * speed
 
+
 func _physics_process(delta: float) -> void:
 	_velocity = _velocity.move_toward(Vector2.ZERO, friction * delta)
 	if _velocity.length() < 10:
@@ -42,6 +43,8 @@ func _on_HitboxScanner_area_entered(area: Area2D) -> void:
 	var parent = area.get_parent()
 	if parent and parent is Character:
 		var character = parent as Character
+		if gunslinger_name == character.name:
+			return # Do not allow suicide
 		print(gunslinger_name, " hits ", character.name)
 		character.take_damage(damage, gunslinger_name, direction_vector)
 		character.set_external_force(direction_vector * impulse)

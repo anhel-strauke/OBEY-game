@@ -25,8 +25,8 @@ tracks/0/keys = {
 [node name="Gun" type="Node2D"]
 script = ExtResource( 2 )
 attack_cooldown_time = 0.1
+hit_damage = 10.0
 knockback_impulse = 100.0
-ammo = 7
 shoot_sound = ExtResource( 4 )
 
 [node name="gun" type="Sprite" parent="."]

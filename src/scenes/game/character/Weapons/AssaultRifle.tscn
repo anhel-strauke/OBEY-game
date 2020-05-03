@@ -26,7 +26,8 @@ tracks/0/keys = {
 script = ExtResource( 1 )
 attack_cooldown_time = 0.1
 is_automatic = true
-ammo = 20
+hit_damage = 7.143
+ammo = 14
 shoot_sound = ExtResource( 4 )
 
 [node name="ShotAnim" type="AnimationPlayer" parent="."]
