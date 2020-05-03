@@ -37,9 +37,9 @@ extents = Vector2( 960, 40 )
 extents = Vector2( 40, 440 )
 
 [sub_resource type="NavigationPolygon" id=6]
-vertices = PoolVector2Array( 1781.75, 152.134, 1796.37, 953.74, 1742.77, 649.179, 1382.17, 505.426, 1508.86, 639.433, 1196.99, 466.442, 1676.98, 478.624, 254.072, 634.56, 339.349, 948.867, 154.176, 951.303, 163.922, 157.007, 336.912, 556.592, 814.11, 766.139, 833.956, 953.74, 402.698, 948.867, 434.372, 641.869, 678.021, 434.767, 1462.57, 429.894, 902.178, 303.197, 1803.68, 965.922, 156.612, 926.938, 295.61, 782.162, 780.354, 817.296, 813.453, 766.139, 1158.01, 780.749, 1779.31, 783.186, 1551.8, 664.751, 1755.37, 671.974, 1209.18, 459.132 )
-polygons = [ PoolIntArray( 0, 1, 2 ), PoolIntArray( 3, 4, 5 ), PoolIntArray( 0, 2, 6 ), PoolIntArray( 7, 8, 9 ), PoolIntArray( 7, 9, 10 ), PoolIntArray( 11, 7, 10 ), PoolIntArray( 12, 13, 14, 15, 16 ), PoolIntArray( 0, 6, 17 ), PoolIntArray( 16, 15, 11, 10 ), PoolIntArray( 18, 16, 10 ), PoolIntArray( 18, 10, 0 ), PoolIntArray( 18, 0, 17, 5 ), PoolIntArray( 5, 17, 3 ), PoolIntArray( 19, 20, 21, 22 ), PoolIntArray( 19, 22, 23, 24 ), PoolIntArray( 25, 19, 24, 26, 27 ), PoolIntArray( 24, 28, 26 ) ]
-outlines = [ PoolVector2Array( 163.922, 157.007, 154.176, 951.303, 339.349, 948.867, 254.072, 634.56, 336.912, 556.592, 434.372, 641.869, 402.698, 948.867, 833.956, 953.74, 814.11, 766.139, 678.021, 434.767, 902.178, 303.197, 1196.99, 466.442, 1508.86, 639.433, 1382.17, 505.426, 1462.57, 429.894, 1676.98, 478.624, 1742.77, 649.179, 1796.37, 953.74, 1781.75, 152.134 ), PoolVector2Array( 295.61, 782.162, 156.612, 926.938, 1803.68, 965.922, 1779.31, 783.186, 1755.37, 671.974, 1551.8, 664.751, 1209.18, 459.132, 1158.01, 780.749, 813.453, 766.139, 780.354, 817.296 ) ]
+vertices = PoolVector2Array( 1781.75, 152.134, 1796.37, 953.74, 154.176, 951.303, 163.922, 157.007 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 163.922, 157.007, 154.176, 951.303, 1796.37, 953.74, 1781.75, 152.134 ) ]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 3 )
@@ -57,7 +57,7 @@ collision_layer = 97
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level/map1/StaticBody2D"]
 position = Vector2( 82.8407, 584.758 )
-polygon = PoolVector2Array( 819.338, -264.505, 626.855, -128.062, 751.116, 166.753, 1050.8, 186.245, 1099.53, -96.3876 )
+polygon = PoolVector2Array( 817.741, -251.001, 631.76, -139.276, 751.116, 166.753, 1050.8, 186.245, 1099.53, -96.3876 )
 
 [node name="Polygon2D" type="Polygon2D" parent="Level/map1/StaticBody2D"]
 position = Vector2( 151.062, 579.885 )
@@ -275,6 +275,22 @@ script = ExtResource( 19 )
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="PathFinder"]
 navpoly = SubResource( 6 )
 
+[node name="Cutouts" type="Node2D" parent="PathFinder"]
+
+[node name="Polygon2D" type="Polygon2D" parent="PathFinder/Cutouts"]
+color = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( 337.153, 560.554, 434.331, 653.683, 416.11, 795.401, 310.834, 787.302, 268.319, 639.511 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="PathFinder/Cutouts"]
+position = Vector2( 603.314, -117.423 )
+color = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( 292.613, 420.86, 602.369, 592.946, 547.706, 912.824, 223.779, 892.579, 82.0607, 542.333 )
+
+[node name="Polygon2D3" type="Polygon2D" parent="PathFinder/Cutouts"]
+position = Vector2( 1208.65, -129.571 )
+color = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( 244.024, 556.504, 458.626, 605.093, 533.534, 795.401, 312.859, 777.18, 183.288, 635.462 )
+
 [node name="Polygon2D" type="Polygon2D" parent="PathFinder"]
 color = Color( 0.360784, 1, 0, 0.180392 )
 script = ExtResource( 15 )
@@ -298,6 +314,24 @@ script = ExtResource( 15 )
 navigation_polygon_path = NodePath("../NavigationPolygonInstance")
 outline_number = 3
 
+[node name="Polygon2D5" type="Polygon2D" parent="PathFinder"]
+color = Color( 0.360784, 1, 0, 0.180392 )
+script = ExtResource( 15 )
+navigation_polygon_path = NodePath("../NavigationPolygonInstance")
+outline_number = 4
+
+[node name="Polygon2D6" type="Polygon2D" parent="PathFinder"]
+color = Color( 0.360784, 1, 0, 0.180392 )
+script = ExtResource( 15 )
+navigation_polygon_path = NodePath("../NavigationPolygonInstance")
+outline_number = 5
+
+[node name="Polygon2D7" type="Polygon2D" parent="PathFinder"]
+color = Color( 0.360784, 1, 0, 0.180392 )
+script = ExtResource( 15 )
+navigation_polygon_path = NodePath("../NavigationPolygonInstance")
+outline_number = 6
+
 [node name="HidingSpots" type="Area2D" parent="PathFinder"]
 collision_layer = 384
 
@@ -310,7 +344,7 @@ position = Vector2( 16.4165, -13.1332 )
 polygon = PoolVector2Array( 1518.97, 683.794, 1518.97, 711.374, 1749.46, 726.477, 1767.19, 687.078, 1684.71, 445.93, 1466.67, 393.598, 1453.58, 435.027, 1668.03, 480.886, 1739.61, 691.674 )
 
 [node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="PathFinder/HidingSpots"]
-polygon = PoolVector2Array( 954.255, 302.019, 895.382, 278.033, 666.433, 408.862, 768.915, 744.654, 851.773, 794.805, 1161.4, 805.708, 1220.27, 467.734, 1257.34, 485.178, 1205.01, 838.415, 860.495, 823.151, 736.208, 755.557, 625.004, 389.237, 904.104, 236.604, 967.338, 267.131 )
+polygon = PoolVector2Array( 1220.88, 461.086, 895.382, 278.033, 666.433, 408.862, 768.915, 744.654, 851.773, 794.805, 1161.4, 805.708, 1220.27, 467.734, 1257.34, 485.178, 1205.01, 838.415, 860.495, 823.151, 736.208, 755.557, 625.004, 389.237, 904.104, 236.604, 1265.67, 450.376 )
 
 [node name="Centroids" type="Node" parent="PathFinder"]
 

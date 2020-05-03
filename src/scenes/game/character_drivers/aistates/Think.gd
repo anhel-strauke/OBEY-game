@@ -71,6 +71,15 @@ func _sort_by_distance(a,b):
 	
 func _sort_spots_by_distance(a,b):
 	return player.global_position.distance_to(a.position) < player.global_position.distance_to(b.position)
+
+func _sort_spots_by_distance_and_threats(a,b):
+	# fixme: Check if these threats matter to the player
+	if a.full_covered_list.size() != b.full_covered_list.size():
+		return a.full_covered_list.size() > b.full_covered_list.size()
+	
+	return player.global_position.distance_to(a.position) < player.global_position.distance_to(b.position)
+#func _sort_spots_by_distance_diff(a,b):
+#	return a.their_walking_distance - player.global_position.distance_to(a.position) > b.their_walking_distance	 - player.global_position.distance_to(b.position)
 	
 func _sort(els: Array, sort: String, filter: FuncRef):
 	var array = []
@@ -80,12 +89,11 @@ func _sort(els: Array, sort: String, filter: FuncRef):
 	array.sort_custom(self, sort)
 	return array
 	
-		
 	
 func flee():
 	# TODO: Consider fleeing to a point with _fewer_ enemies, rather than none at all
 	#var points = _sort(strategic_points, "_sort_by_distance", funcref(self, "_filter_by_enemy_presence"))
-	var spots = _sort(navigation.hiding_spots, "_sort_spots_by_distance", funcref(self, "_filter_by_enemy_safety"))
+	var spots = _sort(navigation.hiding_spots, "_sort_spots_by_distance_and_threats", funcref(self, "_filter_by_enemy_safety"))
 	
 	
 	if spots.empty(): # or no path available
@@ -93,5 +101,9 @@ func flee():
 		target_point = player.global_position
 		emit_signal("finished", "hold_position")
 	else:	
-		target_point = spots[0].position
+		var spot = spots[0]
+		if spot.full_covered_list.size() < enemies.size():
+			#print('Fight to the death!')
+			emit_signal("finished", "hold_position")
+		target_point = spot.position
 		emit_signal("finished", "flee")

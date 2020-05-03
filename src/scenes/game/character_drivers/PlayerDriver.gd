@@ -20,6 +20,6 @@ func is_ability_pressed() -> bool:
 	return false
 
 func _process(delta):
-	if get_parent().name == 'Tower5G':
-		get_parent()._suicide()
+	#if get_parent().name == 'Tower5G':
+	#	get_parent()._suicide()
 	pass

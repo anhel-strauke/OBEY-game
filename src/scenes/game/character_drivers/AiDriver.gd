@@ -57,14 +57,9 @@ func _ready():
 	var set_path = funcref(self, "_set_path")
 	var get_path_direction = funcref(self, "_path_direction")
 	var nav_instance = navigation.get_node("NavigationPolygonInstance")
-	var nav_poly = nav_instance.get_navigation_polygon()
-	var nav_full_outlines = []
-	for i in range(0,nav_poly.get_outline_count()):
-		nav_full_outlines.append(nav_poly.get_outline(i))
 	for child in get_children():
 		child.navigation = navigation # fixme: AiDriver-wide nav polygons
 		child.nav_instance = nav_instance
-		child.nav_full_outlines = nav_full_outlines
 		child.player = get_parent()
 		child.enemies = enemies
 		child.set_path = set_path
@@ -180,7 +175,6 @@ func _confirm_death(name):
 	enemy_agents.remove(index)
 	for child in get_children():
 		child.enemies = enemies
-		child.camper_indexes = []
 	proximity.agents = enemy_agents
 	._reset_to_state("think")
 	
