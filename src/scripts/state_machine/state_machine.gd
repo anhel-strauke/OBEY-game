@@ -69,6 +69,9 @@ func _change_state(state_name):
 
 	if state_name == "previous":
 		states_stack.pop_front()
+		 # fixme: actually, this should never happen, but there's a hole in logic that leads to a Think state exit somewhere
+		if states_stack.empty():
+			initialize(start_state)
 	else:
 		states_stack[0] = states_map[state_name]
 

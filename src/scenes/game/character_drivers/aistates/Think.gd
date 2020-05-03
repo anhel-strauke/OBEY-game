@@ -10,6 +10,9 @@ var mockTimeToDie = 5
 var mockTimeToKill = 4
 
 func update(_delta):
+	flee()
+	return
+	
 	if !player.has_weapon():
 		if weapons.empty():
 			flee()
@@ -59,15 +62,21 @@ func _filter_by_enemy_presence(element) -> bool:
 	var enemies = _get_enemies_around_point(element, 400)
 	return enemies.empty()
 	
+func _filter_by_enemy_safety(element) -> bool:
+	return element.safe_from != player.name
+	
 # TODO: Use distance from the calculated path
 func _sort_by_distance(a,b):
 	return player.global_position.distance_to(a) < player.global_position.distance_to(b)
 	
-func _sort_strategic_points(sort: String, filter: FuncRef):
+func _sort_spots_by_distance(a,b):
+	return player.global_position.distance_to(a.position) < player.global_position.distance_to(b.position)
+	
+func _sort(els: Array, sort: String, filter: FuncRef):
 	var array = []
-	for point in strategic_points:
-		if filter.call_func(point):
-			array.append(point)
+	for el in els:
+		if filter.call_func(el):
+			array.append(el)
 	array.sort_custom(self, sort)
 	return array
 	
@@ -75,10 +84,14 @@ func _sort_strategic_points(sort: String, filter: FuncRef):
 	
 func flee():
 	# TODO: Consider fleeing to a point with _fewer_ enemies, rather than none at all
-	var points = _sort_strategic_points("_sort_by_distance", funcref(self, "_filter_by_enemy_presence"))
+	#var points = _sort(strategic_points, "_sort_by_distance", funcref(self, "_filter_by_enemy_presence"))
+	var spots = _sort(navigation.hiding_spots, "_sort_spots_by_distance", funcref(self, "_filter_by_enemy_safety"))
 	
-	if points.empty(): # or no path available
-		print('Fight to the death!')
+	
+	if spots.empty(): # or no path available
+		#print('Fight to the death!')
+		target_point = player.global_position
+		emit_signal("finished", "hold_position")
 	else:	
-		target_point = points[0]
-	emit_signal("finished", "flee")
+		target_point = spots[0].position
+		emit_signal("finished", "flee")

@@ -10,6 +10,8 @@ onready var background = $Background
 
 func _ready() -> void:
 	background.visible = false
+	
+	Engine.time_scale = 2
 
 
 func run_scene(scene_resource: String) -> void:

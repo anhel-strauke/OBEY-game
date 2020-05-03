@@ -20,7 +20,7 @@ var camper_indexes = []
 
 var navigation: Navigation2D
 var nav_instance
-var nav_full_outline
+var nav_full_outlines
 var path = []
 
 const _SCAN_COUNTDOWN_UPDATE_COUNT: int = 30
@@ -67,8 +67,7 @@ func _update():
 		
 		
 func _build_dynamic_nav():
-	var new_outlines = []
-	new_outlines.append(nav_full_outline)
+	var new_outlines = [] + nav_full_outlines
 	for camper_index in camper_indexes:
 		var camper = enemies[camper_index]
 		var new_polygon = []
@@ -101,17 +100,6 @@ func _get_enemies_around_point(point: Vector2, radius: int):
 	return result
 
 func _find_path(target_pos: Vector2):
-	#for camper_index in camper_indexes:
-	#var enemy = enemies[camper_index]
-	#var new_polygon = []
-	#var col_polygon = enemy.get_node("CollisionShape2D").get_polygon()
-
-	#for vector in col_polygon:
-	#	new_polygon.append(vector + enemy.get_pos())
-	#	var navi_polygon = get_node("NavigationPolygonInstance").get_navigation_polygon()
-	#	navi_polygon.add_outline(new_polygon)
-	#	navi_polygon.make_polygons_from_outlines()
-	
 	path = navigation.get_simple_path(player.global_position, target_pos, true)
 	
 func _assign_path(target_pos: Vector2):

@@ -95,6 +95,9 @@ func calculate_target_position(target_distance: float) -> Vector3:
 
 	var distance := desired_segment.cumulative_length - target_distance
 
+	# hotfix: This is a bug in the library, not our code
+	if is_zero_approx(desired_segment.length):
+		return desired_segment.begin
 	return (
 		(desired_segment.begin - desired_segment.end) *
 		(distance / desired_segment.length) + desired_segment.end)

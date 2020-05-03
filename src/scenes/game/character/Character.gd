@@ -18,6 +18,7 @@ export var ACCELERATION: float = 2400.0
 export var FRICTION: float = 2200.0
 
 export var max_hitpoints: float = 10.0
+var test_max_hitpoints: float = 10000.0
 
 onready var driver = $Driver
 onready var sprite = $Sprite/Sprite
@@ -26,7 +27,7 @@ onready var weapon_pivot = $Sprite/Sprite/WeaponPivot
 var _velocity: Vector2 = Vector2.ZERO
 var _attack_direction: Vector2 = Vector2.LEFT
 var _input_vector: Vector2 = Vector2.ZERO
-onready var _hp: float = max_hitpoints
+onready var _hp: float = test_max_hitpoints
 var external_force: Vector2 = Vector2.ZERO
 var state: int = State.Idle setget set_state
 var weapon_obj = null
@@ -226,3 +227,5 @@ func process_light():
 #	print("rl: ", rl_sign, "hv: ", hv_sign)
 	# print("sc_sign: ", sign(sc))
 
+func _suicide():
+	take_damage(1000, name, Vector2.ZERO)

@@ -33,9 +33,10 @@ func _ready():
 		"hold_position": $HoldPosition
 	}
 	navigation = get_node(navigation_path)
-	# TODO: Automatic resolution of objects
-	enemies.push_back(get_parent().get_parent().get_node("Reptiloid"))
-	enemies.push_back(get_parent().get_parent().get_node("Tower5G"))
+	var characters = get_tree().get_nodes_in_group("chars")
+	for character in characters:
+		if character != get_parent():
+			enemies.append(character)
 	for enemy in enemies:
 		var enemy_agent = GSAISteeringAgent.new()
 		enemy_agent.linear_acceleration_max = get_parent().ACCELERATION
@@ -55,10 +56,15 @@ func _ready():
 	
 	var set_path = funcref(self, "_set_path")
 	var get_path_direction = funcref(self, "_path_direction")
+	var nav_instance = navigation.get_node("NavigationPolygonInstance")
+	var nav_poly = nav_instance.get_navigation_polygon()
+	var nav_full_outlines = []
+	for i in range(0,nav_poly.get_outline_count()):
+		nav_full_outlines.append(nav_poly.get_outline(i))
 	for child in get_children():
 		child.navigation = navigation # fixme: AiDriver-wide nav polygons
-		child.nav_instance = navigation.get_node("NavigationPolygonInstance")
-		child.nav_full_outline = child.nav_instance.get_navigation_polygon().get_outline(0)
+		child.nav_instance = nav_instance
+		child.nav_full_outlines = nav_full_outlines
 		child.player = get_parent()
 		child.enemies = enemies
 		child.set_path = set_path
@@ -159,6 +165,8 @@ func _process(delta):
 	for i in range(0, enemies.size()):
 		_update_agent(enemy_agents[i], enemies[i])
 	._process(delta)	
+	if get_parent().name == 'Mason':
+		get_parent()._suicide()
 
 func _confirm_death(name):
 	var index = -1
