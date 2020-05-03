@@ -20,7 +20,7 @@ func update(Variant):
 			countdown = COUNTDOWN_UPDATE_COUNT
 			emit_signal("finished", "previous")
 	else:
-		velocity_vector = get_path_direction.call_func() # player.position.direction_to(target_position)
+		velocity_vector = get_path_direction.call_func(true) # player.position.direction_to(target_position)
 		countdown = COUNTDOWN_UPDATE_COUNT
 
 func get_state_description():
