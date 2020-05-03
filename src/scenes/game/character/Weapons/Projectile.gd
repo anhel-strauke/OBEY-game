@@ -8,6 +8,7 @@ var direction_vector: Vector2 = Vector2.ZERO setget set_direction
 var friction = 12.0
 var _velocity: Vector2 = Vector2.ZERO
 var damage = 1
+var impulse = 120.0
 var gunslinger_name: String
 var sound: AudioStream = null
 
@@ -34,7 +35,6 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 	var collision = move_and_collide(_velocity)
 	if collision:
-		print(collision.collider.name)
 		queue_free()
 
 
@@ -43,4 +43,6 @@ func _on_HitboxScanner_area_entered(area: Area2D) -> void:
 	if parent and parent is Character:
 		var character = parent as Character
 		print(gunslinger_name, " hits ", character.name)
+		character.take_damage(damage, gunslinger_name, direction_vector)
+		character.set_external_force(direction_vector * impulse)
 		queue_free()

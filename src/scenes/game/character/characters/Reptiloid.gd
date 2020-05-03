@@ -1,7 +1,7 @@
 extends Character
 
 
-onready var walk_anim_player = $Sprite/Sprite/WalkAnimation
+onready var walk_anim_player = $WalkAnimation
 
 
 func play_state_animation(st: int) -> void:

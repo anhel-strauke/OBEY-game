@@ -4,14 +4,20 @@ class_name Character
 enum State {
 	Invalid,
 	Idle,
-	Run
+	Run,
+	Died
 }
 
+signal died(name)
+
 const WeaponDropEffect = preload("res://scenes/game/effects/WeaponDropEffect.tscn")
+const DeathEffect = preload("res://scenes/game/effects/DeathEffect.tscn")
 
 export var MAX_SPEED: float = 800.0
 export var ACCELERATION: float = 2400.0
 export var FRICTION: float = 2200.0
+
+export var max_hitpoints: float = 10.0
 
 onready var driver = $Driver
 onready var sprite = $Sprite
@@ -20,6 +26,7 @@ onready var weapon_pivot = $Sprite/WeaponPivot
 var _velocity: Vector2 = Vector2.ZERO
 var _attack_direction: Vector2 = Vector2.LEFT
 var _input_vector: Vector2 = Vector2.ZERO
+onready var _hp: float = max_hitpoints
 export var external_force: Vector2 = Vector2.ZERO
 var state: int = State.Idle setget set_state
 var weapon_obj = null
@@ -107,6 +114,23 @@ func set_state(st: int) -> void:
 
 func set_external_force(force: Vector2) -> void:
 	external_force = force
+
+
+func take_damage(dmg: float, from: String, direction: Vector2) -> void:
+	_hp -= dmg
+	if _hp <= 0.0:
+		print(name, " dies")
+		set_state(State.Idle)
+		drop_weapon()
+		var death = DeathEffect.instance()
+		find_bullet_parent().add_child(death)
+		death.global_position = global_position
+		death.scale = sprite.scale
+		death.set_sprite(sprite)
+		death.set_direction(direction)
+		#sprite.scale = Vector2(1.0, 1.0)
+		emit_signal("died", name)
+		queue_free()
 
 
 func set_weapon_object(weapon: BaseWeapon) -> void:

@@ -41,4 +41,4 @@ texture = ExtResource( 3 )
 vframes = 2
 
 [node name="WeaponPickupZone" parent="." instance=ExtResource( 2 )]
-position = Vector2( -15, 0 )
+position = Vector2( -20, 0 )

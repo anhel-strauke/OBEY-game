@@ -36,7 +36,7 @@ vframes = 2
 position = Vector2( -75, -10 )
 
 [node name="WeaponPickupZone" parent="." instance=ExtResource( 1 )]
-position = Vector2( -20, -5 )
+position = Vector2( -35, -5 )
 
 [node name="ShotAnim" type="AnimationPlayer" parent="."]
 anims/shoot = SubResource( 1 )
