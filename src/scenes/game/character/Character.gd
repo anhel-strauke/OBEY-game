@@ -9,6 +9,8 @@ enum State {
 }
 
 signal died(name)
+signal health_changed(new_health)
+signal ammo_changed(new_ammo)
 
 const WeaponDropEffect = preload("res://scenes/game/effects/WeaponDropEffect.tscn")
 const DeathEffect = preload("res://scenes/game/effects/DeathEffect.tscn")
@@ -50,6 +52,7 @@ func _ready():
 	$Sprite/Sprite.position += Vector2(150, 200)
 	#weapon_pivot.position += Vector2(150, 200)
 	$Shadow.texture = $Sprite.get_texture()
+
 
 func _process(delta: float) -> void:
 	process_light()
@@ -126,6 +129,7 @@ func set_external_force(force: Vector2) -> void:
 
 func take_damage(dmg: float, from: String, direction: Vector2) -> void:
 	_hp -= dmg
+	emit_signal("health_changed", _hp)
 	if _hp <= 0.0:
 		print(name, " dies")
 		set_state(State.Idle)
@@ -153,6 +157,10 @@ func set_weapon_object(weapon: BaseWeapon) -> void:
 		weapon.transform = Transform2D(0.0, Vector2.ZERO)
 		weapon_obj.connect("out_of_ammo", self, "drop_weapon")
 		weapon_obj.owner_name = name
+		if weapon_obj.is_firearm:
+			emit_signal("ammo_changed", weapon_obj.ammo)
+		else:
+			emit_signal("ammo_changed", 0)
 
 
 func drop_weapon() -> void:
@@ -165,6 +173,7 @@ func drop_weapon() -> void:
 			drop_effect.scale = sprite.scale
 			drop_effect.global_position = global_position
 		weapon_obj = null
+		emit_signal("ammo_changed", 0)
 
 
 func play_state_animation(state: int) -> void:

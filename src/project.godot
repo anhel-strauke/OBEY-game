@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://scenes/game/character/Character.gd"
 }, {
 "base": "Node2D",
+"class": "CharacterHUD",
+"language": "GDScript",
+"path": "res://scenes/game/HUD/CharacterHUD.gd"
+}, {
+"base": "Node2D",
 "class": "CustomSlider",
 "language": "GDScript",
 "path": "res://scenes/ui/menu/CustomSlider.gd"
@@ -208,6 +213,7 @@ _global_script_class_icons={
 "AiDriver": "",
 "BaseWeapon": "",
 "Character": "",
+"CharacterHUD": "",
 "CustomSlider": "",
 "GSAIAgentLocation": "",
 "GSAIArrive": "",
