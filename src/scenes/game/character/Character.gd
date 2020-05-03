@@ -182,10 +182,13 @@ func _on_WeaponPickup_area_entered(area: Area2D) -> void:
 var light_coord = Vector2(1500, 500)
 
 func process_light():
-	var shadow = $Shadow
+	var shadow: Sprite = $Shadow
 	var lvec = position - light_coord
 	var ldirection = atan2(lvec.y, lvec.x)
 	
+	
+	var falloff = (500.0 - lvec.length())/500.0
+	shadow.self_modulate = Color(0.3, 0.3, 0.3, clamp(falloff, 0, 1))
 #	shadow.rotation = ldirection + PI/2.0
 #	var sc = (ldirection - PI)/PI*2.0
 #	if abs(sc) < 0.1:
