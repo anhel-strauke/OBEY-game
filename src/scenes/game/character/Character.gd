@@ -44,12 +44,13 @@ func has_weapon() -> bool:
 	return weapon_obj != null
 
 
-func _ready():
-#	$Sprite.world = get_tree().root.world
-	$Rendered.texture = $Sprite.get_texture()
-	$Sprite/Sprite.position += Vector2(150, 200)
-	#weapon_pivot.position += Vector2(150, 200)
-	$Shadow.texture = $Sprite.get_texture()
+#func _ready():
+##	$Sprite.world = get_tree().root.world
+#
+#	$Rendered.texture = $Sprite.get_texture()
+#	$Sprite/Sprite.position += Vector2(150, 200)
+#	#weapon_pivot.position += Vector2(150, 200)
+#	$Shadow.texture = $Sprite.get_texture()
 
 func _process(delta: float) -> void:
 	process_light()
