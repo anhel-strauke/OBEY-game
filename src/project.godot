@@ -205,9 +205,9 @@ _global_script_classes=[ {
 "path": "res://scenes/game/character/Weapons/WeaponSpawner.gd"
 } ]
 _global_script_class_icons={
+"AiDriver": "",
 "BaseWeapon": "",
 "Character": "",
-"AiDriver": "",
 "CustomSlider": "",
 "GSAIAgentLocation": "",
 "GSAIArrive": "",

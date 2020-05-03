@@ -10,9 +10,17 @@ var acceleration := GSAITargetAcceleration.new()
 var pathfollower: GSAIFollowPath = null
 
 var enemies = []
+var enemy_agents = []
 var strategic_points = []
 func get_velocity_vector() -> Vector2:
 	return current_state.velocity_vector
+
+func is_fire_pressed() -> bool:
+	return false
+
+
+func is_ability_pressed() -> bool:
+	return false
 	
 func _ready():
 	states_map = {
@@ -26,11 +34,14 @@ func _ready():
 	}
 	navigation = get_node(navigation_path)
 	# TODO: Automatic resolution of objects
-	enemies.push_back(get_parent().get_parent().get_node("Character"))
-	enemies.push_back(get_parent().get_parent().get_node("Character2"))
-	var enemy_agents = []
+	enemies.push_back(get_parent().get_parent().get_node("Reptiloid"))
+	enemies.push_back(get_parent().get_parent().get_node("Tower5G"))
 	for enemy in enemies:
-		enemy_agents.append(enemy.driver.agent)
+		var enemy_agent = GSAISteeringAgent.new()
+		enemy_agent.linear_acceleration_max = get_parent().ACCELERATION
+		enemy_agent.linear_speed_max = get_parent().MAX_SPEED
+		enemy_agent.bounding_radius = 100
+		enemy_agents.append(enemy_agent)
 	#proximity.agents = enemy_agents
 	proximity = GSAIRadiusProximity.new(agent, enemy_agents, 75) # TODO: Calculate proximity from real params
 	flocking = GSAIAvoidCollisions.new(agent, proximity)
@@ -125,14 +136,16 @@ func _path_direction(avoid: bool = true):
 		return (course * percentage + course_correction) / (1 + percentage)
 
 	
-func _update_agent() -> void:
-	agent.position.x = get_parent().global_position.x
-	agent.position.y = get_parent().global_position.y
+func _update_agent(agent, character) -> void:
+	agent.position.x = character.global_position.x
+	agent.position.y = character.global_position.y
 	agent.orientation = 0
-	agent.linear_velocity.x = get_parent()._velocity.x
-	agent.linear_velocity.y = get_parent()._velocity.y
+	agent.linear_velocity.x = character._velocity.x
+	agent.linear_velocity.y = character._velocity.y
 	agent.angular_velocity = 0	
 	
 func _process(delta):
-	_update_agent()
+	_update_agent(agent, get_parent())
+	for i in range(0, enemies.size()):
+		_update_agent(enemy_agents[i], enemies[i])
 	._process(delta)	
