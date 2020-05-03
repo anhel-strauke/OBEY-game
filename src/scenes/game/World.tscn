@@ -110,3 +110,4 @@ spawn_period = 5.0
 [node name="RenderableLight" parent="." instance=ExtResource( 7 )]
 position = Vector2( 976.064, 527.417 )
 light_system_path = NodePath("../LightSystem")
+intensity = 200

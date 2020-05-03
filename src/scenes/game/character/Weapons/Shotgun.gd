@@ -29,12 +29,14 @@ func _make_spread_angles() -> Array:
 
 func make_shot(direction: Vector2, parent: Node) -> void:
 	var first_projectile = true
+	
 	for angle in _make_spread_angles():
 		var projectile = create_bullet()
 		setup_projectile(projectile)
 		# We need only 1 sound, so only first projectile makes it
 		if first_projectile:
 			projectile.set_sound(shoot_sound)
+			make_flash(projectile, parent)
 			first_projectile = false
 		var phi: float = deg2rad(angle)
 		projectile.direction_vector = direction.rotated(phi)

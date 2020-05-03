@@ -2,6 +2,8 @@ extends Node2D
 
 export(NodePath) var light_system_path
 
+export var intensity = 0
+
 var light_id = 0
 
 var light_system
@@ -12,10 +14,12 @@ func _ready():
 	else:
 		light_system = get_light_system()
 	light_system.add_light(self)
+	print("rlight ready: ", light_id)
 	
 func get_light_system():
 	return get_tree().get_root().get_node("World").get_node("LightSystem")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	var coeff = intensity/500.0
+	$Sprite.scale.x = coeff
+	$Sprite.scale.y = coeff

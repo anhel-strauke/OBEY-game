@@ -2,6 +2,7 @@ extends BaseWeapon
 
 
 const Bullet = preload("res://scenes/game/character/Weapons/Bullet.tscn")
+const FireFlash = preload("res://scenes/game/effects/FireFlash.tscn")
 onready var bullet_spawn = $BulletSpawn
 onready var shoot_anim = $ShotAnim
 
@@ -60,6 +61,13 @@ func make_shot(direction: Vector2, parent: Node) -> void:
 	setup_projectile(projectile)
 	projectile.direction_vector = direction
 	parent.add_child(projectile)
+	
+	make_flash(projectile, parent)
+	
+func make_flash(projectile, parent):
+	var fire_flash = FireFlash.instance()
+	fire_flash.global_position = projectile.global_position
+	parent.add_child(fire_flash)
 
 
 func do_fire(direction: Vector2):

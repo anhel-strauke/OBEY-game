@@ -15,6 +15,7 @@ func _ready():
 	viewport = get_node(viewport_path)
 
 	$Rendered.texture = viewport.get_texture()
+	$Rendered.z_index = 1
 	viewport.get_node('Sprite').position += Vector2(150, 200)
 	#weapon_pivot.position += Vector2(150, 200)
 	$Shadow.texture = viewport.get_texture()
@@ -51,7 +52,10 @@ func process_light(light, shadow: Sprite):
 	var ldirection = atan2(lvec.y, lvec.x)
 	
 	
-	var falloff = (500.0 - lvec.length())/500.0
+	var falloff = 0
+	if light.intensity > 0:
+		falloff = (light.intensity - lvec.length())/light.intensity
+
 	shadow.self_modulate = Color(0.3, 0.3, 0.3, clamp(falloff, 0, 1))
 	
 	shadow.modulate = Color(0.3, 0.3, 0.3, 1.0)
