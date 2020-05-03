@@ -30,6 +30,11 @@ _global_script_classes=[ {
 "path": "res://scenes/game/HUD/CharacterHUD.gd"
 }, {
 "base": "Node2D",
+"class": "CharacterSpawner",
+"language": "GDScript",
+"path": "res://scenes/game/character/CharacterSpawner.gd"
+}, {
+"base": "Node2D",
 "class": "CustomSlider",
 "language": "GDScript",
 "path": "res://scenes/ui/menu/CustomSlider.gd"
@@ -214,6 +219,7 @@ _global_script_class_icons={
 "BaseWeapon": "",
 "Character": "",
 "CharacterHUD": "",
+"CharacterSpawner": "",
 "CustomSlider": "",
 "GSAIAgentLocation": "",
 "GSAIArrive": "",
