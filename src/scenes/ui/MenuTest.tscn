@@ -149,6 +149,7 @@ autoplay = true
 bus = "Music"
 
 [node name="MainSplash" parent="." instance=ExtResource( 9 )]
+visible = false
 [connection signal="activated" from="MenuController/NewGame" to="." method="_on_NewGame_activated"]
 [connection signal="activated" from="MenuController/Settings" to="." method="_on_Settings_activated"]
 [connection signal="activated" from="MenuController/Exit" to="." method="_on_Exit_activated"]

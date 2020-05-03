@@ -25,6 +25,8 @@ tracks/0/keys = {
 [node name="Shotgun" type="Node2D"]
 script = ExtResource( 3 )
 ammo = 4
+bullet_speed = 21.5
+bullet_friction = 14.0
 shoot_sound = ExtResource( 4 )
 
 [node name="shotgun" type="Sprite" parent="."]

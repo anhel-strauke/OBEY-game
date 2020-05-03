@@ -27,7 +27,7 @@ var _velocity: Vector2 = Vector2.ZERO
 var _attack_direction: Vector2 = Vector2.LEFT
 var _input_vector: Vector2 = Vector2.ZERO
 onready var _hp: float = max_hitpoints
-export var external_force: Vector2 = Vector2.ZERO
+var external_force: Vector2 = Vector2.ZERO
 var state: int = State.Idle setget set_state
 var weapon_obj = null
 

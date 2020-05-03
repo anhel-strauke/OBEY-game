@@ -4,6 +4,7 @@ extends Node2D
 var active: bool = false
 onready var button = $ItemBack
 onready var anim_player = $AnimationPlayer
+onready var wobbling_anim = $ItemBack/WobblingAnim
 onready var sound = $CloseSound
 
 
@@ -17,6 +18,7 @@ func _ready():
 func activate_input():
 	button.visible = true
 	active = true
+	wobbling_anim.play("idle")
 
 
 func run():

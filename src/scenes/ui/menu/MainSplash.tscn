@@ -7,7 +7,7 @@
 [ext_resource path="res://textures/ui/menu/item_back.png" type="Texture" id=5]
 [ext_resource path="res://sounds/ui/select.ogg" type="AudioStream" id=6]
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=1]
 resource_name = "hide"
 length = 0.5
 tracks/0/type = "value"
@@ -73,8 +73,7 @@ tracks/4/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "show"
+[sub_resource type="Animation" id=2]
 length = 2.25
 step = 0.05
 tracks/0/type = "value"
@@ -128,8 +127,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "idle"
+[sub_resource type="Animation" id=3]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -145,8 +143,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "idle"
+[sub_resource type="Animation" id=4]
 length = 0.6
 loop = true
 step = 0.2
@@ -178,8 +175,8 @@ texture = ExtResource( 2 )
 centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/hide = SubResource( 4 )
-anims/show = SubResource( 1 )
+anims/hide = SubResource( 1 )
+anims/show = SubResource( 2 )
 
 [node name="ItemBack" type="Sprite" parent="."]
 visible = false
@@ -200,12 +197,11 @@ __meta__ = {
 }
 
 [node name="WobblingAnim" type="AnimationPlayer" parent="ItemBack"]
-autoplay = "idle"
-anims/idle = SubResource( 2 )
+anims/idle = SubResource( 3 )
 
 [node name="SpriteAnim" type="AnimationPlayer" parent="ItemBack"]
 autoplay = "idle"
-anims/idle = SubResource( 3 )
+anims/idle = SubResource( 4 )
 
 [node name="CloseSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )

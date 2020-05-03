@@ -6,6 +6,9 @@ onready var bullet_spawn = $BulletSpawn
 onready var shoot_anim = $ShotAnim
 
 export(int) var ammo: int = 5
+export(float) var bullet_speed: float = 30.0
+export(float) var bullet_friction: float = 12.0
+
 export(AudioStream) var shoot_sound = null
 
 var _current_ammo: int = 0
@@ -32,6 +35,8 @@ func setup_projectile(projectile) -> void:
 	projectile.gunslinger_name = owner_name
 	projectile.set_sound(shoot_sound)
 	projectile.global_position = bullet_spawn.global_position
+	projectile.damage = hit_damage
+	projectile.impulse = knockback_impulse
 
 
 func make_shot(direction: Vector2, parent: Node) -> void:
