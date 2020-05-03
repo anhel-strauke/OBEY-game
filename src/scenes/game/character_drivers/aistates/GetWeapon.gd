@@ -9,6 +9,7 @@ func initialize(newTarget: Vector2):
 func update(Variant):
 	._update()
 	velocity_vector = get_path_direction.call_func()
+	return true
 	#emit_signal("finished", "previous")
 
 

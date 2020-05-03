@@ -1,26 +1,52 @@
 extends "res://scenes/game/character_drivers/aistates/StageAwareState.gd"
 
+
 const WEAPON_COOLDOWN: int = 5
 var countdown = -1
 var target
 
+var reaction_countdown: float
+
 func initialize(newTarget):
 	target = newTarget
+	reaction_countdown = reaction_time
 
-func update(Variant):
+func update(delta):
 	._update()
+	
+	if reaction_countdown > 0:
+		reaction_countdown -= delta
+		return false
+	
 	# var aim_direction = player.position.direction_to(target.position)
 	#get_simple_path(start_position, end_position, true)
 	var aim_direction = predict_without_acceleration()
-	velocity_vector = aim_direction # / 10000 # fixme: stop on "shoot" to visualize cooldown
+	
+	var weapon = player.weapon_obj
+	# fixme: Stabilize API
+	var shooting_range = 900
+	if weapon.name == "Shotgun":
+		#print('Detected shotgun')
+		shooting_range = 500
+	
+	var space_state = player.get_parent().get_world_2d().get_direct_space_state()
+	# TODO: ignore pits
+	var results = space_state.intersect_ray(player.global_position,player.global_position + aim_direction * shooting_range ,[player] )
+	var should_shoot = false
+	if results:
+		if results.collider == target:
+			should_shoot = true
+			velocity_vector = aim_direction
+			if countdown > -1:
+				countdown -= 1
+			
+	# / 10000 # fixme: stop on "shoot" to visualize cooldown
 	# var distance = player.position.distance_to(target.position)
-	if countdown > -1:
-		countdown -= 1
-		
+	return should_shoot
 	
 func _is_fire_pressed() -> bool:
 	if countdown == -1:
-		countdown = WEAPON_COOLDOWN
+		countdown = WEAPON_COOLDOWN + int(reaction_time*4)
 		return true
 	return false
 # To make it more accurate, we can do:
