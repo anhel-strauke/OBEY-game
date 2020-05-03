@@ -1,5 +1,7 @@
 extends "res://scenes/game/character_drivers/aistates/StageAwareState.gd"
 
+const WEAPON_COOLDOWN: int = 5
+var countdown = -1
 var target
 
 func initialize(newTarget):
@@ -12,7 +14,15 @@ func update(Variant):
 	var aim_direction = predict_without_acceleration()
 	velocity_vector = aim_direction # / 10000 # fixme: stop on "shoot" to visualize cooldown
 	# var distance = player.position.distance_to(target.position)
+	if countdown > -1:
+		countdown -= 1
+		
 	
+func _is_fire_pressed() -> bool:
+	if countdown == -1:
+		countdown = WEAPON_COOLDOWN
+		return true
+	return false
 # To make it more accurate, we can do:
 # 1. Add acceleration to the equation
 # 2. Consider _changing_ acceleration

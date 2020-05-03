@@ -7,6 +7,7 @@ var set_path: FuncRef
 var get_path_direction: FuncRef
 var player
 var enemies = []
+var weapons = []
 
 var enemies_rough_pos = {}
 var enemies_pos_repeats = {
@@ -38,7 +39,7 @@ func _update():
 			if(enemies_rough_pos.has(i)):
 				old_pos = enemies_rough_pos[i]
 				enemies_rough_pos[i] = Vector2(int(miniposition.x), int(miniposition.y))
-				if (old_pos - enemies_rough_pos[i]).length() < 0.000001:
+				if is_zero_approx((old_pos - enemies_rough_pos[i]).length()):
 					enemies_pos_repeats[i] += 1
 				else:					
 					enemies_pos_repeats[i] = 0
@@ -116,3 +117,6 @@ func _find_path(target_pos: Vector2):
 func _assign_path(target_pos: Vector2):
 	_find_path(target_pos)
 	set_path.call_func(path)
+
+func _is_fire_pressed() -> bool:
+	return false
