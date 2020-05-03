@@ -25,8 +25,13 @@ func set_ammo(num: int) -> void:
 
 
 func set_health(value: float) -> void:
-	_set_animation_value(health_anim, "set_health", value / max_health)
+	var clamped = clamp(value / max_health, 0.0, 1.0)
+	_set_animation_value(health_anim, "set_health", clamped)
 
 
 func set_name(name: String) -> void:
 	name_label.text = name
+
+
+func set_icon_index(index: int) -> void:
+	pass

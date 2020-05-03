@@ -15,6 +15,8 @@ signal ammo_changed(new_ammo)
 const WeaponDropEffect = preload("res://scenes/game/effects/WeaponDropEffect.tscn")
 const DeathEffect = preload("res://scenes/game/effects/DeathEffect.tscn")
 
+export(String) var display_name
+export(int, "Mason", "Reptiloid", "5G Tower", "UFO") var icon_index = 0
 export var MAX_SPEED: float = 800.0
 export var ACCELERATION: float = 2400.0
 export var FRICTION: float = 2200.0
