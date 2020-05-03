@@ -17,7 +17,6 @@ var attack_cooldown: float = 0.0
 func can_attack(was_pressed: bool) -> bool:
 	return (is_automatic or not was_pressed) and attack_cooldown <= 0.0
 
-
 func _process(delta: float) -> void:
 	if attack_cooldown > 0.0:
 		attack_cooldown -= delta
