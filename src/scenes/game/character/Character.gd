@@ -20,8 +20,8 @@ export var FRICTION: float = 2200.0
 export var max_hitpoints: float = 10.0
 
 onready var driver = $Driver
-onready var sprite = $Sprite/Sprite
-onready var weapon_pivot = $Sprite/Sprite/WeaponPivot
+onready var sprite = $Sprite
+onready var weapon_pivot = $Sprite/WeaponPivot
 
 var _velocity: Vector2 = Vector2.ZERO
 var _attack_direction: Vector2 = Vector2.LEFT
@@ -44,15 +44,7 @@ func has_weapon() -> bool:
 	return weapon_obj != null
 
 
-func _ready():
-#	$Sprite.world = get_tree().root.world
-	$Rendered.texture = $Sprite.get_texture()
-	$Sprite/Sprite.position += Vector2(150, 200)
-	#weapon_pivot.position += Vector2(150, 200)
-	$Shadow.texture = $Sprite.get_texture()
-
 func _process(delta: float) -> void:
-	process_light()
 	if not driver:
 		return
 	_input_vector = driver.get_velocity_vector()
@@ -177,51 +169,4 @@ func _on_WeaponPickup_area_entered(area: Area2D) -> void:
 		if weapon_candidate is BaseWeapon:
 			area.set_deferred("monitorable", false)
 			set_weapon_object(weapon_candidate)
-
-
-var light_coord = Vector2(1500, 500)
-
-func process_light():
-	var shadow = $Shadow
-	var lvec = position - light_coord
-	var ldirection = atan2(lvec.y, lvec.x)
-	
-#	shadow.rotation = ldirection + PI/2.0
-#	var sc = (ldirection - PI)/PI*2.0
-#	if abs(sc) < 0.1:
-#		sc = sign(sc)*0.1
-#	shadow.scale.x = sc
-
-#	shadow.rotation = abs(ldirection) + PI/2.0
-#	var hv_sign = sign(ldirection)
-#	var sc = (PI/2.0 - abs(abs(ldirection) - PI/2.0))/PI*2.0
-#	if sc < 0.1:
-#		sc = 0.1
-#	var rl_sign = -sign(abs(ldirection) - PI/2.0)
-##	shadow.scale.x = -sc*hv_sign
-##	shadow.scale.y = hv_sign*rl_sign
-#	shadow.scale.x = sc*rl_sign
-#	shadow.scale.y = hv_sign
-
-	#shadow.rotation = abs(abs(ldirection) - PI/2.0) + PI/2.0    + PI/2.0
-	
-	
-	#shadow.rotation = abs(abs(ldirection) - PI/2.0)# + PI/2.0    + PI/2.0
-	
-	#print("rot: ", shadow.rotation)
-	# var hv_sign = sign(ldirection)
-	var hv_sign = 1.0 if lvec.y > 0 else -1.0
-	var rl_sign = 1.0 if lvec.x > 0 else -1.0
-	var sc = (PI/2.0 - abs(abs(ldirection) - PI/2.0))/PI*2.0
-	if sc < 0.3:
-		sc = 0.3
-	# var rl_sign = -sign(abs(ldirection) - PI/2.0)
-#	shadow.scale.x = -sc*hv_sign
-#	shadow.scale.y = hv_sign*rl_sign
-	shadow.scale.x = sc
-	shadow.scale.y = -hv_sign
-	
-	shadow.rotation = -abs(abs(ldirection) - PI/2.0)*hv_sign*rl_sign# + PI/2.0    + PI/2.0
-#	print("rl: ", rl_sign, "hv: ", hv_sign)
-	# print("sc_sign: ", sign(sc))
 
