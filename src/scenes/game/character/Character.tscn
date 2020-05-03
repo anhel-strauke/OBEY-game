@@ -19,7 +19,12 @@ collision_layer = 2
 collision_mask = 3
 script = ExtResource( 3 )
 
-[node name="Sprite" type="Node2D" parent="."]
+[node name="Sprite" type="Viewport" parent="."]
+size = Vector2( 300, 400 )
+size_override_stretch = true
+transparent_bg = true
+usage = 0
+render_target_v_flip = true
 
 [node name="Hurtbox" parent="." instance=ExtResource( 2 )]
 collision_layer = 4
@@ -47,6 +52,13 @@ collision_mask = 64
 position = Vector2( 0, -4.57794 )
 rotation = -1.5708
 shape = SubResource( 3 )
+
+[node name="Rendered" type="Sprite" parent="."]
+z_index = 1
+
+[node name="Shadow" type="Sprite" parent="."]
+modulate = Color( 0.27451, 0.27451, 0.27451, 1 )
+self_modulate = Color( 0.286275, 0.286275, 0.286275, 0.584314 )
 [connection signal="area_entered" from="WeaponPickup" to="." method="_on_WeaponPickup_area_entered"]
 
 [editable path="Hurtbox"]

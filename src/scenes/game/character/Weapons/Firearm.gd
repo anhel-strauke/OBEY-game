@@ -32,6 +32,12 @@ func setup_projectile(projectile) -> void:
 	projectile.gunslinger_name = owner_name
 	projectile.set_sound(shoot_sound)
 	projectile.global_position = bullet_spawn.global_position
+	
+	# position viewport correction:
+	var vp = get_parent()
+	while not vp is Viewport:
+		vp = vp.get_parent()
+	projectile.global_position += vp.get_parent().global_position - Vector2(150, 200)
 
 
 func make_shot(direction: Vector2, parent: Node) -> void:
