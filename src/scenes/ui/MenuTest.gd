@@ -3,11 +3,18 @@ extends Node2D
 onready var menu_controller = $MenuController
 onready var player_selection = $PlayerSelectSlider
 onready var settings = $SettingsSlider
+onready var main_splash = $MainSplash
 
 
 func _ready() -> void:
 	GameInput.set_common_input_mode(true)
-
+	if Constants.game_just_started:
+		menu_controller.enabled = false
+		main_splash.visible = true
+		main_splash.run()
+		Constants.game_just_started = false
+	else:
+		menu_controller.enabled = true
 
 func _activate_slider(slider):
 	menu_controller.enabled = false
@@ -30,3 +37,7 @@ func _on_slider_hidden():
 
 func _on_Settings_activated():
 	_activate_slider(settings)
+
+
+func _on_MainSplash_finished():
+	menu_controller.enabled = true

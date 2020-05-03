@@ -8,8 +8,8 @@
 [ext_resource path="res://scenes/ui/menu/PlayerSelectSlider.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/ui/menu/SettingsSlider.tscn" type="PackedScene" id=7]
 [ext_resource path="res://fonts/font_obey_64.tres" type="DynamicFont" id=8]
-[ext_resource path="res://fonts/Caveat-Regular.ttf" type="DynamicFontData" id=9]
-
+[ext_resource path="res://scenes/ui/menu/MainSplash.tscn" type="PackedScene" id=9]
+[ext_resource path="res://sounds/music/Main.ogg" type="AudioStream" id=10]
 
 [sub_resource type="Animation" id=1]
 resource_name = "loop"
@@ -31,10 +31,6 @@ tracks/0/keys = {
 [sub_resource type="DynamicFont" id=2]
 size = 112
 font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=3]
-size = 54
-font_data = ExtResource( 9 )
 
 [node name="MenuTest" type="Node2D"]
 script = ExtResource( 4 )
@@ -73,20 +69,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="."]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 1467.0
-margin_bottom = 272.0
-custom_fonts/font = SubResource( 3 )
-custom_colors/font_color = Color( 0.933333, 1, 0, 0.305882 )
-text = "Мышка (пока что) не работает, выбор стрелками или геймпадом,
-и Enter или кнопка (A) на геймпаде
-                                            — Анхель"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="MenuController" parent="." instance=ExtResource( 2 )]
 can_be_cancelled = false
 
@@ -95,12 +77,13 @@ position = Vector2( 380.011, 360 )
 change_label_color = false
 
 [node name="Label" type="Label" parent="MenuController/NewGame"]
-margin_left = 339.989
-margin_top = 20.0
-margin_right = 636.989
-margin_bottom = 121.0
+margin_left = 39.989
+margin_top = 35.0
+margin_right = 1056.99
+margin_bottom = 136.0
 custom_fonts/font = ExtResource( 8 )
 text = "Начать Игру"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -110,12 +93,13 @@ position = Vector2( 380.022, 500 )
 change_label_color = false
 
 [node name="Label" type="Label" parent="MenuController/Settings"]
-margin_left = 339.978
-margin_top = 20.0
-margin_right = 699.978
-margin_bottom = 121.0
+margin_left = 39.978
+margin_top = 35.0
+margin_right = 1039.98
+margin_bottom = 136.0
 custom_fonts/font = ExtResource( 8 )
 text = "Настройки"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -125,12 +109,13 @@ position = Vector2( 380, 640 )
 change_label_color = false
 
 [node name="Label" type="Label" parent="MenuController/Credits"]
-margin_left = 340.0
-margin_top = 20.0
-margin_right = 760.0
-margin_bottom = 102.0
+margin_left = 40.0
+margin_top = 35.0
+margin_right = 1040.0
+margin_bottom = 117.0
 custom_fonts/font = ExtResource( 8 )
 text = "Авторы"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -140,12 +125,13 @@ position = Vector2( 380, 780 )
 change_label_color = false
 
 [node name="Label" type="Label" parent="MenuController/Exit"]
-margin_left = 340.0
-margin_top = 20.0
-margin_right = 760.0
-margin_bottom = 121.0
+margin_left = 50.0
+margin_top = 30.0
+margin_right = 1030.0
+margin_bottom = 131.0
 custom_fonts/font = ExtResource( 8 )
 text = "Выход"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -154,8 +140,18 @@ __meta__ = {
 visible = false
 
 [node name="SettingsSlider" parent="." instance=ExtResource( 7 )]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 10 )
+volume_db = -5.0
+autoplay = true
+bus = "Music"
+
+[node name="MainSplash" parent="." instance=ExtResource( 9 )]
 [connection signal="activated" from="MenuController/NewGame" to="." method="_on_NewGame_activated"]
 [connection signal="activated" from="MenuController/Settings" to="." method="_on_Settings_activated"]
 [connection signal="activated" from="MenuController/Exit" to="." method="_on_Exit_activated"]
 [connection signal="hidden" from="PlayerSelectSlider" to="." method="_on_slider_hidden"]
 [connection signal="hidden" from="SettingsSlider" to="." method="_on_slider_hidden"]
+[connection signal="finished" from="MainSplash" to="." method="_on_MainSplash_finished"]
