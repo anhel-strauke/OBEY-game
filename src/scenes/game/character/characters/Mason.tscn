@@ -4,60 +4,31 @@
 [ext_resource path="res://textures/characters/bodies/mason_walk.png" type="Texture" id=2]
 [ext_resource path="res://scenes/game/character/characters/Mason.gd" type="Script" id=3]
 
-[sub_resource type="Animation" id=1]
-resource_name = "idle"
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 40.0
+height = 40.0
+
+[sub_resource type="Animation" id=2]
 length = 0.1
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("Sprite/MasonSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 0, 0 ]
-}
-
-[sub_resource type="Animation" id=2]
-resource_name = "walk_1"
-length = 0.7
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.7 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 12, 23 ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath("../..")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.7 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "play_random_walk_animation"
-} ]
+"update": 1,
+"values": [ 0 ]
 }
 
 [sub_resource type="Animation" id=3]
-resource_name = "walk_2"
 length = 0.7
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("Sprite/MasonSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -69,7 +40,7 @@ tracks/0/keys = {
 "values": [ 0, 11 ]
 }
 tracks/1/type = "method"
-tracks/1/path = NodePath("../..")
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -83,9 +54,35 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="CapsuleShape2D" id=4]
-radius = 40.0
-height = 40.0
+[sub_resource type="Animation" id=4]
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite/MasonSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 12, 23 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_random_walk_animation"
+} ]
+}
 
 [node name="Mason" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -95,11 +92,7 @@ position = Vector2( 0, -50 )
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 12
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite/MasonSprite" index="0"]
-anims/idle = SubResource( 1 )
-anims/walk_1 = SubResource( 2 )
-anims/walk_2 = SubResource( 3 )
+frame = 23
 
 [node name="WeaponPivot" type="Position2D" parent="Sprite" index="1"]
 position = Vector2( -50, -65 )
@@ -109,7 +102,7 @@ position = Vector2( 0, -45 )
 
 [node name="HurtboxCollision2" type="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, 25 )
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 
 [node name="TopCollisionCapsule" parent="." index="2"]
 visible = false
@@ -119,5 +112,10 @@ visible = false
 
 [node name="BottomCollisionCapsule" parent="." index="4"]
 visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+anims/idle = SubResource( 2 )
+anims/walk_1 = SubResource( 3 )
+anims/walk_2 = SubResource( 4 )
 
 [editable path="Hurtbox"]

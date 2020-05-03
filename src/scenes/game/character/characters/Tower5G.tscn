@@ -4,11 +4,14 @@
 [ext_resource path="res://textures/characters/bodies/5G_walk.png" type="Texture" id=2]
 [ext_resource path="res://scenes/game/character/characters/Tower5G.gd" type="Script" id=3]
 
-[sub_resource type="Animation" id=1]
-resource_name = "idle"
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 20.0
+height = 90.0
+
+[sub_resource type="Animation" id=2]
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("Sprite/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -20,12 +23,11 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "walk_slam"
+[sub_resource type="Animation" id=3]
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("Sprite/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -36,13 +38,26 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 12, 23 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_random_walk_animation"
+} ]
+}
 
-[sub_resource type="Animation" id=3]
-resource_name = "walk_usual"
+[sub_resource type="Animation" id=4]
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("Sprite/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -53,31 +68,50 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 0, 11 ]
 }
-
-[sub_resource type="CapsuleShape2D" id=4]
-radius = 20.0
-height = 90.0
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_random_walk_animation"
+} ]
+}
 
 [node name="Tower5G" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="Sprite" index="0"]
-position = Vector2( 0, -90 )
+position = Vector2( 0, -80 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 6
-frame = 15
-
-[node name="WalkAnimation" type="AnimationPlayer" parent="Sprite/Sprite" index="0"]
-anims/idle = SubResource( 1 )
-anims/walk_slam = SubResource( 2 )
-anims/walk_usual = SubResource( 3 )
+frame = 12
 
 [node name="WeaponPivot" type="Position2D" parent="Sprite" index="1"]
 position = Vector2( -25, -80 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -45 )
-shape = SubResource( 4 )
+shape = SubResource( 1 )
+
+[node name="TopCollisionCapsule" parent="." index="2"]
+position = Vector2( 0, -15 )
+
+[node name="BottomCollisionCapsule" parent="." index="4"]
+position = Vector2( 0, -7 )
+
+[node name="CollisionShape2D" parent="WeaponPickup" index="0"]
+position = Vector2( 0, -5 )
+
+[node name="WalkAnimation" type="AnimationPlayer" parent="." index="6"]
+anims/idle = SubResource( 2 )
+anims/walk_slam = SubResource( 3 )
+anims/walk_usual = SubResource( 4 )
 
 [editable path="Hurtbox"]
