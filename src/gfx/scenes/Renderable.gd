@@ -53,8 +53,8 @@ func process_light(light, shadow: Sprite):
 	
 	
 	var falloff = 0
-	if light.intensity > 0:
-		falloff = (light.intensity - lvec.length())/light.intensity
+	if light.distance > 0:
+		falloff = (light.distance - lvec.length())/light.distance
 
 	shadow.self_modulate = Color(0.3, 0.3, 0.3, clamp(falloff, 0, 1))
 	

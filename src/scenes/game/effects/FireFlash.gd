@@ -10,8 +10,7 @@ extends "res://gfx/scenes/RenderableLight.gd"
 func _ready():
 	intensity = 0
 	$AnimationPlayer.play("Flash")
-	print("flash ready: ", light_id)
-
+	$Sprite.rotation = rand_range(-PI, PI)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

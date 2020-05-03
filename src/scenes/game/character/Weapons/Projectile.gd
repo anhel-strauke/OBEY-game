@@ -23,7 +23,6 @@ func _ready() -> void:
 	get_tree().root.add_child(sound_player)
 	sound_player.connect("finished", sound_player, "queue_free")
 	sound_player.play()
-	print("bullet ready")
 	
 
 func set_direction(vect: Vector2) -> void:
