@@ -169,4 +169,7 @@ func _on_CheckVictoryTimer_timeout() -> void:
 
 func _on_victory_finished() -> void:
 	Global.game_is_on = false
-	LoadingScene.run_scene("res://scenes/ui/MenuTest.tscn")
+	if characters_choice.size() == 1:
+		LoadingScene.run_scene("res://scenes/ui/character_selection/CharacterSelectionScene1.gd")
+	else:
+		LoadingScene.run_scene("res://scenes/ui/character_selection/CharacterSelectionScene2.tscn")
