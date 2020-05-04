@@ -1,4 +1,5 @@
 extends Node2D
+class_name GameHUD
 
 
 onready var character_huds: Array = [

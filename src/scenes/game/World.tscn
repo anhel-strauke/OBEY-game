@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://textures/arenas/map1.png" type="Texture" id=1]
 [ext_resource path="res://scenes/game/character/characters/Tower5G.tscn" type="PackedScene" id=2]
@@ -22,26 +22,6 @@
 [ext_resource path="res://scenes/game/character_drivers/AiGlobalAnalyzer.gd" type="Script" id=21]
 [ext_resource path="res://scenes/ui/SpotVisualiser.gd" type="Script" id=22]
 [ext_resource path="res://scenes/game/arenas/ArenaBorders.tscn" type="PackedScene" id=23]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 960, 20 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 20, 500 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 960, 40 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 960, 40 )
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 40, 440 )
-
-[sub_resource type="NavigationPolygon" id=6]
-vertices = PoolVector2Array( 1781.75, 152.134, 1796.37, 953.74, 154.176, 951.303, 163.922, 157.007 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
-outlines = [ PoolVector2Array( 163.922, 157.007, 154.176, 951.303, 1796.37, 953.74, 1781.75, 152.134 ) ]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 3 )
@@ -103,9 +83,7 @@ polygon = PoolVector2Array( 751.116, -247.45, 563.506, -135.371, 685.331, 169.19
 "BulletParent",
 ]]
 
-[node name="Reptiloid" parent="YSort" groups=[
-"chars",
-] instance=ExtResource( 5 )]
+[node name="Reptiloid" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 1340, 760 )
 
 [node name="Driver" type="Node" parent="YSort/Reptiloid"]
@@ -121,9 +99,7 @@ position = Vector2( 320, 360 )
 script = ExtResource( 4 )
 player_index = 0
 
-[node name="Mason" parent="YSort" groups=[
-"chars",
-] instance=ExtResource( 17 )]
+[node name="Mason" parent="YSort" instance=ExtResource( 17 )]
 position = Vector2( 1489.32, 271.183 )
 
 [node name="Control" type="Node2D" parent="YSort/Mason"]
@@ -167,9 +143,7 @@ script = ExtResource( 14 )
 [node name="HoldPosition" type="Node" parent="YSort/Mason/Driver"]
 script = ExtResource( 12 )
 
-[node name="Mason3" parent="YSort" groups=[
-"chars",
-] instance=ExtResource( 17 )]
+[node name="Mason3" parent="YSort" instance=ExtResource( 17 )]
 position = Vector2( 636.866, 817.054 )
 
 [node name="Control" type="Node2D" parent="YSort/Mason3"]
@@ -251,7 +225,6 @@ texture = ExtResource( 18 )
 script = ExtResource( 21 )
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="PathFinder"]
-navpoly = SubResource( 1 )
 
 [node name="Cutouts" type="Node2D" parent="PathFinder"]
 

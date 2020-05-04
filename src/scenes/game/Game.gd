@@ -163,4 +163,5 @@ func _on_CheckVictoryTimer_timeout() -> void:
 
 
 func _on_victory_finished() -> void:
+	Global.game_is_on = false
 	LoadingScene.run_scene("res://scenes/ui/MenuTest.tscn")

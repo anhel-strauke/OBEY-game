@@ -54,7 +54,7 @@ func set_look_right(right: bool) -> void:
 
 
 func _process(delta: float) -> void:
-	process_light()
+	#process_light()
 	if not Global.game_is_on:
 		return
 	if not driver:

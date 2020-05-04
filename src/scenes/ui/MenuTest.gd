@@ -4,6 +4,7 @@ onready var menu_controller = $MenuController
 onready var player_selection = $PlayerSelectSlider
 onready var settings = $SettingsSlider
 onready var main_splash = $MainSplash
+onready var music = $Music
 
 
 func _ready() -> void:
@@ -41,3 +42,7 @@ func _on_Settings_activated():
 
 func _on_MainSplash_finished():
 	menu_controller.enabled = true
+
+
+func _before_free() -> void:
+	music.stop()

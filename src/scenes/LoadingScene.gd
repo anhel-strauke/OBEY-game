@@ -37,6 +37,8 @@ func _on_animation_finished(anim_name: String) -> void:
 	match anim_name:
 		"show":
 			var old_scene = get_tree().current_scene
+			if old_scene.has_method("_before_free"):
+				old_scene._before_free()
 			if old_scene:
 				old_scene.queue_free()
 			get_tree().change_scene(next_scene_name)

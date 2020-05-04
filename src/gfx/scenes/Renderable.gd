@@ -43,7 +43,7 @@ func _process(delta):
 		shadow.queue_free()
 	
 func get_light_system():
-	return get_tree().get_root().get_node("World").get_node("LightSystem")
+	return get_tree().get_root().get_node("Game").get_node("LightSystem")
 
 func process_light(light, shadow: Sprite):
 	var light_coord = light.position

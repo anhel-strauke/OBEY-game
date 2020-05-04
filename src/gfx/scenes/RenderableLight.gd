@@ -18,7 +18,7 @@ func _ready():
 	_process(0)
 
 func get_light_system():
-	return get_tree().get_root().get_node("World").get_node("LightSystem")
+	return get_tree().get_root().get_node("Game").get_node("LightSystem")
 
 func _process(delta):
 	var coeff = distance/500.0
