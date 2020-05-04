@@ -31,7 +31,10 @@ func update(delta):
 	
 	var space_state = player.get_parent().get_world_2d().get_direct_space_state()
 	# TODO: ignore pits
-	var results = space_state.intersect_ray(player.global_position,player.global_position + aim_direction * shooting_range ,[player] )
+	var bullet_origin = player.global_position
+	#if player.has_weapon():
+	#	bullet_origin = player.weapon_obj.bullet_spawn.global_position
+	var results = space_state.intersect_ray(bullet_origin, bullet_origin + aim_direction * shooting_range ,[player] )
 	var should_shoot = false
 	if results:
 		if results.collider == target:
@@ -39,6 +42,8 @@ func update(delta):
 			velocity_vector = aim_direction
 			if countdown > -1:
 				countdown -= 1
+		else:
+			reaction_countdown = reaction_time				
 			
 	# / 10000 # fixme: stop on "shoot" to visualize cooldown
 	# var distance = player.position.distance_to(target.position)
@@ -54,7 +59,7 @@ func _is_fire_pressed() -> bool:
 # 2. Consider _changing_ acceleration
 # 3. Record patterns of acceleration changes to predict target's dodging
 func predict_without_acceleration():
-	var bullet_origin = player.global_position # TODO: Take gun anchor into account
+	var bullet_origin = player.global_position
 	var bullet_speed = 10000 # TODO: Get current gun stats
 	var target_origin = target.global_position
 	var target_velocity = target._velocity # fixme: Stabilize API

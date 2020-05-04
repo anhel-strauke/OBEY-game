@@ -179,6 +179,8 @@ __meta__ = {
 script = ExtResource( 9 )
 start_state = NodePath("Think")
 navigation_path = NodePath("../../../PathFinder")
+reaction_time = 0.3
+courage = 0.05
 
 [node name="Think" type="Node" parent="YSort/Mason/Driver"]
 script = ExtResource( 11 )
@@ -223,6 +225,8 @@ __meta__ = {
 script = ExtResource( 9 )
 start_state = NodePath("Think")
 navigation_path = NodePath("../../../PathFinder")
+reaction_time = 0.3
+courage = 0.05
 
 [node name="Think" type="Node" parent="YSort/Mason3/Driver"]
 script = ExtResource( 11 )
