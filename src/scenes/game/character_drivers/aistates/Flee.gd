@@ -28,6 +28,7 @@ func update(Variant):
 	else:
 		velocity_vector = get_path_direction.call_func(true) # player.position.direction_to(target_position)
 		countdown = COUNTDOWN_UPDATE_COUNT
+	return true
 
 func get_state_description():
 	return "Fleeing"

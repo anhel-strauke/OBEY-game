@@ -8,6 +8,8 @@ var get_path_direction: FuncRef
 var player
 var enemies = []
 var weapons = []
+var courage = 0
+var reaction_time = 0
 
 var navigation: Navigation2D
 var nav_instance
@@ -29,7 +31,7 @@ func _update():
 		if isSituationBad: # fixme: strict equality check
 			emit_signal("stack_invalid", "think")
 		_lastEnemies = nearby
-		
+	return true
 
 # fixme: read about simpler solutions	
 func _get_enemies_around_point(point: Vector2, radius: int):

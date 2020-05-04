@@ -70,11 +70,11 @@ polygon = PoolVector2Array( 751.116, -247.45, 563.506, -135.371, 685.331, 169.19
 collision_layer = 97
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level/map1/StaticBody2D2"]
-position = Vector2( 716.328, 689.527 )
+position = Vector2( 694.058, 683.453 )
 polygon = PoolVector2Array( 746.243, -230.395, 707.259, -186.538, 799.845, -64.7132, 999.638, -42.7848, 938.726, -196.284 )
 
 [node name="Polygon2D" type="Polygon2D" parent="Level/map1/StaticBody2D2"]
-position = Vector2( 1264.66, 562.415 )
+position = Vector2( 1250.49, 558.366 )
 scale = Vector2( 0.260417, 0.446928 )
 color = Color( 0.733333, 0.733333, 0.733333, 1 )
 polygon = PoolVector2Array( 751.116, -247.45, 563.506, -135.371, 975.175, 139.617, 1733.02, 188.682, 1489.76, -154.772 )
@@ -199,6 +199,92 @@ script = ExtResource( 14 )
 [node name="HoldPosition" type="Node" parent="YSort/Mason/Driver"]
 script = ExtResource( 12 )
 
+[node name="Mason2" parent="YSort" groups=[
+"chars",
+] instance=ExtResource( 17 )]
+position = Vector2( 622.815, 259.036 )
+
+[node name="Control" type="Node2D" parent="YSort/Mason2"]
+script = ExtResource( 10 )
+
+[node name="StateLabel" type="RichTextLabel" parent="YSort/Mason2/Control"]
+margin_left = -68.0
+margin_top = -158.0
+margin_right = 68.0
+margin_bottom = -64.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Driver" type="Node" parent="YSort/Mason2"]
+script = ExtResource( 9 )
+start_state = NodePath("Think")
+navigation_path = NodePath("../../../PathFinder")
+
+[node name="Think" type="Node" parent="YSort/Mason2/Driver"]
+script = ExtResource( 11 )
+
+[node name="GetWeapon" type="Node" parent="YSort/Mason2/Driver"]
+script = ExtResource( 16 )
+
+[node name="GetBonus" type="Node" parent="YSort/Mason2/Driver"]
+script = ExtResource( 8 )
+
+[node name="FollowPlayer" type="Node" parent="YSort/Mason2/Driver"]
+script = ExtResource( 7 )
+
+[node name="Attack" type="Node" parent="YSort/Mason2/Driver"]
+script = ExtResource( 13 )
+
+[node name="Flee" type="Node" parent="YSort/Mason2/Driver"]
+script = ExtResource( 14 )
+
+[node name="HoldPosition" type="Node" parent="YSort/Mason2/Driver"]
+script = ExtResource( 12 )
+
+[node name="Mason4" parent="YSort" groups=[
+"chars",
+] instance=ExtResource( 17 )]
+position = Vector2( 1448.83, 769.221 )
+
+[node name="Control" type="Node2D" parent="YSort/Mason4"]
+script = ExtResource( 10 )
+
+[node name="StateLabel" type="RichTextLabel" parent="YSort/Mason4/Control"]
+margin_left = -68.0
+margin_top = -158.0
+margin_right = 68.0
+margin_bottom = -64.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Driver" type="Node" parent="YSort/Mason4"]
+script = ExtResource( 9 )
+start_state = NodePath("Think")
+navigation_path = NodePath("../../../PathFinder")
+
+[node name="Think" type="Node" parent="YSort/Mason4/Driver"]
+script = ExtResource( 11 )
+
+[node name="GetWeapon" type="Node" parent="YSort/Mason4/Driver"]
+script = ExtResource( 16 )
+
+[node name="GetBonus" type="Node" parent="YSort/Mason4/Driver"]
+script = ExtResource( 8 )
+
+[node name="FollowPlayer" type="Node" parent="YSort/Mason4/Driver"]
+script = ExtResource( 7 )
+
+[node name="Attack" type="Node" parent="YSort/Mason4/Driver"]
+script = ExtResource( 13 )
+
+[node name="Flee" type="Node" parent="YSort/Mason4/Driver"]
+script = ExtResource( 14 )
+
+[node name="HoldPosition" type="Node" parent="YSort/Mason4/Driver"]
+script = ExtResource( 12 )
+
 [node name="Mason3" parent="YSort" groups=[
 "chars",
 ] instance=ExtResource( 17 )]
@@ -287,7 +373,7 @@ color = Color( 1, 1, 1, 0 )
 polygon = PoolVector2Array( 292.613, 420.86, 602.369, 592.946, 547.706, 912.824, 223.779, 892.579, 82.0607, 542.333 )
 
 [node name="Polygon2D3" type="Polygon2D" parent="PathFinder/Cutouts"]
-position = Vector2( 1208.65, -129.571 )
+position = Vector2( 1184.36, -133.62 )
 color = Color( 1, 1, 1, 0 )
 polygon = PoolVector2Array( 244.024, 556.504, 458.626, 605.093, 533.534, 795.401, 312.859, 777.18, 183.288, 635.462 )
 
@@ -355,7 +441,7 @@ position = Vector2( 351.056, 691.21 )
 position = Vector2( 961.588, 560.381 )
 
 [node name="Node3" type="Node2D" parent="PathFinder/Centroids"]
-position = Vector2( 1569.94, 545.118 )
+position = Vector2( 1547.67, 545.118 )
 
 [node name="Control" type="Node2D" parent="PathFinder"]
 script = ExtResource( 20 )

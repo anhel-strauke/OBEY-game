@@ -2,6 +2,9 @@ extends "res://scripts/state_machine/state_machine.gd"
 class_name AiDriver
 
 export(NodePath) var navigation_path
+export(float) var reaction_time = 0
+export(float) var courage = 10.05
+
 var navigation
 var agent := GSAISteeringAgent.new()
 var proximity
@@ -14,7 +17,10 @@ var weapons = []
 var enemy_agents = []
 var strategic_points = []
 func get_velocity_vector() -> Vector2:
-	return current_state.velocity_vector
+	if !consumed_last and states_stack.size() > 1:
+		return states_stack[1].velocity_vector
+	else:
+		return current_state.velocity_vector
 
 func is_fire_pressed() -> bool:
 	return current_state._is_fire_pressed()
@@ -64,6 +70,8 @@ func _ready():
 		child.enemies = enemies
 		child.set_path = set_path
 		child.get_path_direction = get_path_direction
+		child.courage = courage
+		child.reaction_time = reaction_time
 	
 	agent.linear_acceleration_max = get_parent().ACCELERATION
 	agent.linear_speed_max = get_parent().MAX_SPEED
@@ -94,6 +102,13 @@ func _change_state(state_name):
 		$GetWeapon.initialize($Think.target_point)
 	._change_state(state_name)
 
+# fixme: This will fail on an unconsumed Think
+func get_path():
+	if !consumed_last and states_stack.size() > 1:
+		return states_stack[1].path
+	else:
+		return current_state.path
+		
 # Abrupt changes of the game field should trigger recalculation of the action stack
 # Examples:
 # - Random bonus/weapon spawn
@@ -160,8 +175,8 @@ func _process(delta):
 	for i in range(0, enemies.size()):
 		_update_agent(enemy_agents[i], enemies[i])
 	._process(delta)	
-	if get_parent().name == 'Mason':
-		get_parent()._suicide()
+	#if get_parent().name == 'Mason':
+	#	get_parent()._suicide()
 
 func _confirm_death(name):
 	var index = -1

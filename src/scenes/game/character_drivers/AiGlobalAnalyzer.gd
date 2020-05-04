@@ -47,13 +47,14 @@ func _ready():
 		for point in cutout.polygon:
 			global_polygon.append(point + cutout.global_position)
 		nav_full_outlines = clip_polygons(nav_full_outlines, global_polygon)
+	_build_dynamic_nav()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	_scan_countdown -= 1
 	if _scan_countdown < 1:
 		_scan_countdown = _SCAN_COUNTDOWN_UPDATE_COUNT
-		check_for_campers()
+		#check_for_campers()
 		visibility_rays()
 
 
@@ -71,9 +72,17 @@ func _confirm_death(name):
 # TODO: [PvE]: Disable raychecks for wave enemies	
 # TODO: If we've got a hiding spot that is known to hide from multiple enemies, we can skip the check for one of the enemies
 func visibility_rays():
+	var anyone_has_weapons = false
+	for player in players:
+		if player.has_weapon():
+			anyone_has_weapons = true
+			break
 	var space_state = get_parent().get_world_2d().get_direct_space_state()
 	hiding_spots = []
 	for player in players:
+		# TODO: Move threat-level logic to the AI itself
+		if anyone_has_weapons and !player.has_weapon():
+			continue
 		for centroid in centroids:
 			var results = space_state.intersect_ray(
 				player.global_position,
