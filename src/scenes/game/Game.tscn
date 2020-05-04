@@ -75,6 +75,7 @@ one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+volume_db = -20.0
 bus = "Music"
 [connection signal="start_animation_finished" from="HUDLayer/GameHUD" to="." method="_on_start_animation_finished"]
 [connection signal="victory_animation_finished" from="HUDLayer/GameHUD" to="." method="_on_victory_finished"]
