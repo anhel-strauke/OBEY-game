@@ -1,0 +1,134 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://textures/arenas/map2_5g1.png" type="Texture" id=1]
+[ext_resource path="res://scenes/game/arenas/ArenaBorders.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/game/arenas/Arena2_Garbage2.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/game/character/CharacterSpawner.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/game/character/Weapons/RandomWeaponSpawner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/game/arenas/Area2_Garbage.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/game/arenas/Arena2_Pit.tscn" type="PackedScene" id=7]
+
+[node name="Arena2" type="Node2D"]
+
+[node name="map2_5g1" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="ArenaBorders" parent="." instance=ExtResource( 2 )]
+
+[node name="Arena2_Pit" parent="." instance=ExtResource( 7 )]
+position = Vector2( 990, 528 )
+
+[node name="YSort" type="YSort" parent="." groups=[
+"BulletParent",
+]]
+
+[node name="Arena2_Garbage2" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 177, 574 )
+
+[node name="Arena2_Garbage3" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 245, 513 )
+
+[node name="Arena2_Garbage4" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 240, 646 )
+
+[node name="Area2_Garbage3" parent="YSort" instance=ExtResource( 6 )]
+position = Vector2( 633, 792 )
+
+[node name="Area2_Garbage2" parent="YSort" instance=ExtResource( 6 )]
+position = Vector2( 402, 229 )
+
+[node name="Area2_Garbage" parent="YSort" instance=ExtResource( 6 )]
+position = Vector2( 1226, 284 )
+
+[node name="Arena2_Garbage5" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 1770, 549 )
+
+[node name="Arena2_Garbage6" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 1702, 619 )
+
+[node name="Arena2_Garbage7" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 1674, 497 )
+
+[node name="RandomWeaponSpawner" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 249, 308 )
+spawn_period = 3.0
+gun_probability = 2.0
+
+[node name="RandomWeaponSpawner2" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 309, 877 )
+spawn_period = 3.0
+gun_probability = 2.0
+
+[node name="RandomWeaponSpawner3" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 1633, 877 )
+spawn_period = 3.0
+gun_probability = 2.0
+
+[node name="RandomWeaponSpawner4" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 1598, 187 )
+spawn_period = 3.0
+gun_probability = 2.0
+
+[node name="RandomWeaponSpawner5" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 1255, 528 )
+spawn_period = 3.0
+start_period = 9.0
+gun_probability = 2.0
+
+[node name="RandomWeaponSpawner6" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 1734, 366 )
+spawn_period = 3.0
+start_period = 4.0
+gun_probability = 2.0
+
+[node name="RandomWeaponSpawner7" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 1152, 171 )
+spawn_period = 3.0
+start_period = 4.0
+gun_probability = 2.0
+
+[node name="RandomWeaponSpawner8" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 552, 157 )
+spawn_period = 3.0
+start_period = 3.0
+gun_probability = 2.0
+
+[node name="RandomWeaponSpawner9" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 783, 899 )
+spawn_period = 3.0
+start_period = 3.0
+gun_probability = 2.0
+
+[node name="RandomWeaponSpawner10" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 990, 779 )
+spawn_period = 3.0
+start_period = 6.0
+gun_probability = 2.0
+
+[node name="RandomWeaponSpawner11" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 715, 528 )
+spawn_period = 3.0
+start_period = 6.0
+
+[node name="RandomWeaponSpawner12" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 981, 270 )
+spawn_period = 3.0
+start_period = 6.0
+
+[node name="CharacterSpawner" parent="." instance=ExtResource( 4 )]
+position = Vector2( 552, 555 )
+player = 1
+
+[node name="CharacterSpawner2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 990, 879 )
+hud_slot = 2
+
+[node name="CharacterSpawner3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1391, 549 )
+player = 2
+hud_slot = 3
+
+[node name="CharacterSpawner4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 981, 212 )
+hud_slot = 1

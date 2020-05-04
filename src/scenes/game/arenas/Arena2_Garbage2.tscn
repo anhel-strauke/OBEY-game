@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://textures/arenas/map3_.png" type="Texture" id=1]
+
+[node name="Arena2_Garbage2" type="Area2D" groups=[
+"obstacles",
+]]
+collision_layer = 33
+collision_mask = 0
+
+[node name="map3_" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -50, -22, -25, -39, 14, -39, 37, -16, 41, 23, 15, 46, -25, 45, -51, 24 )

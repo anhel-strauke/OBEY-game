@@ -6,7 +6,9 @@
 radius = 33.0
 height = 28.0
 
-[node name="Area1_Stone1" type="StaticBody2D"]
+[node name="Area1_Stone1" type="StaticBody2D" groups=[
+"obstacles",
+]]
 collision_layer = 33
 collision_mask = 0
 

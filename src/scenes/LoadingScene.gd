@@ -8,6 +8,11 @@ var preloaded_scenes = {
 	GameSceneName: preload("res://scenes/game/Game.tscn")
 }
 
+const Arenas = [
+	"res://scenes/game/arenas/Arena1.tscn",
+	"res://scenes/game/arenas/Arena2.tscn"
+]
+
 var next_scene_name: String = ""
 var _player_chars: Array = []
 var _arena_name: String = ""
@@ -28,7 +33,10 @@ func run_scene(scene_resource: String) -> void:
 
 func run_game_arena(player_chars: Array, arena_scene: String, music_resource: String) -> void:
 	_player_chars = player_chars
-	_arena_name = arena_scene
+	if arena_scene == "":
+		_arena_name = Arenas[randi() % Arenas.size()]
+	else:
+		_arena_name = arena_scene
 	_music_resource = music_resource
 	run_scene(GameSceneName)
 

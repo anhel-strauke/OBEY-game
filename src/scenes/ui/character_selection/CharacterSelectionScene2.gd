@@ -39,4 +39,4 @@ func _on_CharactersMenu_finished_selection():
 		menu.selected_character_name(0),
 		menu.selected_character_name(1)
 	]
-	LoadingScene.run_game_arena(characters, "res://scenes/game/arenas/Arena1.tscn", "")
+	LoadingScene.run_game_arena(characters, "", "")
