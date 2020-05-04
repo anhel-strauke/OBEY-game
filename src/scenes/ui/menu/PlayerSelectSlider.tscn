@@ -1,20 +1,17 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://fonts/font_64.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/ui/menu/MenuSlider.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/ui/menu/MenuItem.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/ui/menu/PlayerSelectSlider.gd" type="Script" id=4]
-[ext_resource path="res://fonts/Caveat-Regular.ttf" type="DynamicFontData" id=5]
-
-
-[sub_resource type="DynamicFont" id=1]
-size = 64
-font_data = ExtResource( 5 )
 
 [node name="PlayerSelectSlider" type="Node2D"]
 script = ExtResource( 4 )
 
 [node name="MenuSlider" parent="." instance=ExtResource( 2 )]
+
+[node name="Background" parent="MenuSlider/Slider" index="0"]
+self_modulate = Color( 0.756863, 0.768627, 0.827451, 1 )
 
 [node name="SinglePlayer" parent="MenuSlider/Slider/MenuController" index="0" instance=ExtResource( 3 )]
 
@@ -45,23 +42,7 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="DELETE_THIS_LABEL" type="Label" parent="MenuSlider/Slider" index="5"]
-visible = false
-margin_left = 500.0
-margin_top = 660.0
-margin_right = 1634.0
-margin_bottom = 997.0
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0, 0.113725, 0.854902, 1 )
-text = "Пока что оба варианта — это на двух игроков.
-Управление — W A S D у первого, стрелки у второго.
-Выход в меню — Escape, ну или Alt+F4
-                                                          — Анхель"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 [connection signal="activated" from="MenuSlider/Slider/MenuController/SinglePlayer" to="." method="_on_SinglePlayer_activated"]
-[connection signal="activated" from="MenuSlider/Slider/MenuController/TwoPlayers" to="." method="_on_SinglePlayer_activated"]
+[connection signal="activated" from="MenuSlider/Slider/MenuController/TwoPlayers" to="." method="_on_TwoPlayers_activated"]
 
 [editable path="MenuSlider"]

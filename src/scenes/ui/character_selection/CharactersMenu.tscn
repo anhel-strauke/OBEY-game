@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/ui/character_selection/CharactersMenu.gd" type="Script" id=1]
+[ext_resource path="res://scenes/ui/character_selection/MasonMenuItem.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/ui/character_selection/ReptiloidMenuItem.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/ui/character_selection/Tower5GMenuItem.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/ui/character_selection/GraymanMenuItem.tscn" type="PackedScene" id=5]
+
+[node name="CharactersMenu" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="ReptiloidMenuItem" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, -20 )
+
+[node name="MasonMenuItem" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, 240 )
+
+[node name="GraymanMenuItem" parent="." instance=ExtResource( 5 )]
+position = Vector2( 0, 519 )
+
+[node name="Tower5GMenuItem" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, 795 )

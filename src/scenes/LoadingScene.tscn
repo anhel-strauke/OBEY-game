@@ -9,7 +9,7 @@ resource_name = "hide"
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Background/loading:visible")
+tracks/0/path = NodePath("CanvasLayer/Background/loading:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -21,7 +21,7 @@ tracks/0/keys = {
 "values": [ true, false, false ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Background:modulate")
+tracks/1/path = NodePath("CanvasLayer/Background:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -33,7 +33,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.888889 ), Color( 1, 1, 1, 0.888889 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Background:visible")
+tracks/2/path = NodePath("CanvasLayer/Background:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -50,7 +50,7 @@ resource_name = "show"
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Background:visible")
+tracks/0/path = NodePath("CanvasLayer/Background:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -62,7 +62,7 @@ tracks/0/keys = {
 "values": [ false, true, true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Background:modulate")
+tracks/1/path = NodePath("CanvasLayer/Background:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -74,7 +74,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Background/loading:visible")
+tracks/2/path = NodePath("CanvasLayer/Background/loading:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -94,19 +94,18 @@ script = ExtResource( 3 )
 anims/hide = SubResource( 1 )
 anims/show = SubResource( 2 )
 
-[node name="Background" type="Node2D" parent="."]
-visible = false
-modulate = Color( 1, 1, 1, 0 )
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="black" type="Sprite" parent="Background"]
+[node name="Background" type="Node2D" parent="CanvasLayer"]
+modulate = Color( 1, 1, 1, 0.888889 )
+
+[node name="black" type="Sprite" parent="CanvasLayer/Background"]
 scale = Vector2( 120, 67.5 )
 texture = ExtResource( 1 )
 centered = false
 
-[node name="loading" type="Sprite" parent="Background"]
-visible = false
+[node name="loading" type="Sprite" parent="CanvasLayer/Background"]
 position = Vector2( 1346, 967 )
-scale = Vector2( 1, 1 )
 texture = ExtResource( 2 )
 centered = false
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

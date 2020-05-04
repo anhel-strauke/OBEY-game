@@ -37,12 +37,6 @@ var weapon_obj = null
 
 var fire_was_pressed: bool = false
 
-func find_bullet_parent() -> Node2D:
-	var nodes = get_tree().get_nodes_in_group("BulletParent")
-	if nodes.size() > 0:
-		return nodes[0]
-	return null
-
 
 func has_weapon() -> bool:
 	return weapon_obj != null
@@ -56,8 +50,19 @@ func _ready():
 	$Shadow.texture = $Sprite.get_texture()
 
 
+func set_look_right(right: bool) -> void:
+	if right:
+		sprite.scale = Vector2(-1.0, 1.0)
+		_attack_direction = Vector2.RIGHT
+	else:
+		sprite.scale = Vector2(1.0, 1.0)
+		_attack_direction = Vector2.LEFT
+
+
 func _process(delta: float) -> void:
 	process_light()
+	if not Global.game_is_on:
+		return
 	if not driver:
 		return
 	_input_vector = driver.get_velocity_vector()
@@ -137,7 +142,7 @@ func take_damage(dmg: float, from: String, direction: Vector2) -> void:
 		set_state(State.Idle)
 		drop_weapon()
 		var death = DeathEffect.instance()
-		find_bullet_parent().add_child(death)
+		Global.find_bullet_parent().add_child(death)
 		death.global_position = global_position
 		death.scale = sprite.scale
 		death.set_sprite(sprite)
@@ -158,6 +163,7 @@ func set_weapon_object(weapon: BaseWeapon) -> void:
 		weapon.position = Vector2.ZERO
 		weapon.transform = Transform2D(0.0, Vector2.ZERO)
 		weapon_obj.connect("out_of_ammo", self, "drop_weapon")
+		weapon_obj.connect("ammo_changed", self, "update_ammo")
 		weapon_obj.owner_name = name
 		if weapon_obj.is_firearm:
 			emit_signal("ammo_changed", weapon_obj.ammo)
@@ -165,9 +171,13 @@ func set_weapon_object(weapon: BaseWeapon) -> void:
 			emit_signal("ammo_changed", 0)
 
 
+func update_ammo(ammo: int):
+	emit_signal("ammo_changed", ammo)
+
+
 func drop_weapon() -> void:
 	if weapon_obj:
-		var effect_parent = find_bullet_parent()
+		var effect_parent = Global.find_bullet_parent()
 		if effect_parent:
 			var drop_effect = WeaponDropEffect.instance()
 			effect_parent.add_child(drop_effect)

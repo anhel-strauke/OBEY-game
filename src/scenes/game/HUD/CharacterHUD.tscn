@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://fonts/Caveat-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://textures/hud/ammo_gauge.png" type="Texture" id=2]
@@ -58,6 +58,38 @@ tracks/1/keys = {
 size = 32
 font_data = ExtResource( 1 )
 
+[sub_resource type="Animation" id=4]
+resource_name = "cooldown"
+tracks/0/type = "value"
+tracks/0/path = NodePath("yellow:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 87 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "idle"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("yellow:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 87, 100 ]
+}
+
 [node name="CharacterHUD" type="Node2D"]
 script = ExtResource( 9 )
 
@@ -76,6 +108,9 @@ region_rect = Rect2( 0, 0, 72.7, 67 )
 [node name="yellow" type="Sprite" parent="."]
 position = Vector2( -78, -13 )
 texture = ExtResource( 8 )
+vframes = 11
+hframes = 10
+frame = 100
 
 [node name="white_fon" type="Sprite" parent="."]
 position = Vector2( -77, -14 )
@@ -127,3 +162,7 @@ uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AbilityAnim" type="AnimationPlayer" parent="."]
+anims/cooldown = SubResource( 4 )
+anims/idle = SubResource( 5 )

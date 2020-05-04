@@ -22,6 +22,10 @@ onready var weapon_probs = [
 var _prob_sum: float = 0.0
 
 
+func can_spawn() -> bool:
+	return true
+
+
 func spawn() -> BaseWeapon:
 	var dice_roll = rand_range(0, _prob_sum)
 	for i in weapon_probs.size():

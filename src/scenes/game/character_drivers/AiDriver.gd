@@ -35,7 +35,7 @@ func _ready():
 	navigation = get_node(navigation_path)
 	# TODO: Automatic resolution of objects
 	enemies.push_back(get_parent().get_parent().get_node("Reptiloid"))
-	enemies.push_back(get_parent().get_parent().get_node("Tower5G"))
+	enemies.push_back(get_parent().get_parent().get_node("Grayman"))
 	for enemy in enemies:
 		var enemy_agent = GSAISteeringAgent.new()
 		enemy_agent.linear_acceleration_max = get_parent().ACCELERATION

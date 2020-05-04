@@ -70,8 +70,12 @@ tracks/0/keys = {
 "values": [ 12, 23 ]
 }
 
-[node name="Reptiloid" instance=ExtResource( 1 )]
+[node name="Reptiloid" groups=[
+"chars",
+] instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+display_name = "Рептилоид"
+icon_index = 1
 max_hitpoints = 100.0
 
 [node name="Sprite" type="Sprite" parent="Sprite" index="0"]

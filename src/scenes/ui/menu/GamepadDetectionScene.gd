@@ -1,8 +1,8 @@
 extends Node2D
 
 const KBD_FALLBACK_KEY = [
-	[KEY_H, "H"],
-	[KEY_P, "P"]
+	[KEY_C, "C"],
+	[KEY_O, "O"]
 ]
 
 const PLEASE_PRESS = "Пожалуйста, нажмите %s на геймпаде"
@@ -175,6 +175,7 @@ func _input(event) -> void:
 					elif allow_keyboard_fallback and event.scancode == KBD_FALLBACK_KEY[player_index][0]:
 						cancelled = false
 						cancel_sound.play()
+						device_id = Constants.KeyboardDevice
 						GameInput.set_keyboard_input_source(player_index)
 						hide()
 		State.SuccessMessage:

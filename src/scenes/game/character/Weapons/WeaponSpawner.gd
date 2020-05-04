@@ -23,8 +23,14 @@ func spawn() -> BaseWeapon:
 	return Weapon.instance()
 
 
+func can_spawn() -> bool:
+	return Weapon != null
+
+
 func _process(delta: float) -> void:
-	if not Weapon:
+	if not Global.game_is_on:
+		return
+	if not can_spawn():
 		return
 	var weapon_found = false
 	for child in get_children():

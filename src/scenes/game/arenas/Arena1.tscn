@@ -106,12 +106,15 @@ player = 1
 [node name="Player2Spawn" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 1690, 883 )
 player = 2
+hud_slot = 3
 
 [node name="CharacterSpawner3" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 1673, 209 )
+hud_slot = 1
 
 [node name="CharacterSpawner4" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 230, 891 )
+hud_slot = 2
 
 [node name="Area1_Stone1" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 385, 240 )

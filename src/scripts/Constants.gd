@@ -7,7 +7,6 @@ enum Actions {
 	Pause
 }
 
-
 enum CommonActions {
 	Up,
 	Down,
@@ -17,6 +16,11 @@ enum CommonActions {
 	Esc
 }
 
+const KeyboardDevice = -2
 
-# Not a constant, but *whatever, that will do*
-var game_just_started: bool = true
+# Character object names
+const Mason = "Mason"
+const Reptiloid = "Reptiloid"
+const Tower5G = "Tower5G"
+const Grayman = "Grayman"
+
