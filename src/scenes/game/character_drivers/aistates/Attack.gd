@@ -25,7 +25,7 @@ func update(delta):
 	var weapon = player.weapon_obj
 	# fixme: Stabilize API
 	var shooting_range = 900
-	if weapon.name == "Shotgun":
+	if weapon != null and weapon.name == "Shotgun":
 		#print('Detected shotgun')
 		shooting_range = 500
 	

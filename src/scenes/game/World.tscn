@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://textures/arenas/map1.png" type="Texture" id=1]
 [ext_resource path="res://scenes/game/character/characters/Tower5G.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://scenes/game/character_drivers/aistates/HoldPosition.gd" type="Script" id=12]
 [ext_resource path="res://scenes/game/character_drivers/aistates/Attack.gd" type="Script" id=13]
 [ext_resource path="res://scenes/game/character_drivers/aistates/Flee.gd" type="Script" id=14]
+[ext_resource path="res://scenes/game/character_drivers/MediumBotDriver.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scenes/game/character_drivers/aistates/GetWeapon.gd" type="Script" id=16]
 [ext_resource path="res://scenes/game/character/characters/Mason.tscn" type="PackedScene" id=17]
 [ext_resource path="res://textures/test/light.png" type="Texture" id=18]
@@ -22,6 +23,11 @@
 [ext_resource path="res://scenes/game/character_drivers/AiGlobalAnalyzer.gd" type="Script" id=21]
 [ext_resource path="res://scenes/ui/SpotVisualiser.gd" type="Script" id=22]
 [ext_resource path="res://scenes/game/arenas/ArenaBorders.tscn" type="PackedScene" id=23]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 161.018, 151.596, 1770.53, 159.694, 1794.83, 959.39, 142.797, 961.414 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 161.018, 151.596, 1770.53, 159.694, 1794.83, 959.39, 142.797, 961.414 ) ]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 3 )
@@ -90,9 +96,7 @@ position = Vector2( 1340, 760 )
 script = ExtResource( 4 )
 player_index = 1
 
-[node name="Tower5G" parent="YSort" groups=[
-"chars",
-] instance=ExtResource( 2 )]
+[node name="Tower5G" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 320, 360 )
 
 [node name="Driver" type="Node" parent="YSort/Tower5G"]
@@ -115,33 +119,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Driver" type="Node" parent="YSort/Mason"]
-script = ExtResource( 9 )
-start_state = NodePath("Think")
-navigation_path = NodePath("../../../PathFinder")
-reaction_time = 0.3
-courage = 0.05
-
-[node name="Think" type="Node" parent="YSort/Mason/Driver"]
-script = ExtResource( 11 )
-
-[node name="GetWeapon" type="Node" parent="YSort/Mason/Driver"]
-script = ExtResource( 16 )
-
-[node name="GetBonus" type="Node" parent="YSort/Mason/Driver"]
-script = ExtResource( 8 )
-
-[node name="FollowPlayer" type="Node" parent="YSort/Mason/Driver"]
-script = ExtResource( 7 )
-
-[node name="Attack" type="Node" parent="YSort/Mason/Driver"]
-script = ExtResource( 13 )
-
-[node name="Flee" type="Node" parent="YSort/Mason/Driver"]
-script = ExtResource( 14 )
-
-[node name="HoldPosition" type="Node" parent="YSort/Mason/Driver"]
-script = ExtResource( 12 )
+[node name="Driver" parent="YSort/Mason" instance=ExtResource( 15 )]
 
 [node name="Mason3" parent="YSort" instance=ExtResource( 17 )]
 position = Vector2( 636.866, 817.054 )
@@ -225,6 +203,7 @@ texture = ExtResource( 18 )
 script = ExtResource( 21 )
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="PathFinder"]
+navpoly = SubResource( 1 )
 
 [node name="Cutouts" type="Node2D" parent="PathFinder"]
 

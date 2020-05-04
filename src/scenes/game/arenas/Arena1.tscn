@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://textures/arenas/map1_area.png" type="Texture" id=1]
 [ext_resource path="res://scenes/game/arenas/ArenaBorders.tscn" type="PackedScene" id=2]
@@ -8,6 +8,12 @@
 [ext_resource path="res://scenes/game/arenas/Area1_Stone2.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/game/arenas/Area1_Stone1.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/game/arenas/Area1_Stone1_UpsideDown.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/game/character_drivers/AiGlobalAnalyzer.gd" type="Script" id=9]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 148.871, 143.498, 752.185, 143.498, 723.842, 447.179, 142.797, 959.39, 681.326, 959.39, 711.694, 884.481, 792.676, 886.506, 1114.58, 530.186, 1084.21, 872.334, 1215.81, 147.547, 1780.65, 155.645, 1790.78, 959.39, 1199.61, 955.34, 1175.32, 870.309, 1061.96, 956.365, 814.946, 955.34 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 3, 2, 5 ), PoolIntArray( 6, 5, 2, 7, 8 ), PoolIntArray( 9, 10, 11, 12, 13, 7 ), PoolIntArray( 7, 13, 8 ), PoolIntArray( 6, 8, 14, 15 ) ]
+outlines = [ PoolVector2Array( 148.871, 143.498, 752.185, 143.498, 723.842, 447.179, 1114.58, 530.186, 1215.81, 147.547, 1780.65, 155.645, 1790.78, 959.39, 1199.61, 955.34, 1175.32, 870.309, 1084.21, 872.334, 1061.96, 956.365, 814.946, 955.34, 792.676, 886.506, 711.694, 884.481, 681.326, 959.39, 142.797, 959.39 ) ]
 
 [node name="Arena1" type="Node2D"]
 
@@ -164,3 +170,67 @@ position = Vector2( 1652, 767 )
 
 [node name="Area1_Stone9" parent="YSort" instance=ExtResource( 8 )]
 position = Vector2( 1537, 861 )
+
+[node name="PathFinder" type="Navigation2D" parent="." groups=[
+"pathfinder_singleton",
+]]
+script = ExtResource( 9 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="PathFinder"]
+navpoly = SubResource( 1 )
+
+[node name="Cutouts" type="Node2D" parent="PathFinder"]
+
+[node name="Polygon2D" type="Polygon2D" parent="PathFinder/Cutouts"]
+color = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( 207.582, 311.535, 327.031, 299.388, 345.252, 188.038, 446.479, 186.013, 440.405, 398.59, 205.558, 396.566 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="PathFinder/Cutouts"]
+position = Vector2( -4.04907, 522.333 )
+color = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( 197.46, 307.486, 197.46, 190.062, 454.577, 190.062, 454.577, 404.664, 320.957, 408.713, 318.932, 305.461 )
+
+[node name="Polygon2D3" type="Polygon2D" parent="PathFinder/Cutouts"]
+position = Vector2( 1273.44, 524.357 )
+color = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( 203.533, 188.038, 446.479, 186.013, 442.43, 295.338, 325.006, 297.363, 322.981, 396.566, 205.558, 396.566 )
+
+[node name="Polygon2D4" type="Polygon2D" parent="PathFinder/Cutouts"]
+position = Vector2( 1022.4, 4.04907 )
+color = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( 452.552, 198.16, 574.025, 188.038, 572.001, 299.388, 689.424, 305.461, 693.473, 390.492, 458.626, 396.566 )
+
+[node name="Polygon2D5" type="Polygon2D" parent="PathFinder/Cutouts"]
+position = Vector2( 627.609, 431.228 )
+color = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( 442.43, 327.731, 561.878, 323.682, 547.706, 390.492, 452.552, 390.492 )
+
+[node name="Polygon2D6" type="Polygon2D" parent="PathFinder/Cutouts"]
+position = Vector2( 248.889, 433.085 )
+color = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( 442.43, 327.731, 561.878, 323.682, 547.706, 390.492, 452.552, 390.492 )
+
+[node name="HidingSpots" type="Area2D" parent="PathFinder"]
+collision_layer = 257
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PathFinder/HidingSpots"]
+polygon = PoolVector2Array( 235.926, 825.769, 320.957, 904.727, 322.982, 825.769 )
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="PathFinder/HidingSpots"]
+position = Vector2( 1376.69, 12.1472 )
+polygon = PoolVector2Array( 235.926, 825.769, 237.951, 892.579, 322.982, 825.769 )
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="PathFinder/HidingSpots"]
+position = Vector2( -2.02454, -615.462 )
+polygon = PoolVector2Array( 231.877, 902.702, 320.957, 904.727, 322.982, 825.769 )
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="PathFinder/HidingSpots"]
+position = Vector2( 1368.59, -623.56 )
+polygon = PoolVector2Array( 235.926, 825.769, 320.957, 904.727, 235.926, 906.751 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="PathFinder/HidingSpots"]
+polygon = PoolVector2Array( 677.277, 775.156, 715.743, 831.843, 792.676, 831.843, 821.02, 777.18, 855.437, 779.205, 800.774, 858.162, 709.67, 856.138, 644.884, 781.229 )
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="PathFinder/HidingSpots"]
+position = Vector2( 378.59, 6.07361 )
+polygon = PoolVector2Array( 677.277, 775.156, 715.743, 831.843, 792.676, 831.843, 821.02, 777.18, 855.437, 779.205, 800.774, 858.162, 709.67, 856.138, 644.884, 781.229 )

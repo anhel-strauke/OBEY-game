@@ -3,7 +3,7 @@ extends Node2D
 
 func _ready() -> void:
 	#Engine.time_scale = 0.5
-	# Assign player #0 with controller #0
+	# Assign player #0 with controller #0D
 	if GamepadManager.gamepads.size() > 0:
 		GameInput.set_gamepad_input_source(0, 0)
 	else:

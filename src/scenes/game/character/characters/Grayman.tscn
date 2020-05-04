@@ -186,7 +186,7 @@ position = Vector2( -45.3878, 7.52066 )
 position = Vector2( 0, -25.9183 )
 shape = SubResource( 1 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
 anims/idle_noweapon = SubResource( 2 )
 anims/idle_weapon = SubResource( 3 )
 anims/walk_blink_noweapon = SubResource( 4 )

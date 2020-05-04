@@ -38,6 +38,19 @@ func _ready():
 		"flee": $Flee,
 		"hold_position": $HoldPosition
 	}
+	
+	var world_width = 1920 # TODO: Stabilize API
+	var world_height = 1080
+	
+	# fixme: Unused, rework as mid-way points between bonuses for $HoldPosition
+	strategic_points.push_back(Vector2(world_width/4, world_height/4))
+	strategic_points.push_back(Vector2(world_width*3/4, world_height/4))
+	strategic_points.push_back(Vector2(world_width/4, world_height*3/4))
+	strategic_points.push_back(Vector2(world_width*3/4, world_height*3/4))
+		
+	$Think.strategic_points = strategic_points
+	
+func _on_all_players_ready():
 	navigation = get_node(navigation_path)
 	var characters = get_tree().get_nodes_in_group("chars")
 	for character in characters:
@@ -76,14 +89,6 @@ func _ready():
 	agent.linear_acceleration_max = get_parent().ACCELERATION
 	agent.linear_speed_max = get_parent().MAX_SPEED
 	agent.bounding_radius = 100
-	var world_width = 1920 # TODO: Stabilize API
-	var world_height = 1080
-	strategic_points.push_back(Vector2(world_width/4, world_height/4))
-	strategic_points.push_back(Vector2(world_width*3/4, world_height/4))
-	strategic_points.push_back(Vector2(world_width/4, world_height*3/4))
-	strategic_points.push_back(Vector2(world_width*3/4, world_height*3/4))
-		
-	$Think.strategic_points = strategic_points
 	
 func _change_state(state_name):
 	if not _active:

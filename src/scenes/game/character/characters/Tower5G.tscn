@@ -83,7 +83,9 @@ tracks/1/keys = {
 } ]
 }
 
-[node name="Tower5G" instance=ExtResource( 1 )]
+[node name="Tower5G" groups=[
+"chars",
+] instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 display_name = "5G-Вышка"
 icon_index = 2

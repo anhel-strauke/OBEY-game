@@ -1,7 +1,7 @@
 extends Navigation2D
 
 var obstacles
-var players
+var players = []
 var centroids
 var hiding_area
 var hiding_spots
@@ -25,19 +25,14 @@ var camper_indexes = []
 const _SCAN_COUNTDOWN_UPDATE_COUNT: int = 5
 var _scan_countdown = _SCAN_COUNTDOWN_UPDATE_COUNT
 
-const OBSTACLE_LAYER = 1+32+64
-const HIDING_SPOT_LAYER = 128+256
+const OBSTACLE_LAYER = 1+32
+const HIDING_SPOT_LAYER = 256
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	obstacles = get_tree().get_nodes_in_group('obstacles')
-	players = get_tree().get_nodes_in_group("chars")
-	for player in players:
-		player.connect("died", self, "_confirm_death")
-	centroids = $Centroids.get_children()
+	centroids = obstacles # $Centroids.get_children() fixme: automatic centroid resolution
 	hiding_area = $HidingSpots
-	visibility_rays()
-	
 	var nav_poly = $NavigationPolygonInstance.get_navigation_polygon()
 	for i in range(0,nav_poly.get_outline_count()):
 		nav_full_outlines.append(nav_poly.get_outline(i))
@@ -48,6 +43,13 @@ func _ready():
 			global_polygon.append(point + cutout.global_position)
 		nav_full_outlines = clip_polygons(nav_full_outlines, global_polygon)
 	_build_dynamic_nav()
+	
+func _on_all_players_ready():
+	players = get_tree().get_nodes_in_group("chars")
+	for player in players:
+		player.connect("died", self, "_confirm_death")
+	print(players)
+	visibility_rays()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -87,7 +89,7 @@ func visibility_rays():
 			var results = space_state.intersect_ray(
 				player.global_position,
 				centroid.global_position, 
-				[], OBSTACLE_LAYER )
+				[], OBSTACLE_LAYER, true, true )
 		
 			var outwards = (results.position - centroid.global_position).normalized()*600
 			if results:

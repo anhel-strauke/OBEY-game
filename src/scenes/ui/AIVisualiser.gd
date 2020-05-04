@@ -10,7 +10,7 @@ var aidriver
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	aidriver = get_parent().get_node("Driver")
+	aidriver = get_parent()
 	set_process_input(true)
 	
 

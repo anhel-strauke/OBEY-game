@@ -9,7 +9,7 @@ const CharacterScenes = {
 }
 
 const PlayerDriver = preload("res://scenes/game/character_drivers/PlayerDriver.gd")
-const AiDriver = preload("res://scenes/game/character_drivers/AiDriver.gd")
+const AiDriver = preload("res://scenes/game/character_drivers/MediumBotDriver.tscn")
 
 
 enum State {
@@ -96,6 +96,7 @@ func spawn_characters() -> void:
 			print("No spawner for player #", player_id)
 	# Spawn all other characters
 	characters.shuffle()
+	var aidrivers = []
 	for char_name in characters:
 		if spawners.size() > 0:
 			var spawner = spawners[0]
@@ -103,13 +104,17 @@ func spawn_characters() -> void:
 			var character = CharacterScene.instance()
 			setup_character(character, spawner.global_position)
 			add_character(character, spawner.hud_slot)
-			#var driver = AiDriver.new()
-			#driver.name = "Driver"
-			#character.add_child(driver)
-			#character.driver = driver
+			var driver = AiDriver.instance()
+			aidrivers.append(driver)
+			driver.name = "Driver"
+			character.add_child(driver)
+			character.driver = driver
 			spawners.remove(0)
 			spawner.queue_free()
-
+	for aidriver in aidrivers:
+		aidriver._on_all_players_ready()
+	# fixme: import of navigation
+	aidrivers[0].navigation._on_all_players_ready() 
 
 func start() -> void:
 	load_arena()
