@@ -83,7 +83,9 @@ func update(_delta):
 			emit_signal("finished", "follow_player")
 			emit_signal("finished", "attack")
 		else:
+			target_ent = best_item._enemy
 			flee()	
+			emit_signal("finished", "attack")
 	else:
 		flee()
 		#weapons
