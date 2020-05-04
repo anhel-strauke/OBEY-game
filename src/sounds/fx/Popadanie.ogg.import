@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Popadanie.ogg-a57b4d0536debdaff7ab03bd90ecb6be.oggstr"
+
+[deps]
+
+source_file="res://sounds/fx/Popadanie.ogg"
+dest_files=[ "res://.import/Popadanie.ogg-a57b4d0536debdaff7ab03bd90ecb6be.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

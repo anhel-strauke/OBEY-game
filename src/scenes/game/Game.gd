@@ -23,6 +23,7 @@ onready var arena_parent = $Arena
 onready var game_hud = $HUDLayer/GameHUD
 onready var start_anim = $HUDLayer/StartAnimation
 onready var victory_timer = $CheckVictoryTimer
+onready var audio = $AudioStreamPlayer
 
 # Game settings
 # Should be set before call to start(), then have no effect
@@ -124,6 +125,7 @@ func start() -> void:
 	for i in all_characters.size():
 		game_hud.assign_character(all_characters[i], i)
 	start_anim.play("start")
+	audio.play()
 
 
 func show_start_message():
@@ -170,5 +172,9 @@ func _on_CheckVictoryTimer_timeout() -> void:
 
 
 func _on_victory_finished() -> void:
+	audio.stop()
 	Global.game_is_on = false
-	LoadingScene.run_scene("res://scenes/ui/MenuTest.tscn")
+	if characters_choice.size() == 1:
+		LoadingScene.run_scene("res://scenes/ui/character_selection/CharacterSelectionScene1.tscn")
+	else:
+		LoadingScene.run_scene("res://scenes/ui/character_selection/CharacterSelectionScene2.tscn")
