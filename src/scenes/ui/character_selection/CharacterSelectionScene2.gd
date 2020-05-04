@@ -13,6 +13,7 @@ onready var instruction_labels = [
 
 
 func _ready() -> void:
+	$AudioStreamPlayer.play()
 	menu.players = 2
 	for i in 2:
 		if GameInput.player(i).is_keyboard_input_source():
@@ -31,6 +32,7 @@ func _on_CharactersMenu_selected(player, character):
 
 
 func _on_CharactersMenu_cancelled():
+	$AudioStreamPlayer.stop()
 	LoadingScene.run_scene("res://scenes/ui/MenuTest.tscn")
 
 
@@ -39,4 +41,5 @@ func _on_CharactersMenu_finished_selection():
 		menu.selected_character_name(0),
 		menu.selected_character_name(1)
 	]
+	$AudioStreamPlayer.stop()
 	LoadingScene.run_game_arena(characters, "", "")

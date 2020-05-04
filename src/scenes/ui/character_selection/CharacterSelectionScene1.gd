@@ -7,6 +7,7 @@ onready var menu = $CharactersMenu
 
 
 func _ready():
+	$AudioStreamPlayer.play()
 	if GameInput.player(0).is_keyboard_input_source():
 		instructions_label.text = "W и S = выбор, C = подтвердить, V или Esc = отмена"
 	elif GameInput.player(0).is_gamepad_input_source():
@@ -19,6 +20,7 @@ func _on_CharactersMenu_selected(player, character):
 
 
 func _on_CharactersMenu_cancelled():
+	$AudioStreamPlayer.stop()
 	LoadingScene.run_scene("res://scenes/ui/MenuTest.tscn")
 
 
@@ -26,4 +28,5 @@ func _on_CharactersMenu_finished_selection():
 	var characters = [
 		menu.selected_character_name(0)
 	]
+	$AudioStreamPlayer.stop()
 	LoadingScene.run_game_arena(characters, "", "")

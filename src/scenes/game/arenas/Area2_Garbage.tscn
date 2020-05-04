@@ -2,7 +2,7 @@
 
 [ext_resource path="res://textures/arenas/map3_oblomki.png" type="Texture" id=1]
 
-[node name="Area2_Garbage" type="Area2D" groups=[
+[node name="Area2_Garbage" type="StaticBody2D" groups=[
 "obstacles",
 ]]
 collision_layer = 33
