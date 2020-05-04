@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://textures/triangle_menu.png" type="Texture" id=1]
+
+[node name="StatsTriangle" type="Node2D"]
+
+[node name="Polygon" type="Polygon2D" parent="."]
+position = Vector2( -164, 73 )
+texture = ExtResource( 1 )
+polygon = PoolVector2Array( -1, 0, 179, -225, 327, 0 )
+uv = PoolVector2Array( -50, 208, 118, -42, 313, 197 )

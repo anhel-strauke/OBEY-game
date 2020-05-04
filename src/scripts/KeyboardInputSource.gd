@@ -34,9 +34,9 @@ const MAPPINGS = [
 		Buttons.Down: KEY_DOWN,
 		Buttons.Left: KEY_LEFT,
 		Buttons.Right: KEY_RIGHT,
-		Buttons.Fire: KEY_I,
-		Buttons.AddFire: KEY_O,
-		Buttons.Evade: KEY_P,
+		Buttons.Fire: KEY_O,
+		Buttons.AddFire: KEY_P,
+		Buttons.Evade: KEY_I,
 		Buttons.Pause: KEY_ESCAPE
 	}
 ]
@@ -51,7 +51,12 @@ var _actions_just_pressed = {
 	Constants.Actions.Evade: false,
 	Constants.Actions.Pause: false
 }
-
+var _actions_was_pressed = {
+	Constants.Actions.Fire: false,
+	Constants.Actions.AddFire: false,
+	Constants.Actions.Evade: false,
+	Constants.Actions.Pause: false
+}
 
 func direction() -> Vector2:
 	return _direction
@@ -74,7 +79,8 @@ func is_just_pressed(action: int) -> bool:
 
 func _process(_delta: float) -> void:
 	for action in _actions_just_pressed.keys():
-		_actions_just_pressed[action] = is_pressed(action) and not _actions_just_pressed[action]
+		_actions_just_pressed[action] = is_pressed(action) and not _actions_was_pressed[action]
+		_actions_was_pressed[action] = is_pressed(action)
 	var map = MAPPINGS[mapping]
 	var x_axis = 0.0
 	var y_axis = 0.0

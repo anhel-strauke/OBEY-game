@@ -21,6 +21,7 @@
 [ext_resource path="res://gfx/scenes/LightSystem.tscn" type="PackedScene" id=20]
 [ext_resource path="res://scenes/game/character_drivers/AiGlobalAnalyzer.gd" type="Script" id=21]
 [ext_resource path="res://scenes/ui/SpotVisualiser.gd" type="Script" id=22]
+[ext_resource path="res://scenes/game/arenas/ArenaBorders.tscn" type="PackedScene" id=23]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 960, 20 )
@@ -96,44 +97,7 @@ scale = Vector2( 0.260417, 0.446928 )
 color = Color( 0.733333, 0.733333, 0.733333, 1 )
 polygon = PoolVector2Array( 751.116, -247.45, 563.506, -135.371, 685.331, 169.19, 975.273, 188.682, 1031.31, -86.6416 )
 
-[node name="ProjectileBorders" type="StaticBody2D" parent="."]
-collision_layer = 32
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectileBorders"]
-position = Vector2( 960, 40 )
-shape = SubResource( 1 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="ProjectileBorders"]
-position = Vector2( 960, 1060 )
-shape = SubResource( 1 )
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="ProjectileBorders"]
-position = Vector2( 40, 560 )
-shape = SubResource( 2 )
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="ProjectileBorders"]
-position = Vector2( 1880, 560 )
-shape = SubResource( 2 )
-
-[node name="Borders" type="StaticBody2D" parent="."]
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders"]
-position = Vector2( 960, 80 )
-shape = SubResource( 3 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders"]
-position = Vector2( 960, 1020 )
-shape = SubResource( 4 )
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Borders"]
-position = Vector2( 80, 560 )
-shape = SubResource( 5 )
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Borders"]
-position = Vector2( 1860, 560 )
-shape = SubResource( 5 )
+[node name="ArenaBorders" parent="." instance=ExtResource( 23 )]
 
 [node name="YSort" type="YSort" parent="." groups=[
 "BulletParent",
@@ -270,6 +234,13 @@ position = Vector2( 460, 760 )
 weapon_scene = "res://scenes/game/character/Weapons/AssaultRifle.tscn"
 spawn_period = 5.0
 
+[node name="Grayman" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 300, 340 )
+
+[node name="Driver" type="Node" parent="YSort/Grayman"]
+script = ExtResource( 4 )
+player_index = 0
+
 [node name="Sprite" type="Sprite" parent="."]
 visible = false
 position = Vector2( 1500, 500 )
@@ -280,7 +251,7 @@ texture = ExtResource( 18 )
 script = ExtResource( 21 )
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="PathFinder"]
-navpoly = SubResource( 6 )
+navpoly = SubResource( 1 )
 
 [node name="Cutouts" type="Node2D" parent="PathFinder"]
 

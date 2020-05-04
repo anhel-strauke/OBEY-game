@@ -8,11 +8,11 @@ onready var main_splash = $MainSplash
 
 func _ready() -> void:
 	GameInput.set_common_input_mode(true)
-	if Constants.game_just_started:
+	if Global.game_just_started:
 		menu_controller.enabled = false
 		main_splash.visible = true
 		main_splash.run()
-		Constants.game_just_started = false
+		Global.game_just_started = false
 	else:
 		menu_controller.enabled = true
 

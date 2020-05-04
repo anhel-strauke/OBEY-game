@@ -6,6 +6,7 @@ signal picked_up(name)
 
 export(String, FILE, "*.tscn") var weapon_scene: String = "" 
 export(float) var spawn_period: float = 20
+export(float) var start_period: float = 0.0
 
 onready var Weapon = load(weapon_scene)
 
@@ -14,10 +15,22 @@ var _spawn_timer: float = 0.0
 
 func _ready() -> void:
 	$Polygon2D.visible = false
+	$Polygon2D.queue_free()
+	_spawn_timer = start_period
+
+
+func spawn() -> BaseWeapon:
+	return Weapon.instance()
+
+
+func can_spawn() -> bool:
+	return Weapon != null
 
 
 func _process(delta: float) -> void:
-	if not Weapon:
+	if not Global.game_is_on:
+		return
+	if not can_spawn():
 		return
 	var weapon_found = false
 	for child in get_children():
@@ -27,7 +40,7 @@ func _process(delta: float) -> void:
 	if not weapon_found:
 		_spawn_timer -= delta
 		if _spawn_timer <= 0:
-			var new_weapon = Weapon.instance()
+			var new_weapon = spawn()
 			add_child(new_weapon)
 			new_weapon.connect("picked_up", self, "signal_picked_up")
 			new_weapon.position = Vector2.ZERO

@@ -15,17 +15,11 @@ export(AudioStream) var shoot_sound = null
 var _current_ammo: int = 0
 
 signal out_of_ammo()
+signal ammo_changed(ammo)
 
 
 func _ready() -> void:
 	_current_ammo = ammo
-
-
-func find_bullet_parent() -> Node2D:
-	var nodes = get_tree().get_nodes_in_group("BulletParent")
-	if nodes.size() > 0:
-		return nodes[0]
-	return null
 
 
 func create_bullet() -> Node:
@@ -75,7 +69,8 @@ func do_fire(direction: Vector2):
 		emit_signal("out_of_ammo")
 		return
 	_current_ammo -= 1
-	var parent = find_bullet_parent()
+	emit_signal("ammo_changed", _current_ammo)
+	var parent = Global.find_bullet_parent()
 	make_shot(direction, parent)
 	attack_cooldown = attack_cooldown_time
 	if shoot_anim:

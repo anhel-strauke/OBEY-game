@@ -1,0 +1,166 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://textures/arenas/map1_area.png" type="Texture" id=1]
+[ext_resource path="res://scenes/game/arenas/ArenaBorders.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/game/arenas/Area1_Pit.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/game/character/CharacterSpawner.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/game/character/Weapons/RandomWeaponSpawner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/game/arenas/Area1_Stone2.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/game/arenas/Area1_Stone1.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/game/arenas/Area1_Stone1_UpsideDown.tscn" type="PackedScene" id=8]
+
+[node name="Arena1" type="Node2D"]
+
+[node name="Back" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ArenaBorders" parent="." instance=ExtResource( 2 )]
+
+[node name="Area1_Pit" parent="." instance=ExtResource( 3 )]
+position = Vector2( 949, 291 )
+rotation = -1.41108
+
+[node name="YSort" type="YSort" parent="." groups=[
+"BulletParent",
+]]
+
+[node name="RandomWeaponSpawner" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 289, 257 )
+spawn_period = 3.0
+start_period = 9.0
+gun_probability = 3.0
+
+[node name="RandomWeaponSpawner2" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 299, 848 )
+spawn_period = 3.0
+start_period = 9.0
+gun_probability = 3.0
+
+[node name="RandomWeaponSpawner3" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 1623, 838 )
+spawn_period = 3.0
+start_period = 9.0
+gun_probability = 3.0
+
+[node name="RandomWeaponSpawner4" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 1623, 271 )
+spawn_period = 3.0
+start_period = 9.0
+gun_probability = 3.0
+
+[node name="RandomWeaponSpawner5" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 917, 491 )
+spawn_period = 3.0
+gun_probability = 3.0
+
+[node name="RandomWeaponSpawner6" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 279, 560 )
+spawn_period = 3.0
+start_period = 3.0
+gun_probability = 3.0
+
+[node name="RandomWeaponSpawner7" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 934, 838 )
+spawn_period = 3.0
+start_period = 3.0
+gun_probability = 3.0
+
+[node name="RandomWeaponSpawner8" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 1588, 542 )
+spawn_period = 3.0
+start_period = 3.0
+gun_probability = 3.0
+
+[node name="RandomWeaponSpawner9" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 1325, 271 )
+spawn_period = 3.0
+start_period = 6.0
+gun_probability = 3.0
+
+[node name="RandomWeaponSpawner10" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 566, 287 )
+spawn_period = 3.0
+start_period = 6.0
+gun_probability = 3.0
+
+[node name="RandomWeaponSpawner11" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 566, 838 )
+spawn_period = 3.0
+start_period = 6.0
+gun_probability = 3.0
+
+[node name="RandomWeaponSpawner12" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 1341, 838 )
+spawn_period = 3.0
+start_period = 6.0
+gun_probability = 3.0
+
+[node name="Player1Spawn" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 239, 209 )
+player = 1
+
+[node name="Player2Spawn" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 1690, 883 )
+player = 2
+hud_slot = 3
+
+[node name="CharacterSpawner3" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 1673, 209 )
+hud_slot = 1
+
+[node name="CharacterSpawner4" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 230, 891 )
+hud_slot = 2
+
+[node name="Area1_Stone1" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 385, 240 )
+
+[node name="Area1_Stone2" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 385, 341 )
+
+[node name="Area1_Stone3" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 270, 341 )
+
+[node name="Area1_Stone10" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 1537, 240 )
+
+[node name="Area1_Stone11" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 1537, 341 )
+
+[node name="Area1_Stone13" parent="YSort" instance=ExtResource( 6 )]
+position = Vector2( 748, 924 )
+
+[node name="Area1_Stone14" parent="YSort" instance=ExtResource( 6 )]
+position = Vector2( 748, 794 )
+
+[node name="Area1_Stone15" parent="YSort" instance=ExtResource( 6 )]
+position = Vector2( 1130, 794 )
+scale = Vector2( -1, 1 )
+
+[node name="Area1_Stone16" parent="YSort" instance=ExtResource( 6 )]
+position = Vector2( 1129, 920 )
+
+[node name="Area1_Stone5" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 385, 767 )
+
+[node name="Area1_Stone6" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 383, 861 )
+
+[node name="Area1_Stone4" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 270, 768 )
+
+[node name="Area1_Stone12" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 1652, 341 )
+
+[node name="Area1_Stone7" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 1533, 766 )
+
+[node name="Area1_Stone8" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 1652, 767 )
+
+[node name="Area1_Stone9" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 1537, 861 )
