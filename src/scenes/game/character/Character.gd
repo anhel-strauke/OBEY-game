@@ -64,15 +64,15 @@ func _physics_process(delta: float) -> void:
 		_velocity = _velocity.move_toward(total_vector * MAX_SPEED, ACCELERATION * delta)
 	else:
 		_velocity = _velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-	
+
 	if _input_vector != Vector2.ZERO:
 		_attack_direction = _input_vector.normalized()
-	
+
 	_velocity = move_and_slide(_velocity)
-	
+
 	if _velocity.length() < 0.05:
 		_velocity = Vector2.ZERO
-	
+
 	if _input_vector != Vector2.ZERO:
 		for i in get_slide_count():
 			var collision := get_slide_collision(i)
@@ -82,13 +82,13 @@ func _physics_process(delta: float) -> void:
 				var force_amount = max(_velocity.length(), MAX_SPEED * 0.1)
 				var push_force = direction * force_amount * 0.2
 				other_character.set_external_force(push_force)
-	
+
 	if _input_vector.x < -0.1:
 		sprite.scale = Vector2(1.0, 1.0)
 	elif _input_vector.x > 0.1:
 		sprite.scale = Vector2(-1.0, 1.0)
-		
-		
+
+
 	if weapon_obj:
 		var dir_vector = Vector2.LEFT
 		var angle_rad = 0.0
@@ -103,7 +103,7 @@ func _physics_process(delta: float) -> void:
 		self.state = State.Idle
 	else:
 		self.state = State.Run
-	
+
 	external_force = external_force.move_toward(Vector2.ZERO, FRICTION * delta)
 
 

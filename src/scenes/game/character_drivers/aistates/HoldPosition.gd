@@ -20,6 +20,7 @@ func update(Variant):
 	else:
 		velocity_vector = player.position.direction_to(target_position)
 		countdown = COUNTDOWN_UPDATE_COUNT
+	return true
 
 func get_state_description():
 	return "Holding position"

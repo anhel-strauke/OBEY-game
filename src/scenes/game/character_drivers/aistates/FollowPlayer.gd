@@ -10,17 +10,14 @@ func initialize(newTarget):
 
 func update(Variant):
 	._update()
+	
 	velocity_vector = get_path_direction.call_func()
 	
 	countdown -= 1
 	if countdown < 1:
 		countdown = COUNTDOWN_UPDATE_COUNT
 		_assign_path(target.position)
-	#velocity_vector = player.position.direction_to(target.position)
-	#var distance = player.position.distance_to(target.position)
-	#if distance < 50:
-		#emit_signal("finished", "previous")
-		#emit_signal("finished", "hold_position")
+	return true
 
 func get_state_description():
 	if target == null:

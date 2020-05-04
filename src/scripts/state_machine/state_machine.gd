@@ -16,6 +16,7 @@ var states_map = {}
 var states_stack = []
 var current_state = null
 var _active = false setget set_active
+var consumed_last = true
 
 func _ready():
 	if not start_state:
@@ -53,7 +54,9 @@ func get_stack_description():
 
 #func _physics_process(delta):
 func _process(delta):
-	current_state.update(delta)
+	consumed_last = current_state.update(delta)
+	if !consumed_last and states_stack.size() > 1:
+		states_stack[1].update(delta)
 
 
 func _on_animation_finished(anim_name):
@@ -69,6 +72,9 @@ func _change_state(state_name):
 
 	if state_name == "previous":
 		states_stack.pop_front()
+		 # fixme: actually, this should never happen, but there's a hole in logic that leads to a Think state exit somewhere
+		if states_stack.empty():
+			initialize(start_state)
 	else:
 		states_stack[0] = states_map[state_name]
 
