@@ -11,5 +11,5 @@ dest_files=[ "res://.import/ArenaX.ogg-814bf6bd0725b64a3b27a12cabe72bfb.oggstr" 
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0

@@ -165,23 +165,17 @@ script = ExtResource( 14 )
 [node name="HoldPosition" type="Node" parent="YSort/Mason3/Driver"]
 script = ExtResource( 12 )
 
-[node name="WeaponSpawner" parent="YSort" groups=[
-"weapon_spawners",
-] instance=ExtResource( 6 )]
+[node name="WeaponSpawner" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 720, 280 )
 weapon_scene = "res://scenes/game/character/Weapons/Gun.tscn"
 spawn_period = 5.0
 
-[node name="WeaponSpawner2" parent="YSort" groups=[
-"weapon_spawners",
-] instance=ExtResource( 6 )]
+[node name="WeaponSpawner2" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 1600, 420 )
 weapon_scene = "res://scenes/game/character/Weapons/Shotgun.tscn"
 spawn_period = 5.0
 
-[node name="WeaponSpawner3" parent="YSort" groups=[
-"weapon_spawners",
-] instance=ExtResource( 6 )]
+[node name="WeaponSpawner3" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 460, 760 )
 weapon_scene = "res://scenes/game/character/Weapons/AssaultRifle.tscn"
 spawn_period = 5.0
