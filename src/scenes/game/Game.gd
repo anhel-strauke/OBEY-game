@@ -96,6 +96,7 @@ func spawn_characters() -> void:
 			print("No spawner for player #", player_id)
 	# Spawn all other characters
 	characters.shuffle()
+	#var navigation = get_tree().get_nodes_in_group('pathfinder_singleton')[0]
 	var aidrivers = []
 	for char_name in characters:
 		if spawners.size() > 0:
@@ -109,6 +110,7 @@ func spawn_characters() -> void:
 			driver.name = "Driver"
 			character.add_child(driver)
 			character.driver = driver
+			#driver.navigation = navigation
 			spawners.remove(0)
 			spawner.queue_free()
 	for aidriver in aidrivers:

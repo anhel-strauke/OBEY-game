@@ -91,8 +91,8 @@ func visibility_rays():
 				centroid.global_position, 
 				[], OBSTACLE_LAYER, true, true )
 		
-			var outwards = (results.position - centroid.global_position).normalized()*600
 			if results:
+				var outwards = (results.position - centroid.global_position).normalized()*600
 				#hiding_spots.append(results.position)
 				var spot = space_state.intersect_ray(
 					centroid.global_position, #+ deep_start,
