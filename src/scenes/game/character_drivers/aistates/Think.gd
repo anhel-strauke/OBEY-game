@@ -110,7 +110,7 @@ func recursive_reasoning(action, param, our_dps, our_hp, their_dps, their_hp, di
 		return our_prct_lost + recursive_reasoning("follow_player", null, our_dps, our_hp, their_dps, their_hp, distanceB)
 	if action == "follow_player":
 		var their_prct_lost = (our_dps*distance/mean_speed)/their_hp
-		return our_prct_lost - their_prct_lost
+		return their_prct_lost - our_prct_lost
 	#if action == "hold_position":
 	#if action == "get_bonus":
 	
