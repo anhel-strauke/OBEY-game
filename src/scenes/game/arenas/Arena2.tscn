@@ -10,9 +10,9 @@
 [ext_resource path="res://scenes/game/character_drivers/AiGlobalAnalyzer.gd" type="Script" id=8]
 
 [sub_resource type="NavigationPolygon" id=1]
-vertices = PoolVector2Array( 224.185, 449.855, 142.629, 514.729, 150.043, 149.581, 1721.85, 694.523, 1784.87, 640.77, 1794.14, 952.165, 150.043, 955.873, 146.336, 670.427, 226.038, 726.033, 1771.89, 168.116, 1766.33, 473.951, 1694.05, 425.759, 302.034, 724.18, 1612.49, 692.669, 1597.66, 435.027, 298.327, 451.709 )
-polygons = [ PoolIntArray( 0, 1, 2 ), PoolIntArray( 3, 4, 5 ), PoolIntArray( 6, 7, 8 ), PoolIntArray( 9, 10, 11 ), PoolIntArray( 3, 5, 6, 8, 12, 13 ), PoolIntArray( 0, 2, 9, 11, 14, 15 ), PoolIntArray( 14, 13, 12, 15 ) ]
-outlines = [ PoolVector2Array( 142.629, 514.729, 224.185, 449.855, 298.327, 451.709, 302.034, 724.18, 226.038, 726.033, 146.336, 670.427, 150.043, 955.873, 1794.14, 952.165, 1784.87, 640.77, 1721.85, 694.523, 1612.49, 692.669, 1597.66, 435.027, 1694.05, 425.759, 1766.33, 473.951, 1771.89, 168.116, 150.043, 149.581 ) ]
+vertices = PoolVector2Array( 150.043, 955.873, 137.343, 632.875, 176.574, 635.525, 176.043, 680.057, 226.307, 717.439, 1794.14, 952.165, 270.154, 715.965, 1721.85, 694.523, 295.003, 692.427, 1630.99, 689.848, 1785.45, 475.844, 1730.12, 492.685, 1719.29, 443.966, 1775.99, 155.477, 1694.05, 425.759, 224.185, 449.855, 150.043, 149.581, 1597.66, 435.027, 276.329, 451.935, 180.815, 514.653, 142.629, 514.729, 183.166, 482.483, 297.266, 477.965, 1604.98, 536.872, 1750.04, 668.541, 1756.7, 617.671, 1800.01, 622.483, 1628.95, 577.772 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 3, 4 ), PoolIntArray( 5, 0, 4, 6 ), PoolIntArray( 7, 5, 6, 8, 9 ), PoolIntArray( 10, 11, 12, 13 ), PoolIntArray( 13, 12, 14 ), PoolIntArray( 15, 16, 13, 14, 17, 18 ), PoolIntArray( 19, 20, 16, 21 ), PoolIntArray( 15, 21, 16 ), PoolIntArray( 22, 18, 17, 23 ), PoolIntArray( 24, 25, 26, 5 ), PoolIntArray( 7, 24, 5 ), PoolIntArray( 23, 27, 9, 8, 22 ) ]
+outlines = [ PoolVector2Array( 142.629, 514.729, 180.815, 514.653, 183.166, 482.483, 224.185, 449.855, 276.329, 451.935, 297.266, 477.965, 295.003, 692.427, 270.154, 715.965, 226.307, 717.439, 176.043, 680.057, 176.574, 635.525, 137.343, 632.875, 150.043, 955.873, 1794.14, 952.165, 1800.01, 622.483, 1756.7, 617.671, 1750.04, 668.541, 1721.85, 694.523, 1630.99, 689.848, 1628.95, 577.772, 1604.98, 536.872, 1597.66, 435.027, 1694.05, 425.759, 1719.29, 443.966, 1730.12, 492.685, 1785.45, 475.844, 1775.99, 155.477, 150.043, 149.581 ) ]
 
 [node name="Arena2" type="Node2D"]
 
@@ -143,6 +143,7 @@ hud_slot = 1
 script = ExtResource( 8 )
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="PathFinder"]
+position = Vector2( 10.4237, -8.93462 )
 navpoly = SubResource( 1 )
 
 [node name="Cutouts" type="Node2D" parent="PathFinder"]
@@ -151,7 +152,47 @@ navpoly = SubResource( 1 )
 color = Color( 1, 1, 1, 0 )
 polygon = PoolVector2Array( 837.708, 349.764, 882.193, 316.4, 1100.91, 316.4, 1143.54, 383.127, 1173.2, 679.694, 1134.27, 735.301, 1067.55, 753.836, 863.658, 742.715, 821.026, 681.548 )
 
+[node name="Polygon2D2" type="Polygon2D" parent="PathFinder/Cutouts"]
+position = Vector2( -251.479, 114.479 )
+color = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( 832.164, 633.986, 875.328, 626.479, 937.26, 620.849, 993.561, 677.15, 918.493, 742.835, 863.658, 742.715, 773.986, 680.904 )
+
+[node name="Polygon2D3" type="Polygon2D" parent="PathFinder/Cutouts"]
+position = Vector2( -480.438, -452.287 )
+color = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( 832.164, 633.986, 875.328, 626.479, 937.26, 620.849, 993.561, 677.15, 918.493, 742.835, 863.658, 742.715, 773.986, 680.904 )
+
+[node name="Polygon2D4" type="Polygon2D" parent="PathFinder/Cutouts"]
+position = Vector2( 343.438, -394.109 )
+color = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( 832.164, 633.986, 875.328, 626.479, 937.26, 620.849, 984.178, 677.15, 918.493, 742.835, 863.658, 742.715, 779.616, 682.78 )
+
 [node name="HidingSpots" type="Area2D" parent="PathFinder"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PathFinder/HidingSpots"]
-polygon = PoolVector2Array( 151.897, 681.548, 211.21, 722.326, 153.75, 731.594 )
+position = Vector2( 9.1926, -5.51556 )
+polygon = PoolVector2Array( 144.246, 639.813, 171.05, 642.791, 169.561, 687.464, 220.191, 718.735, 150.87, 703.775 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="PathFinder/HidingSpots"]
+position = Vector2( 29.782, -288.886 )
+polygon = PoolVector2Array( 121.91, 743.157, 188.919, 738.689, 151.692, 762.515, 142.757, 801.232, 118.932, 795.275 )
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="PathFinder/HidingSpots"]
+position = Vector2( 375.254, 151.888 )
+polygon = PoolVector2Array( 137.099, 651.726, 159.435, 654.704, 199.641, 684.486, 244.314, 720.224, 236.338, 754.161, 150.87, 703.775 )
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="PathFinder/HidingSpots"]
+position = Vector2( 114.661, -445.242 )
+polygon = PoolVector2Array( 220.194, 603.195, 332.671, 586.056, 327.85, 621.406, 252.866, 614.979, 190.706, 654.704, 169.561, 687.464, 220.191, 718.735, 150.87, 703.775, 146.28, 647.115 )
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="PathFinder/HidingSpots"]
+position = Vector2( 953.212, -379.348 )
+polygon = PoolVector2Array( 180.19, 595.035, 280.488, 568.984, 383.391, 597.64, 414.652, 682.307, 339.103, 739.621, 329.985, 712.267, 363.852, 679.702, 374.273, 647.138, 303.934, 604.153, 227.082, 609.364, 176.282, 651.046, 169.561, 687.464, 220.191, 718.735, 223.174, 753.949, 150.87, 703.775, 139.81, 660.164 )
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="PathFinder/HidingSpots"]
+position = Vector2( 1547.18, -276.973 )
+polygon = PoolVector2Array( 158.84, 694.612, 197.556, 722.905, 227.338, 718.438, 231.806, 751.198, 188.622, 761.621 )
+
+[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="PathFinder/HidingSpots"]
+position = Vector2( 1620.14, -7.44556 )
+polygon = PoolVector2Array( 143.949, 632.069, 176.709, 633.559, 166.285, 687.166, 105.232, 709.503, 135.014, 679.721 )
