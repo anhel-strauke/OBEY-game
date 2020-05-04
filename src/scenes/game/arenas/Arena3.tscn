@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://textures/arenas/map4_masson2.png" type="Texture" id=1]
 [ext_resource path="res://scenes/game/arenas/ArenaBorders.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/game/arenas/Area3_Pit.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/game/arenas/Area3_Stone1.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/game/character/CharacterSpawner.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/game/character_drivers/AiGlobalAnalyzer.gd" type="Script" id=8]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 1783.76, 945.863, 154.491, 942.156, 152.638, 154.4, 1778.2, 161.814 )
@@ -119,6 +120,7 @@ start_period = 1.0
 gun_probability = 3.0
 
 [node name="PathFinder" type="Navigation2D" parent="."]
+script = ExtResource( 8 )
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="PathFinder"]
 navpoly = SubResource( 1 )
