@@ -2,9 +2,7 @@
 
 [ext_resource path="res://textures/arenas/pit2.png" type="Texture" id=1]
 
-[node name="Arena2_Pit" type="Area2D" groups=[
-"obstacles",
-]]
+[node name="Arena2_Pit" type="Area2D"]
 collision_mask = 0
 
 [node name="pit2" type="Sprite" parent="."]

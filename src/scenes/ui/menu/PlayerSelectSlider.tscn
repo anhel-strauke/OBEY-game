@@ -10,9 +10,6 @@ script = ExtResource( 4 )
 
 [node name="MenuSlider" parent="." instance=ExtResource( 2 )]
 
-[node name="Background" parent="MenuSlider/Slider" index="0"]
-self_modulate = Color( 0.756863, 0.768627, 0.827451, 1 )
-
 [node name="SinglePlayer" parent="MenuSlider/Slider/MenuController" index="0" instance=ExtResource( 3 )]
 
 [node name="Label" type="Label" parent="MenuSlider/Slider/MenuController/SinglePlayer"]

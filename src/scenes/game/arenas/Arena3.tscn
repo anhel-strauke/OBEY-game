@@ -25,15 +25,20 @@ rotation = 0.785397
 
 [node name="CharacterSpawner" parent="." instance=ExtResource( 7 )]
 position = Vector2( 860, 540 )
+player = 1
 
 [node name="CharacterSpawner2" parent="." instance=ExtResource( 7 )]
 position = Vector2( 960, 480 )
+hud_slot = 1
 
 [node name="CharacterSpawner3" parent="." instance=ExtResource( 7 )]
 position = Vector2( 1060, 540 )
+player = 2
+hud_slot = 3
 
 [node name="CharacterSpawner4" parent="." instance=ExtResource( 7 )]
 position = Vector2( 966, 640 )
+hud_slot = 2
 
 [node name="YSort" type="YSort" parent="." groups=[
 "BulletParent",

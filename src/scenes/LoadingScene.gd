@@ -10,7 +10,8 @@ var preloaded_scenes = {
 
 const Arenas = [
 	"res://scenes/game/arenas/Arena1.tscn",
-	"res://scenes/game/arenas/Arena2.tscn"
+	"res://scenes/game/arenas/Arena2.tscn",
+	"res://scenes/game/arenas/Arena3.tscn"
 ]
 
 var next_scene_name: String = ""
