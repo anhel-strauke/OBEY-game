@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Avtomat.ogg-f1efd0afd36f45c2dd14d34e8cf0ca4a.oggstr"
+
+[deps]
+
+source_file="res://sounds/fx/Avtomat.ogg"
+dest_files=[ "res://.import/Avtomat.ogg-f1efd0afd36f45c2dd14d34e8cf0ca4a.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

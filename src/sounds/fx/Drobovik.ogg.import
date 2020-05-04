@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Drobovik.ogg-f320de46da4585b246cf54afef303ed5.oggstr"
+
+[deps]
+
+source_file="res://sounds/fx/Drobovik.ogg"
+dest_files=[ "res://.import/Drobovik.ogg-f320de46da4585b246cf54afef303ed5.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
