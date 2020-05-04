@@ -129,7 +129,61 @@ navpoly = SubResource( 1 )
 color = Color( 1, 1, 1, 0 )
 polygon = PoolVector2Array( 1253.64, 699.342, 1485.34, 469.503, 1561.33, 432.432, 1715.18, 608.518, 1737.42, 695.635, 1487.19, 925.474 )
 
+[node name="Polygon2D2" type="Polygon2D" parent="PathFinder/Cutouts"]
+position = Vector2( -1065.45, -309.21 )
+color = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( 1253.64, 699.342, 1287.1, 656.746, 1368.45, 610.917, 1417.72, 610.917, 1436.05, 669.35, 1398.24, 701.431, 1343.24, 742.678, 1269.92, 743.823 )
+
+[node name="Polygon2D3" type="Polygon2D" parent="PathFinder/Cutouts"]
+position = Vector2( -885.566, -454.72 )
+color = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( 1259.15, 704.18, 1290.08, 665.225, 1351.95, 669.808, 1366.85, 700.743, 1370.28, 723.658, 1343.24, 742.678, 1259.15, 733.97 )
+
+[node name="Polygon2D4" type="Polygon2D" parent="PathFinder/Cutouts"]
+position = Vector2( -435.548, 133.637 )
+scale = Vector2( 0.772803, 1.043 )
+color = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( 1259.15, 704.18, 1290.08, 665.225, 1351.95, 669.808, 1366.85, 700.743, 1370.28, 723.658, 1343.24, 742.678, 1259.15, 733.97 )
+
+[node name="Polygon2D5" type="Polygon2D" parent="PathFinder/Cutouts"]
+position = Vector2( 14.4701, -193.043 )
+scale = Vector2( 0.834903, 0.792121 )
+color = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( 1259.15, 704.18, 1290.08, 665.225, 1351.95, 669.808, 1366.85, 700.743, 1370.28, 723.658, 1343.24, 742.678, 1259.15, 733.97 )
+
+[node name="Polygon2D6" type="Polygon2D" parent="PathFinder/Cutouts"]
+position = Vector2( -58.8662, 228.641 )
+scale = Vector2( 0.834903, 0.792121 )
+color = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( 1259.15, 704.18, 1290.08, 665.225, 1351.95, 669.808, 1366.85, 700.743, 1370.28, 723.658, 1343.24, 742.678, 1259.15, 733.97 )
+
+[node name="Polygon2D7" type="Polygon2D" parent="PathFinder/Cutouts"]
+position = Vector2( -812.23, 228.641 )
+scale = Vector2( 0.834903, 0.792121 )
+color = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( 1259.15, 704.18, 1290.08, 665.225, 1351.95, 669.808, 1366.85, 700.743, 1370.28, 723.658, 1343.24, 742.678, 1259.15, 733.97 )
+
 [node name="HidingSpots" type="Area2D" parent="PathFinder"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PathFinder/HidingSpots"]
 polygon = PoolVector2Array( 184.148, 428.725, 187.855, 369.411, 304.629, 284.148, 358.381, 284.148, 382.477, 208.153, 443.644, 191.471, 495.544, 228.542, 525.2, 193.325, 445.498, 163.668, 286.093, 234.103, 160.052, 360.143 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="PathFinder/HidingSpots"]
+position = Vector2( 75.9953, 435.583 )
+polygon = PoolVector2Array( 170.457, 421.144, 196.323, 409.935, 246.33, 402.175, 242.882, 385.794, 198.047, 384.931, 154.075, 370.274, 162.697, 319.404, 211.842, 306.471, 211.842, 282.329, 163.559, 297.849, 134.244, 321.991, 133.382, 368.549 )
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="PathFinder/HidingSpots"]
+position = Vector2( 1128.28, 752.749 )
+rotation = 1.84511
+scale = Vector2( 1.31214, 1.41848 )
+polygon = PoolVector2Array( 170.457, 421.144, 196.323, 409.935, 246.33, 402.175, 242.882, 385.794, 198.047, 384.931, 154.075, 370.274, 162.697, 319.404, 211.842, 306.471, 211.842, 282.329, 163.559, 297.849, 134.244, 321.991, 133.382, 368.549 )
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="PathFinder/HidingSpots"]
+position = Vector2( 621.341, 823.308 )
+rotation = -1.12709
+polygon = PoolVector2Array( 169.802, 408.235, 213.458, 438.44, 261.937, 433.231, 299.526, 383.846, 287.255, 366.947, 250.032, 410.865, 204.073, 418.696, 173.535, 375.887, 162.697, 319.404, 211.842, 306.471, 247.963, 331.296, 251.397, 299.61, 211.842, 282.329, 163.559, 297.849, 140.867, 336.639, 145.787, 373.79 )
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="PathFinder/HidingSpots"]
+position = Vector2( 693.333, 402.314 )
+rotation = -1.12709
+polygon = PoolVector2Array( 169.802, 408.235, 213.458, 438.44, 261.937, 433.231, 250.032, 410.865, 204.073, 418.696, 173.535, 375.887, 162.697, 319.404, 211.842, 306.471, 211.842, 282.329, 163.559, 297.849, 140.867, 336.639, 145.787, 373.79 )
