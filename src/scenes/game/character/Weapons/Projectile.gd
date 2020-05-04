@@ -12,6 +12,7 @@ var impulse = 120.0
 var gunslinger_name: String
 var sound: AudioStream = null
 
+const RippleController = preload("res://scenes/game/effects/RippleController.tscn")
 
 func set_sound(snd: AudioStream) -> void:
 	sound = snd
@@ -28,6 +29,11 @@ func _ready() -> void:
 func set_direction(vect: Vector2) -> void:
 	direction_vector = vect.normalized()
 	_velocity = direction_vector * speed
+	
+	var controller = RippleController.instance()
+	controller.position -= direction_vector * 80.0
+	controller.rotation += atan2(direction_vector.y, direction_vector.x)
+	add_child(controller)
 
 
 func _physics_process(delta: float) -> void:

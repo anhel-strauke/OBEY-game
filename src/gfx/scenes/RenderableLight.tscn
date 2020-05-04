@@ -3,7 +3,9 @@
 [ext_resource path="res://textures/test/light.png" type="Texture" id=1]
 [ext_resource path="res://gfx/scenes/RenderableLight.gd" type="Script" id=2]
 
-[node name="RenderableLight" type="Node2D"]
+[node name="RenderableLight" type="Node2D" groups=[
+"renderable_lights",
+]]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

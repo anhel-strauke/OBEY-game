@@ -18,16 +18,17 @@ func _ready():
 	$Rendered.z_index = 1
 	viewport.get_node('Sprite').position += Vector2(150, 200)
 	#weapon_pivot.position += Vector2(150, 200)
-	$Shadow.texture = viewport.get_texture()
+#	$Shadow.texture = viewport.get_texture()
 
 
 func _process(delta):
 	obj_pos = get_parent().position
-	var light_system = get_light_system()
-	if not light_system:
-		return
+#	var light_system = get_light_system()
+#	if not light_system:
+#		return
 	var cur_shadow_count = 0
-	for light in light_system.lights.values():
+#	for light in light_system.lights.values():
+	for light in get_tree().get_nodes_in_group("renderable_lights"):
 		cur_shadow_count += 1
 		var shadow
 		if cur_shadow_count > len(shadows):
