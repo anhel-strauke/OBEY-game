@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://textures/arenas/map4_masson2.png" type="Texture" id=1]
 [ext_resource path="res://scenes/game/arenas/ArenaBorders.tscn" type="PackedScene" id=2]
@@ -7,6 +7,11 @@
 [ext_resource path="res://scenes/game/arenas/Area3_Pit.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/game/arenas/Area3_Stone1.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/game/character/CharacterSpawner.tscn" type="PackedScene" id=7]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 1783.76, 945.863, 154.491, 942.156, 152.638, 154.4, 1778.2, 161.814 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 1783.76, 945.863, 154.491, 942.156, 152.638, 154.4, 1778.2, 161.814 ) ]
 
 [node name="Arena3" type="Node2D"]
 
@@ -112,3 +117,19 @@ position = Vector2( 1540, 240 )
 spawn_period = 3.0
 start_period = 1.0
 gun_probability = 3.0
+
+[node name="PathFinder" type="Navigation2D" parent="."]
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="PathFinder"]
+navpoly = SubResource( 1 )
+
+[node name="Cutouts" type="Node2D" parent="PathFinder"]
+
+[node name="Polygon2D" type="Polygon2D" parent="PathFinder/Cutouts"]
+color = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( 1253.64, 699.342, 1485.34, 469.503, 1561.33, 432.432, 1715.18, 608.518, 1737.42, 695.635, 1487.19, 925.474 )
+
+[node name="HidingSpots" type="Area2D" parent="PathFinder"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PathFinder/HidingSpots"]
+polygon = PoolVector2Array( 184.148, 428.725, 187.855, 369.411, 304.629, 284.148, 358.381, 284.148, 382.477, 208.153, 443.644, 191.471, 495.544, 228.542, 525.2, 193.325, 445.498, 163.668, 286.093, 234.103, 160.052, 360.143 )
