@@ -168,6 +168,7 @@ color = Color( 1, 1, 1, 0 )
 polygon = PoolVector2Array( 832.164, 633.986, 875.328, 626.479, 937.26, 620.849, 984.178, 677.15, 918.493, 742.835, 863.658, 742.715, 779.616, 682.78 )
 
 [node name="HidingSpots" type="Area2D" parent="PathFinder"]
+collision_layer = 257
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PathFinder/HidingSpots"]
 position = Vector2( 9.1926, -5.51556 )
