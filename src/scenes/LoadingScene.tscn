@@ -95,6 +95,7 @@ anims/hide = SubResource( 1 )
 anims/show = SubResource( 2 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 3
 
 [node name="Background" type="Node2D" parent="CanvasLayer"]
 modulate = Color( 1, 1, 1, 0.888889 )

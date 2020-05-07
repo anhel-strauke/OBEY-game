@@ -53,7 +53,6 @@ func set_players(p: int) -> void:
 		if player_id >= 0 and player_id < players:
 			selections[player_id] = i
 			item.select(player_id)
-			print("Selected ", selections[i], " for #", i)
 			emit_signal("selected", player_id, item.character_name)
 		else:
 			item.deselect()
@@ -61,10 +60,7 @@ func set_players(p: int) -> void:
 		if selections[i] < 0:
 			selections[i] = get_next_selection_for(i, 1)
 			items[selections[i]].select(i)
-			print("Then Selected ", selections[i], " for #", i)
 			emit_signal("selected", i, items[selections[i]].character_name)
-
-
 
 
 func select_next_item(player_id: int, dir: int) -> void:

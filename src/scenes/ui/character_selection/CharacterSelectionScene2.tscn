@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://fonts/font_42.tres" type="DynamicFont" id=1]
 [ext_resource path="res://textures/ui/white.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/ui/character_selection/CharactersMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/ui/character_selection/CharacterSelectionScene2.gd" type="Script" id=5]
 [ext_resource path="res://sounds/music/ArenaP.ogg" type="AudioStream" id=6]
+[ext_resource path="res://fonts/font_obey_64.tres" type="DynamicFont" id=7]
 
 [node name="CharacterSelectionScene2" type="Node2D"]
 script = ExtResource( 5 )
@@ -23,16 +24,22 @@ __meta__ = {
 position = Vector2( 520, 11 )
 
 [node name="CharacterInformation" parent="." instance=ExtResource( 3 )]
-position = Vector2( -20, 49 )
+position = Vector2( -0.5, 200 )
 scale = Vector2( 0.5, 0.5 )
 
+[node name="Name" parent="CharacterInformation" index="3"]
+align = 1
+
 [node name="CharacterInformation2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1360, 49 )
+position = Vector2( 1360, 200 )
 scale = Vector2( 0.5, 0.5 )
+
+[node name="Name" parent="CharacterInformation2" index="3"]
+align = 1
 
 [node name="Label" type="Label" parent="."]
 margin_left = 40.0
-margin_top = 920.0
+margin_top = 846.0
 margin_right = 507.0
 margin_bottom = 1052.0
 custom_fonts/font = ExtResource( 1 )
@@ -45,7 +52,7 @@ __meta__ = {
 
 [node name="Label2" type="Label" parent="."]
 margin_left = 1381.0
-margin_top = 920.0
+margin_top = 846.0
 margin_right = 1876.0
 margin_bottom = 1052.0
 custom_fonts/font = ExtResource( 1 )
@@ -62,6 +69,36 @@ stream = ExtResource( 6 )
 volume_db = -20.0
 autoplay = true
 bus = "Music"
+
+[node name="Label3" type="Label" parent="."]
+margin_left = 29.0
+margin_top = 20.0
+margin_right = 238.0
+margin_bottom = 102.0
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Игрок 1"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="."]
+margin_left = 1660.0
+margin_top = 20.0
+margin_right = 1869.0
+margin_bottom = 102.0
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Игрок 2"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="cancelled" from="CharactersMenu" to="." method="_on_CharactersMenu_cancelled"]
 [connection signal="finished_selection" from="CharactersMenu" to="." method="_on_CharactersMenu_finished_selection"]
 [connection signal="selected" from="CharactersMenu" to="." method="_on_CharactersMenu_selected"]
+
+[editable path="CharacterInformation"]
+
+[editable path="CharacterInformation2"]

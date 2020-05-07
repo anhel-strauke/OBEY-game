@@ -1,14 +1,50 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://fonts/font_64.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/ui/menu/MenuSlider.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/ui/menu/MenuItem.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/ui/menu/PlayerSelectSlider.gd" type="Script" id=4]
+[ext_resource path="res://textures/ui/white.png" type="Texture" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "hide"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "show"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="PlayerSelectSlider" type="Node2D"]
 script = ExtResource( 4 )
 
 [node name="MenuSlider" parent="." instance=ExtResource( 2 )]
+
+[node name="Background" parent="MenuSlider/Slider" index="0"]
+self_modulate = Color( 0.756863, 0.768627, 0.827451, 1 )
 
 [node name="SinglePlayer" parent="MenuSlider/Slider/MenuController" index="0" instance=ExtResource( 3 )]
 
@@ -39,7 +75,19 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="GamepadSettingBg" type="Sprite" parent="MenuSlider/Slider" index="5"]
+modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 0.756863, 0.768627, 0.827451, 1 )
+scale = Vector2( 120, 67.5 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MenuSlider/Slider/GamepadSettingBg"]
+anims/hide = SubResource( 1 )
+anims/show = SubResource( 2 )
 [connection signal="activated" from="MenuSlider/Slider/MenuController/SinglePlayer" to="." method="_on_SinglePlayer_activated"]
 [connection signal="activated" from="MenuSlider/Slider/MenuController/TwoPlayers" to="." method="_on_TwoPlayers_activated"]
+[connection signal="animation_finished" from="MenuSlider/Slider/GamepadSettingBg/AnimationPlayer" to="." method="_on_GamepadSettingBg_animation_finished"]
 
 [editable path="MenuSlider"]

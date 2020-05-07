@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://fonts/Caveat-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://textures/hud/ammo_gauge.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://textures/hud/white_fon.png" type="Texture" id=7]
 [ext_resource path="res://textures/hud/vnutr_krug.png" type="Texture" id=8]
 [ext_resource path="res://textures/hud/yellow.png" type="Texture" id=9]
+[ext_resource path="res://textures/hud/char_icons.png" type="Texture" id=10]
 
 [sub_resource type="Animation" id=1]
 resource_name = "set_health"
@@ -114,6 +115,11 @@ texture = ExtResource( 7 )
 
 [node name="CharacterPortraitParent" type="Node2D" parent="Reverse"]
 position = Vector2( -76, -11 )
+
+[node name="CharacterPortrait" type="Sprite" parent="Reverse/CharacterPortraitParent"]
+position = Vector2( -4.27254, 0.63044 )
+texture = ExtResource( 10 )
+hframes = 4
 
 [node name="yellow" type="Sprite" parent="Reverse"]
 position = Vector2( -78, -13 )

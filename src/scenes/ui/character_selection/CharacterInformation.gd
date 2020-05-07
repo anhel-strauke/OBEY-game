@@ -7,6 +7,7 @@ onready var images = {
 	Constants.Grayman: $CharacterSprite/Grayman
 }
 onready var label = $descr_animation/Label
+onready var name_label = $Name
 
 const Descriptions = {
 	Constants.Reptiloid: ("Их агенты способны притвориться королевой, президентом и крокодиловой " +
@@ -24,10 +25,18 @@ const Descriptions = {
 						"грязь саму Землю. И твою самооценку.")
 }
 
+const Names = {
+	Constants.Reptiloid: "Рептилоид",
+	Constants.Mason: "Масон",
+	Constants.Tower5G: "5G-Вышка",
+	Constants.Grayman: "Пришелец"
+}
+
 
 func display_character(name: String) -> void:
 	for img_name in images.keys():
 		images[img_name].visible = img_name == name
 	if name != "":
 		label.text = Descriptions[name]
+		name_label.text = Names[name]
 	

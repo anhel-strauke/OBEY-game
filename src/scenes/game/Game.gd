@@ -21,7 +21,7 @@ enum State {
 
 onready var arena_parent = $Arena
 onready var game_hud = $HUDLayer/GameHUD
-onready var start_anim = $HUDLayer/StartAnimation
+onready var start_anim = $BlackLayer/StartAnimation
 onready var victory_timer = $CheckVictoryTimer
 onready var audio = $AudioStreamPlayer
 
@@ -33,7 +33,13 @@ var music_resource_name = ""
 
 
 var all_characters = [null, null, null, null]
+var dead_character_names = []
 var state = State.Beginning
+
+
+func _ready() -> void:
+	Global.game_is_on = false
+
 
 func load_arena() -> void:
 	var ArenaScene = load(arena_scene_name)
@@ -90,6 +96,7 @@ func spawn_characters() -> void:
 			driver.name = "Driver"
 			character.add_child(driver)
 			character.driver = driver
+			driver.connect("sequence_completed", character, "become_immortal")
 			characters.remove(characters.find(char_name))
 			spawners.remove(spawners.find(spawner))
 			spawner.queue_free()
@@ -119,6 +126,7 @@ func spawn_characters() -> void:
 	# fixme: import of navigation
 	aidrivers[0].navigation._on_all_players_ready() 
 
+
 func start() -> void:
 	load_arena()
 	spawn_characters()
@@ -133,11 +141,16 @@ func show_start_message():
 
 
 func bury_character(name: String) -> void:
+	dead_character_names.append(name)
 	for i in all_characters.size():
 		if all_characters[i] and all_characters[i].name == name:
 			print("Buried ", all_characters[i].name)
 			all_characters[i] = null
 			break
+	var player_is_dead = [false, false]
+	for player_id in len(characters_choice):
+		player_is_dead[player_id] = dead_character_names.has(characters_choice[player_id])
+	game_hud.dead_player_characters = player_is_dead
 
 
 func number_of_alive_characters() -> int:

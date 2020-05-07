@@ -2,7 +2,7 @@ extends "res://scripts/state_machine/state_machine.gd"
 class_name AiDriver
 
 export(NodePath) var navigation_path
-export(float) var reaction_time = 0
+export(float) var reaction_time = 0.3
 export(float) var courage = 10.05
 
 var navigation

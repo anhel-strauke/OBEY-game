@@ -16,11 +16,12 @@ var _actions_pressed = {
 	Constants.Actions.Pause: -1
 }
 var _actions_just_pressed = {}
-
+var _actions_was_pressed = {}
 
 func _init():
 	for action in _actions_pressed.keys():
 		_actions_just_pressed[action] = false
+		_actions_was_pressed[action] = false
 
 
 func set_device_id(id: int) -> void:
@@ -60,7 +61,8 @@ func _process(_delta: float) -> void:
 			else:
 				if _actions_pressed[action] == button:
 					_actions_pressed[action] = -1
-		_actions_just_pressed[action] = _actions_pressed[action] != -1 and not _actions_just_pressed[action]
+		_actions_just_pressed[action] = _actions_pressed[action] != -1 and not _actions_was_pressed[action]
+		_actions_was_pressed[action] = _actions_pressed[action] != -1
 	var x_axis = GamepadManager.get_axis(device_id, GamepadManager.GamepadAxis.LX)
 	var y_axis = GamepadManager.get_axis(device_id, GamepadManager.GamepadAxis.LY)
 	_direction = Vector2(x_axis, y_axis)

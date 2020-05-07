@@ -18,11 +18,11 @@ func _ready() -> void:
 	for i in 2:
 		if GameInput.player(i).is_keyboard_input_source():
 			if i == 0:
-				instruction_labels[i].text = "W и S = выбор, C = подтвердить, V или Esc = отмена"
+				instruction_labels[i].text = "W и S = выбор,\nC = подтвердить,\nV или Esc = отмена"
 			else:
-				instruction_labels[i].text = "Стрелки = выбор, O = подтвердить, P или Esc = отмена"
+				instruction_labels[i].text = "Стрелки = выбор,\nO = подтвердить,\nP или Esc = отмена"
 		elif GameInput.player(i).is_gamepad_input_source():
-			instruction_labels[i].text = "A = подтвердить выбор, B или Esc = отмена"
+			instruction_labels[i].text = "Вверх и Вниз = выбор,\nA = подтвердить выбор,\nB или Esc = отмена"
 	menu.set_players(2)
 
 

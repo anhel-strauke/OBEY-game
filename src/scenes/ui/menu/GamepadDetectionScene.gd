@@ -69,6 +69,7 @@ func show_modal(caller: Node, slot: String) -> void:
 	connect("finished", caller, slot)
 	was_paused = get_tree().paused
 	get_tree().paused = true
+	print("Displaying Gamepad Detection for player ", player_index)
 	show()
 
 
@@ -92,7 +93,6 @@ func show() -> void:
 		unknown_gp_message.visible = false
 		prompt_label.text = ""
 	anim_player.play("show")
-	anim_player.seek(0, true)
 
 
 func hide() -> void:
@@ -122,14 +122,15 @@ func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 		else:
 			begin_gamepad_configuration()
 	else:
+		get_tree().paused = was_paused
 		var dev_id = device_id
 		if cancelled:
 			dev_id = -1
+		_set_visible(false)
+		state = State.Showing
 		emit_signal("finished", dev_id)
 		if caller_data.size() > 0:
 			disconnect("finished", caller_data[0], caller_data[1])
-		get_tree().paused = was_paused
-		_set_visible(false)
 
 
 func _on_gamepad_detected(device_id: int) -> void:

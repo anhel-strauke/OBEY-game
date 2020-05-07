@@ -2,6 +2,13 @@ extends Node2D
 class_name GameHUD
 
 
+enum PlayerDeathState {
+	MovingDown,
+	MovingUp,
+	TopPosition,
+	BottomPosition
+}
+
 onready var character_huds: Array = [
 	$Characters/CharacterHUD1,
 	$Characters/CharacterHUD2,
@@ -12,6 +19,12 @@ onready var character_huds: Array = [
 onready var start_anim = $StartMessages/AnimationPlayer
 onready var victory_anim = $VictoryMessage/AnimationPlayer
 onready var victory_label = $VictoryMessage/Label
+onready var player_death_label = $PlayerDeathMessage/PlayerDeathLabel
+onready var player_death_anim = $PlayerDeathMessage/AnimationPlayer
+
+var player_death_state = PlayerDeathState.TopPosition
+var dead_player_characters = [false, false] setget set_dead_player_characters
+var current_dead_player_characters = [false, false]
 
 signal start_animation_finished()
 signal victory_animation_finished()
@@ -22,6 +35,8 @@ func assign_character(ch: Character, index: int) -> void:
 		var hud = character_huds[index]
 		ch.connect("health_changed", hud, "set_health")
 		ch.connect("ammo_changed", hud, "set_ammo")
+		ch.connect("died", hud, "display_death")
+		hud.set_dead(false)
 		hud.set_name(ch.display_name)
 		hud.set_icon_index(ch.icon_index)
 		hud.set_max_health(ch.max_hitpoints)
@@ -49,3 +64,42 @@ func victory_message(winner_name: String):
 
 func _on_victory_animation_end() -> void:
 	emit_signal("victory_animation_finished")
+
+
+func _update_dead_player_characters():
+	current_dead_player_characters = dead_player_characters
+	if not dead_player_characters[0] and not dead_player_characters[1]:
+		player_death_label.text = ""
+	elif dead_player_characters[0] and not dead_player_characters[1]:
+		player_death_label.text = "Игрок 1 всё"
+	elif not dead_player_characters[0] and dead_player_characters[1]:
+		player_death_label.text = "Игрок 2 всё"
+	else:
+		player_death_label.text = "Оба игрока всё"
+
+
+func set_dead_player_characters(dead: Array) -> void:
+	if dead != dead_player_characters:
+		dead_player_characters = dead
+		match player_death_state:
+			PlayerDeathState.TopPosition:
+				_player_death_go_down()
+			PlayerDeathState.BottomPosition:
+				_player_death_go_up()
+
+
+func _player_death_go_down() -> void:
+	_update_dead_player_characters()
+	if current_dead_player_characters[0] or current_dead_player_characters[1]:
+		player_death_state = PlayerDeathState.MovingDown
+		player_death_anim.play("show")
+	else:
+		player_death_state = PlayerDeathState.TopPosition
+
+
+func _player_death_go_up() -> void:
+	if dead_player_characters != current_dead_player_characters:
+		player_death_state = PlayerDeathState.MovingUp
+		player_death_anim.play("hide")
+	else:
+		player_death_state = PlayerDeathState.BottomPosition

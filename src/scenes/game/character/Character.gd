@@ -16,7 +16,7 @@ const WeaponDropEffect = preload("res://scenes/game/effects/WeaponDropEffect.tsc
 const DeathEffect = preload("res://scenes/game/effects/DeathEffect.tscn")
 
 export(String) var display_name
-export(int, "Mason", "Reptiloid", "5G Tower", "UFO") var icon_index = 0
+export(int, "Reptiloid", "Mason", "Grayman", "5G Tower") var icon_index = 0
 export var MAX_SPEED: float = 800.0
 export var ACCELERATION: float = 2400.0
 export var FRICTION: float = 2200.0
@@ -34,14 +34,13 @@ onready var _hp: float = max_hitpoints
 var external_force: Vector2 = Vector2.ZERO
 var state: int = State.Idle setget set_state
 var weapon_obj = null
+var immortal: bool = false
 
 var fire_was_pressed: bool = false
 
 
 func has_weapon() -> bool:
 	return weapon_obj != null
-
-
 
 
 func set_look_right(right: bool) -> void:
@@ -129,6 +128,8 @@ func set_external_force(force: Vector2) -> void:
 
 
 func take_damage(dmg: float, from: String, direction: Vector2) -> void:
+	if immortal:
+		return
 	_hp -= dmg
 	emit_signal("health_changed", _hp)
 	if _hp <= 0.0:
@@ -195,3 +196,5 @@ func _on_WeaponPickup_area_entered(area: Area2D) -> void:
 			set_weapon_object(weapon_candidate)
 
 
+func become_immortal() -> void:
+	immortal = true

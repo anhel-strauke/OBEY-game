@@ -30,10 +30,10 @@ func set_direction(vect: Vector2) -> void:
 	direction_vector = vect.normalized()
 	_velocity = direction_vector * speed
 	
-	#var controller = RippleController.instance()
-	#controller.position -= direction_vector * 80.0
-	#controller.rotation += atan2(direction_vector.y, direction_vector.x)
-	#add_child(controller)
+	var controller = RippleController.instance()
+	controller.position -= direction_vector * 80.0
+	controller.rotation += atan2(direction_vector.y, direction_vector.x)
+	add_child(controller)
 
 
 func _physics_process(delta: float) -> void:

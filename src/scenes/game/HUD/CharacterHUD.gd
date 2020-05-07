@@ -6,13 +6,25 @@ onready var health_anim: AnimationPlayer = $HealthAnimation
 onready var ammo_anim: AnimationPlayer = $AmmoAnimation
 onready var ability_anim: AnimationPlayer = $AbilityAnim
 onready var name_label: Label = $Name
-onready var portrait_parent: Node2D = $CharacterPortraitParent
+onready var portrait: Node2D = null
 
 var max_health: float = 100.0 setget set_max_health
 var ability_cooldown: float = 1.0
+var _dead: bool = false
+
+
+func _ready() -> void:
+	portrait = $CharacterPortraitParent/CharacterPortrait
+	if not portrait:
+		portrait = $Reverse/CharacterPortraitParent/CharacterPortrait
+
 
 func set_max_health(value: float) -> void:
 	max_health = value
+
+
+func is_dead() -> bool:
+	return _dead;
 
 
 func set_ability_cooldown_max(t: float) -> void:
@@ -20,6 +32,8 @@ func set_ability_cooldown_max(t: float) -> void:
 
 
 func set_ability_cooldown(t: float) -> void:
+	if _dead:
+		t = 0.0
 	var clamped = clamp(t / ability_cooldown, 0.0, 1.0)
 	if is_equal_approx(clamped, 1.0):
 		ability_anim.play("idle")
@@ -47,4 +61,16 @@ func set_name(name: String) -> void:
 
 
 func set_icon_index(index: int) -> void:
-	pass
+	portrait.frame = index
+
+
+func display_death(_name: String) -> void:
+	set_dead(true)
+
+
+func set_dead(d: bool) -> void:
+	_dead = d
+	if _dead:
+		set_health(0.0)
+		set_ability_cooldown(0.0)
+	
