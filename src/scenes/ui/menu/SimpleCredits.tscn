@@ -1,3 +1,191 @@
-[gd_scene format=2]
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://fonts/font_64.tres" type="DynamicFont" id=1]
+[ext_resource path="res://textures/ui/black.png" type="Texture" id=2]
+[ext_resource path="res://scenes/ui/menu/SimpleCredits.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "hide"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("CreditsParent:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Back:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "disable"
+} ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "show"
+length = 30.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("CreditsParent:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 27 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 1090 ), Vector2( 0, 1090 ), Vector2( 0, -4180 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Back:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CreditsParent:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 30 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hide"
+} ]
+}
 
 [node name="SimpleCredits" type="Node2D"]
+z_index = 5
+script = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/hide = SubResource( 1 )
+anims/show = SubResource( 2 )
+
+[node name="Back" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+scale = Vector2( 120, 67.5 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="CreditsParent" type="Node2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, 1090 )
+
+[node name="Label" type="Label" parent="CreditsParent"]
+margin_left = 440.0
+margin_top = 10.0
+margin_right = 1561.0
+margin_bottom = 5192.0
+custom_fonts/font = ExtResource( 1 )
+text = "             OBEY: IN THEY WE TRUST
+
+
+Гейм-дизайн
+      Антон Фирсов
+      Дина Грико
+
+Ведущий художник
+      Ника Бауэр
+
+Художники
+      Екатерина Халфина
+      Эвелина Майер
+
+Художник по анимациям
+      Оксана Рар
+
+Программирование
+      Анатолий Грико
+
+Программирование эффектов
+      Антон Сердитов
+
+Программирование AI
+      Вадим Смелянский
+
+Нарратив
+      Александра Пикаревская
+      Дина Грико
+
+Музыка и звуки
+      Дмитрий Алдагаров
+
+
+
+Использован шрифт Caveat
+      Copyright 2014 The Caveat Project Authors
+      (https://github.com/googlefonts/caveat)
+      по лицензии SIL Open Font License, Version 1.1
+
+
+
+
+Разработано на
+      Godot Game Engine 3.2.1
+      https://godotengine.org
+
+
+
+
+
+
+
+
+Играйте в хорошие игры и берегите себя.
+
+
+
+
+© 2020, And Tak Soidet Games
+https://andtaksoidet.games"
+__meta__ = {
+"_edit_use_anchors_": false
+}

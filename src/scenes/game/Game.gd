@@ -130,6 +130,7 @@ func spawn_characters() -> void:
 func start() -> void:
 	load_arena()
 	spawn_characters()
+	game_hud.update_controls_hints(characters_choice.size())
 	for i in all_characters.size():
 		game_hud.assign_character(all_characters[i], i)
 	start_anim.play("start")

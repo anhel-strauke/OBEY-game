@@ -9,6 +9,9 @@ enum PlayerDeathState {
 	BottomPosition
 }
 
+const PLAYER_KBD_CONTROLS = ["WASD = Движение,\nС = Огонь", "Стрелки = Движение,\nO = Огонь"]
+const PLAYER_GAMEPAD_CONTROLS = "Левый стик или D-Pad = Движение,\n(A) = Огонь"
+
 onready var character_huds: Array = [
 	$Characters/CharacterHUD1,
 	$Characters/CharacterHUD2,
@@ -21,6 +24,10 @@ onready var victory_anim = $VictoryMessage/AnimationPlayer
 onready var victory_label = $VictoryMessage/Label
 onready var player_death_label = $PlayerDeathMessage/PlayerDeathLabel
 onready var player_death_anim = $PlayerDeathMessage/AnimationPlayer
+onready var players_controls_labels = [
+	$ControlsHint/Player1Controls/Label,
+	$ControlsHint/Player2Controls/Label
+]
 
 var player_death_state = PlayerDeathState.TopPosition
 var dead_player_characters = [false, false] setget set_dead_player_characters
@@ -103,3 +110,14 @@ func _player_death_go_up() -> void:
 		player_death_anim.play("hide")
 	else:
 		player_death_state = PlayerDeathState.BottomPosition
+
+
+func update_controls_hints(players_count: int) -> void:
+	var player_name = "ИГРОК %d\n"
+	for label in players_controls_labels:
+		label.text = ""
+	for i in players_count:
+		if GameInput.player(i).is_gamepad_input_source():
+			players_controls_labels[i].text = (player_name % (i + 1)) + PLAYER_GAMEPAD_CONTROLS
+		elif GameInput.player(i).is_keyboard_input_source():
+			players_controls_labels[i].text = (player_name % (i + 1)) + PLAYER_KBD_CONTROLS[i]

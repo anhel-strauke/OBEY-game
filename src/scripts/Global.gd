@@ -8,6 +8,7 @@ var last_selected_chars = []
 
 func _ready():
 	randomize()
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 
 func find_bullet_parent() -> Node2D:

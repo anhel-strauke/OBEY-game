@@ -11,7 +11,7 @@ func _ready():
 	if GameInput.player(0).is_keyboard_input_source():
 		instructions_label.text = "W и S = выбор, C = подтвердить, V или Esc = отмена"
 	elif GameInput.player(0).is_gamepad_input_source():
-		instructions_label.text = "A = подтвердить выбор, B или Esc = отмена"
+		instructions_label.text = "(A) = подтвердить выбор, (B) или Esc = отмена"
 	menu.set_players(1)
 
 

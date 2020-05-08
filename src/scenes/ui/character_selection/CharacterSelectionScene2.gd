@@ -22,7 +22,7 @@ func _ready() -> void:
 			else:
 				instruction_labels[i].text = "Стрелки = выбор,\nO = подтвердить,\nP или Esc = отмена"
 		elif GameInput.player(i).is_gamepad_input_source():
-			instruction_labels[i].text = "Вверх и Вниз = выбор,\nA = подтвердить выбор,\nB или Esc = отмена"
+			instruction_labels[i].text = "Вверх и Вниз = выбор,\n(A) = подтвердить выбор,\n(B) или Esc = отмена"
 	menu.set_players(2)
 
 
