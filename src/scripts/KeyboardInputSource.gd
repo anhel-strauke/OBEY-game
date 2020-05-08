@@ -82,6 +82,18 @@ func _process(_delta: float) -> void:
 		_actions_just_pressed[action] = is_pressed(action) and not _actions_was_pressed[action]
 		_actions_was_pressed[action] = is_pressed(action)
 	var map = MAPPINGS[mapping]
+#	var x_axis = 0.0
+#	var y_axis = 0.0
+#	if Input.is_key_pressed(map[Buttons.Up]):
+#		y_axis = -1.0
+#	elif Input.is_key_pressed(map[Buttons.Down]):
+#		y_axis = 1.0
+#	if Input.is_key_pressed(map[Buttons.Left]):
+#		x_axis = -1.0
+#	elif Input.is_key_pressed(map[Buttons.Right]):
+#		x_axis = 1.0
+#	_direction = Vector2(x_axis, y_axis).normalized()
+
 	var x_axis = 0.0
 	var y_axis = 0.0
 	if Input.is_key_pressed(map[Buttons.Up]):
@@ -92,7 +104,16 @@ func _process(_delta: float) -> void:
 		x_axis = -1.0
 	elif Input.is_key_pressed(map[Buttons.Right]):
 		x_axis = 1.0
-	_direction = Vector2(x_axis, y_axis).normalized()
+
+	var angle = atan2(_real_direction.y, _real_direction.x)
+	var angle_change = atan2(y_axis, x_axis)
+#	angle += angle_change * _delta * 10.0
+	angle = lerp_angle(angle, angle_change, _delta*10.0)
+
+	_real_direction = Vector2(cos(angle), sin(angle))
+	_direction = _real_direction * Vector2(x_axis, y_axis).length()
+
+var _real_direction = Vector2(0.0, 0.0)
 
 
 func set_mapping(m: int) -> void:

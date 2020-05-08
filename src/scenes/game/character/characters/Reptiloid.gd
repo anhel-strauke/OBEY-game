@@ -4,6 +4,9 @@ extends Character
 onready var walk_anim_player = $WalkAnimation
 
 
+#func _ready():
+#	immortal = true
+
 func play_state_animation(st: int) -> void:
 	match st:
 		State.Idle:
