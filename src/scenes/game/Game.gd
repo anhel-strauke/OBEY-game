@@ -23,7 +23,12 @@ onready var arena_parent = $Arena
 onready var game_hud = $HUDLayer/GameHUD
 onready var start_anim = $BlackLayer/StartAnimation
 onready var victory_timer = $CheckVictoryTimer
-onready var audio = $AudioStreamPlayer
+
+const music_resources = [
+	"res://sounds/music/ArenaY.ogg",
+	"res://sounds/music/ArenaX.ogg",
+	"res://sounds/music/ArenaP.ogg"
+]
 
 # Game settings
 # Should be set before call to start(), then have no effect
@@ -134,7 +139,7 @@ func start() -> void:
 	for i in all_characters.size():
 		game_hud.assign_character(all_characters[i], i)
 	start_anim.play("start")
-	audio.play()
+	BackgroundMusic.set_with_fade(music_resources[randi() % music_resources.size()])
 
 
 func show_start_message():
@@ -186,7 +191,7 @@ func _on_CheckVictoryTimer_timeout() -> void:
 
 
 func _on_victory_finished() -> void:
-	audio.stop()
+	BackgroundMusic.stop_with_fade()
 	Global.game_is_on = false
 	if characters_choice.size() == 1:
 		LoadingScene.run_scene("res://scenes/ui/character_selection/CharacterSelectionScene1.tscn")

@@ -34,6 +34,7 @@ func check_player_2(device: int) -> void:
 
 func select_single_player(device) -> void:
 	if device != -1:
+		BackgroundMusic.stop_with_fade()
 		LoadingScene.run_scene("res://scenes/ui/character_selection/CharacterSelectionScene1.tscn")
 	else:
 		controls_setting_anim.play("hide")
@@ -41,6 +42,7 @@ func select_single_player(device) -> void:
 
 func select_two_player(device) -> void:
 	if device != -1:
+		BackgroundMusic.stop_with_fade()
 		LoadingScene.run_scene("res://scenes/ui/character_selection/CharacterSelectionScene2.tscn")
 	else:
 		controls_setting_anim.play("hide")

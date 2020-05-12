@@ -280,12 +280,12 @@ GameInput="*res://scripts/GameInput.gd"
 GamepadDetectionScene="*res://scenes/ui/menu/GamepadDetectionScene.tscn"
 LoadingScene="*res://scenes/LoadingScene.tscn"
 Global="*res://scripts/Global.gd"
+BackgroundMusic="*res://scripts/BackgroundMusic.gd"
 
 [display]
 
 window/size/width=1920
 window/size/height=1080
-window/size/fullscreen=true
 window/dpi/allow_hidpi=true
 window/vsync/vsync_via_compositor=true
 window/stretch/mode="viewport"

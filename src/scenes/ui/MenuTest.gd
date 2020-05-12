@@ -4,9 +4,10 @@ onready var menu_controller = $MenuController
 onready var player_selection = $PlayerSelectSlider
 onready var settings = $SettingsSlider
 onready var main_splash = $MainSplash
-onready var music = $Music
 onready var simple_credits = $SimpleCredits
 onready var exit_menu_item = $MenuController/Exit
+
+var bg_music = preload("res://sounds/music/Main.ogg")
 
 func _ready() -> void:
 	GameInput.set_common_input_mode(true)
@@ -20,6 +21,7 @@ func _ready() -> void:
 	if OS.get_name() == "HTML5":
 		exit_menu_item.enabled = false
 		exit_menu_item.visible = false
+	BackgroundMusic.set_immediately(bg_music)
 
 
 func _activate_slider(slider):
@@ -47,10 +49,6 @@ func _on_Settings_activated():
 
 func _on_MainSplash_finished():
 	menu_controller.enabled = true
-
-
-func _before_free() -> void:
-	music.stop()
 
 
 func _on_Credits_activated():

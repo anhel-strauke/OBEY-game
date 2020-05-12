@@ -11,9 +11,10 @@ onready var instruction_labels = [
 	$Label2
 ]
 
+var bg_music = preload("res://sounds/music/ArenaP.ogg")
 
 func _ready() -> void:
-	$AudioStreamPlayer.play()
+	BackgroundMusic.set_with_fade(bg_music)
 	menu.players = 2
 	for i in 2:
 		if GameInput.player(i).is_keyboard_input_source():
@@ -28,11 +29,10 @@ func _ready() -> void:
 
 func _on_CharactersMenu_selected(player, character):
 	info[player].display_character(character)
-	
 
 
 func _on_CharactersMenu_cancelled():
-	$AudioStreamPlayer.stop()
+	BackgroundMusic.stop_with_fade()
 	LoadingScene.run_scene("res://scenes/ui/MenuTest.tscn")
 
 
@@ -41,5 +41,5 @@ func _on_CharactersMenu_finished_selection():
 		menu.selected_character_name(0),
 		menu.selected_character_name(1)
 	]
-	$AudioStreamPlayer.stop()
+	BackgroundMusic.stop_with_fade()
 	LoadingScene.run_game_arena(characters, "", "")
