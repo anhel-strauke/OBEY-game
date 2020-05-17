@@ -116,6 +116,11 @@ func spawn_characters() -> void:
 			var spawner = spawners[0]
 			var CharacterScene = CharacterScenes[char_name]
 			var character = CharacterScene.instance()
+			# Reduce bots' hitpoints
+			# TODO: In the future bot's hitpoints will depend on the
+			#       difficulty level of the game
+			character.max_hitpoints = character.max_hitpoints / 2
+			character._hp = character.max_hitpoints
 			setup_character(character, spawner.global_position)
 			add_character(character, spawner.hud_slot)
 			var driver = AiDriver.instance()

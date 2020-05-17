@@ -18,8 +18,8 @@ const DeathEffect = preload("res://scenes/game/effects/DeathEffect.tscn")
 export(String) var display_name
 export(int, "Reptiloid", "Mason", "Grayman", "5G Tower") var icon_index = 0
 export var MAX_SPEED: float = 800.0
-export var ACCELERATION: float = 2400.0
-export var FRICTION: float = 2200.0
+export var ACCELERATION: float = 24000.0
+export var FRICTION: float = 6600.0
 
 export var max_hitpoints: float = 10.0
 
